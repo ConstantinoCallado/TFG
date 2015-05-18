@@ -17,8 +17,7 @@ public class BasicMovement : MonoBehaviour
 	{
 		targetPos = transform.position;
 	}
-
-	// Update is called once per frame
+	
 	void Update () 
 	{
 		// Obtenemos la posible entrada del usuario
@@ -27,13 +26,35 @@ public class BasicMovement : MonoBehaviour
 		// Cuando se este en un frame en el que se pueda cambiar de direccion ...
 		if(puedeCambiarDireccion())
 		{
-			targetPos = redondearPosicion(transform.position + inputDirection);
-			if(oldInputDirection != inputDirection)
-			{
-				rotarModelo();
-			}
+			// Calculamos la posicion a donde quiere moverse el jugador
+			Vector3 vectorObjetivo = redondearPosicion(transform.position + inputDirection);
 
-			oldInputDirection = inputDirection;
+			// Si la posicion esta libre la ponemos como objetivo
+			if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)
+			{
+				targetPos = vectorObjetivo;
+				if(inputDirection != oldInputDirection)
+				{
+					rotarModelo();
+					oldInputDirection = inputDirection;
+				}
+			}
+			// Si no, intentamos mover el jugador siguiendo el movimiento anterior
+			else
+			{
+				vectorObjetivo = redondearPosicion(transform.position + oldInputDirection);
+			
+				// Si esta libre el movimiento anterior lo ponemos como objetivo
+				if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)
+				{					
+					targetPos = vectorObjetivo;
+				}
+				// Si esta ocupada detenemos el jugador
+				else
+				{
+					targetPos = transform.position;
+				}
+			}
 		}
 
 		transform.position = Vector2.MoveTowards(transform.position, targetPos, Time.deltaTime * speed);	
@@ -112,22 +133,22 @@ public class BasicMovement : MonoBehaviour
 		{
 			Vector2 toqueJugador = (Vector2)Input.mousePosition;
 
-			if(toqueJugador.x > Screen.width * 0.8f)
+			if(toqueJugador.x > Screen.width * 0.7f)
 			{
 				isMoving = true;
 				inputDirection = Vector3.right;
 			}
-			else if(toqueJugador.x < Screen.width * 0.2f)
+			else if(toqueJugador.x < Screen.width * 0.3f)
 			{
 				isMoving = true;
 				inputDirection = Vector3.left;
 			}
-			else if(toqueJugador.y > Screen.height * 0.8f)
+			else if(toqueJugador.y > Screen.height * 0.7f)
 			{
 				isMoving = true;
 				inputDirection = Vector3.up;
 			}
-			else if(toqueJugador.y < Screen.height * 0.2f)
+			else if(toqueJugador.y < Screen.height * 0.3f)
 			{
 				isMoving = true;
 				inputDirection = Vector3.down;
@@ -138,6 +159,6 @@ public class BasicMovement : MonoBehaviour
 
 	Vector3 redondearPosicion(Vector3 position)
 	{
-		return new Vector3((int)position.x, (int)position.y, 0);
+		return new Vector3(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), 0);
 	}
 }

@@ -10,7 +10,7 @@ public class BasicMovement : MonoBehaviour
 	private Vector3 inputDirection = Vector3.zero;
 	private Vector3 oldInputDirection = Vector3.zero;
 	Vector3 targetPos;
-	float speed = 4f;
+	float speed = 3.5f;
 	bool isMoving = true;
 
 	void Start()
@@ -22,7 +22,7 @@ public class BasicMovement : MonoBehaviour
 	void Update () 
 	{
 		// Obtenemos la posible entrada del usuario
-		getEntradaTeclado();
+		getUserInput();
 
 		// Cuando se este en un frame en el que se pueda cambiar de direccion ...
 		if(puedeCambiarDireccion())
@@ -72,6 +72,16 @@ public class BasicMovement : MonoBehaviour
 		}
 	}
 
+
+	void getUserInput()
+	{
+		#if UNITY_STANDALONE
+			getEntradaTeclado();
+		#else
+			getEntradaMovil();
+		#endif
+	}
+
 	void getEntradaTeclado()
 	{
 		if(Input.GetAxis("Vertical") > 0)
@@ -93,6 +103,36 @@ public class BasicMovement : MonoBehaviour
 		{
 			isMoving = true;
 			inputDirection = Vector3.left;
+		}
+	}
+
+	void getEntradaMovil()
+	{
+		if(Input.GetButton("Fire1"))
+		{
+			Vector2 toqueJugador = (Vector2)Input.mousePosition;
+
+			if(toqueJugador.x > Screen.width * 0.8f)
+			{
+				isMoving = true;
+				inputDirection = Vector3.right;
+			}
+			else if(toqueJugador.x < Screen.width * 0.2f)
+			{
+				isMoving = true;
+				inputDirection = Vector3.left;
+			}
+			else if(toqueJugador.y > Screen.height * 0.8f)
+			{
+				isMoving = true;
+				inputDirection = Vector3.up;
+			}
+			else if(toqueJugador.y < Screen.height * 0.2f)
+			{
+				isMoving = true;
+				inputDirection = Vector3.down;
+			}
+
 		}
 	}
 

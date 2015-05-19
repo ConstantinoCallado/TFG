@@ -5,17 +5,17 @@ public class Scenario : MonoBehaviour
 {
 	public static Scenario scenarioRef;
 	public GameObject prefabMuro;
-
+	int tamanyoMapa = 14;
 	public byte[,] arrayNivel = new byte[14, 14] { 
 													{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 													{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 													{0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0},
 													{0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0},
 													{0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0},
-													{0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0},
-													{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
-													{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
-													{0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0},
+													{0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0},
+													{0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0},
+													{0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0},
+													{0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0},
 													{0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0},
 													{0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0},
 													{0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0},
@@ -34,15 +34,15 @@ public class Scenario : MonoBehaviour
 
 	void crearMuros()
 	{
-		for(int i=0; i<14; i++)
+		for(int i=0; i<tamanyoMapa; i++)
 		{
-			for(int j=0; j<14; j++)
+			for(int j=0; j<tamanyoMapa; j++)
 			{
 				if(arrayNivel[i,j] == 0)
 				{
 					GameObject cube = GameObject.Instantiate(prefabMuro);
 					cube.transform.position = new Vector3(j, i, -1);
-					cube.transform.localScale = new Vector3(1, 1, 1.5f);
+					cube.transform.localScale = new Vector3(1, 1, 2f);
 				}
 			}
 		}

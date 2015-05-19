@@ -11,11 +11,12 @@ public class BasicMovement : MonoBehaviour
 	private Vector3 oldInputDirection = Vector3.zero;
 	Vector3 targetPos;
 	float speed = 3.5f;
-	bool isMoving = true;
+	Camera cameraRef;
 
 	void Start()
 	{
 		targetPos = transform.position;
+		cameraRef = Camera.main;
 	}
 	
 	void Update () 
@@ -99,7 +100,8 @@ public class BasicMovement : MonoBehaviour
 		#if UNITY_STANDALONE
 			getEntradaTeclado();
 		#else
-			getEntradaMovil();
+			//getEntradaBordeMovil();
+			getEntradaRelativaMovil();
 		#endif
 	}
 
@@ -107,27 +109,24 @@ public class BasicMovement : MonoBehaviour
 	{
 		if(Input.GetAxis("Vertical") > 0)
 		{
-			isMoving = true;
 			inputDirection = Vector3.up;
 		}
 		else if(Input.GetAxis("Vertical") < 0)
 		{
-			isMoving = true;
 			inputDirection = Vector3.down;
 		}
 		else if(Input.GetAxis("Horizontal") > 0)
 		{
-			isMoving = true;
 			inputDirection = Vector3.right;
 		}
 		else if(Input.GetAxis("Horizontal") < 0)
 		{
-			isMoving = true;
 			inputDirection = Vector3.left;
 		}
 	}
 
-	void getEntradaMovil()
+	// La direccion a moverse sera calculada teniendo en cuenta en que borde de la pantalla toque el jugador
+	void getEntradaBordeMovil()
 	{
 		if(Input.GetButton("Fire1"))
 		{
@@ -135,25 +134,53 @@ public class BasicMovement : MonoBehaviour
 
 			if(toqueJugador.x > Screen.width * 0.7f)
 			{
-				isMoving = true;
 				inputDirection = Vector3.right;
 			}
 			else if(toqueJugador.x < Screen.width * 0.3f)
 			{
-				isMoving = true;
 				inputDirection = Vector3.left;
 			}
 			else if(toqueJugador.y > Screen.height * 0.7f)
 			{
-				isMoving = true;
 				inputDirection = Vector3.up;
 			}
 			else if(toqueJugador.y < Screen.height * 0.3f)
 			{
-				isMoving = true;
 				inputDirection = Vector3.down;
 			}
+		}
+	}
 
+	// La direccion a moverse sera calculada teniendo en cuenta donde ha tocado el jugador respecto al personaje
+	void getEntradaRelativaMovil()
+	{
+		if(Input.GetButton("Fire1"))
+		{
+
+			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
+
+			if(Mathf.Abs(toqueJugadorRelativo.x) > Mathf.Abs(toqueJugadorRelativo.y))
+			{
+				if(toqueJugadorRelativo.x > 0)
+				{
+					inputDirection = Vector3.right;
+				}
+				else
+				{
+					inputDirection = Vector3.left;
+				}
+			}
+			else
+			{
+				if(toqueJugadorRelativo.y > 0)
+				{
+					inputDirection = Vector3.up;
+				}
+				else
+				{
+					inputDirection = Vector3.down;
+				}
+			}
 		}
 	}
 

@@ -12,7 +12,8 @@ public class BasicMovement : MonoBehaviour
 	Vector3 targetPos;
 	public float speed = 3.5f;
 	Vector3 vectorObjetivo;
-	Transform characterTransform;
+	public Transform characterTransform;
+	public int playerNumber = 1;
 
 	void Awake()
 	{
@@ -26,14 +27,8 @@ public class BasicMovement : MonoBehaviour
 		if(puedeCambiarDireccion())
 		{
 			// Calculamos la posicion a donde quiere moverse el jugador
-			if(inputDirection == oldInputDirection)
-			{
-				vectorObjetivo = characterTransform.position + inputDirection;
-			}
-			else
-			{
+
 				vectorObjetivo = redondearPosicion(characterTransform.position + inputDirection);
-			}
 
 			// Si la posicion esta libre la ponemos como objetivo
 			if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)

@@ -22,32 +22,60 @@ public class LocalInput : MonoBehaviour
 	void getUserInput()
 	{
 		#if UNITY_STANDALONE
-		getEntradaTeclado();
+		if(basicMovement.playerNumber == 1)
+		{
+			getEntradaTecladoWASD();
+		}
+		else
+		{
+			getEntradaTecladoFlechas();
+		}
 		#else
 		//getEntradaBordeMovil();
 		getEntradaRelativaMovil();
 		#endif
 	}
 	
-	void getEntradaTeclado()
+	void getEntradaTecladoWASD()
 	{
-		if(Input.GetAxis("Vertical") > 0)
-		{
-			basicMovement.inputDirection = Vector3.up;
-		}
-		else if(Input.GetAxis("Vertical") < 0)
-		{
-			basicMovement.inputDirection = Vector3.down;
-		}
-		else if(Input.GetAxis("Horizontal") > 0)
+		if(Input.GetKey(KeyCode.D))
 		{
 			basicMovement.inputDirection = Vector3.right;
 		}
-		else if(Input.GetAxis("Horizontal") < 0)
+		else if(Input.GetKey(KeyCode.A))
 		{
 			basicMovement.inputDirection = Vector3.left;
 		}
+		else if(Input.GetKey(KeyCode.W))
+		{
+			basicMovement.inputDirection = Vector3.up;
+		}
+		else if(Input.GetKey(KeyCode.S))
+		{
+			basicMovement.inputDirection = Vector3.down;
+		}
 	}
+
+	void getEntradaTecladoFlechas()
+	{
+		if(Input.GetKey(KeyCode.RightArrow))
+		{
+			basicMovement.inputDirection = Vector3.right;
+		}
+		else if(Input.GetKey(KeyCode.LeftArrow))
+		{
+			basicMovement.inputDirection = Vector3.left;
+		}
+		else if(Input.GetKey(KeyCode.UpArrow))
+		{
+			basicMovement.inputDirection = Vector3.up;
+		}
+		else if(Input.GetKey(KeyCode.DownArrow))
+		{
+			basicMovement.inputDirection = Vector3.down;
+		}
+	}
+
 	
 	// La direccion a moverse sera calculada teniendo en cuenta en que borde de la pantalla toque el jugador
 	void getEntradaBordeMovil()
@@ -80,7 +108,7 @@ public class LocalInput : MonoBehaviour
 	{
 		if(Input.GetButton("Fire1"))
 		{
-			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
+			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(basicMovement.characterTransform.position));
 			
 			if(Mathf.Abs(toqueJugadorRelativo.x) > Mathf.Abs(toqueJugadorRelativo.y))
 			{

@@ -129,7 +129,7 @@ AnimationClip:
         value: -1.5
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
+        tangentMode: 0
       - time: 1.5
         value: -1
         inSlope: .666666687

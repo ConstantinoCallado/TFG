@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (BasicMovement))]
 public class Player : MonoBehaviour 
 {
+	public BasicMovement basicMovementRef;
+
+	public void Awake()
+	{
+		basicMovementRef = GetComponent<BasicMovement>();
+	}
+
 	public void Start()
 	{
 		Initialize();

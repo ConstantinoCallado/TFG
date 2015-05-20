@@ -31,8 +31,8 @@ public class LocalInput : MonoBehaviour
 			getEntradaTecladoFlechas();
 		}
 		#else
-		//getEntradaBordeMovil();
-		getEntradaRelativaMovil();
+		getEntradaBordeMovil();
+		//getEntradaRelativaMovil();
 		#endif
 	}
 	

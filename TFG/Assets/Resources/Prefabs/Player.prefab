@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 432884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,13 +24,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 448580}
   - 95: {fileID: 9537198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GraphicsRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &120750
 GameObject:
   m_ObjectHideFlags: 1
@@ -41,7 +41,7 @@ GameObject:
   - 4: {fileID: 496586}
   - 33: {fileID: 3327662}
   - 23: {fileID: 2378634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - 4: {fileID: 446186}
   - 33: {fileID: 3373506}
   - 23: {fileID: 2339338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - 4: {fileID: 424556}
   - 33: {fileID: 3308504}
   - 23: {fileID: 2301632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,8 @@ GameObject:
   - 114: {fileID: 11400994}
   - 50: {fileID: 5025140}
   - 58: {fileID: 5858084}
-  m_Layer: 0
+  - 114: {fileID: 11443686}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,13 +110,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GraphicsHuman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &187200
 GameObject:
   m_ObjectHideFlags: 1
@@ -126,7 +127,7 @@ GameObject:
   - 4: {fileID: 463954}
   - 33: {fileID: 3376162}
   - 23: {fileID: 2383658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,13 +143,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 410218}
   - 108: {fileID: 10826766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &410218
 Transform:
   m_ObjectHideFlags: 1
@@ -491,8 +492,20 @@ MonoBehaviour:
   graphicsTransform: {fileID: 432884}
   inputDirection: {x: 0, y: 0, z: 0}
   speed: 3.75
-  characterTransform: {fileID: 0}
+  characterTransform: {fileID: 415428}
   playerNumber: 1
+--- !u!114 &11443686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e065979b7c8eb434e89daed8a6bc575a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicMovementRef: {fileID: 11422322}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

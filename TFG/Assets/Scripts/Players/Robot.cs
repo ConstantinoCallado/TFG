@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Robot : Player 
 {
+	const float speed = 3.5f;
+
 	public override void Initialize()
 	{
 		base.Initialize();
+
+		base.basicMovementRef.speed = speed;
 		Debug.Log("inicializado Robot con color " + GetColor());
 	}
 

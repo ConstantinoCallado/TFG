@@ -27,7 +27,7 @@ public class Scenario : MonoBehaviour
 
 
 	public List<Vector2> robotSpawnPoints = new List<Vector2>();
-	public Vector2 playerSpawnPoint;
+	public List<Vector2> playerSpawnPoints = new List<Vector2>();
 
 	public void Awake()
 	{
@@ -50,5 +50,10 @@ public class Scenario : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public Vector2 getRandomPlayerSpawnPoint()
+	{
+		return playerSpawnPoints[UnityEngine.Random.Range(0, playerSpawnPoints.Count)];
 	}
 }

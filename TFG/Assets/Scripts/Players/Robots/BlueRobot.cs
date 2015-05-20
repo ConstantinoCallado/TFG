@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RedRobot : Robot
+public class BlueRobot : Robot
 {
-	Color colorRobot = new Color(1, 0.3f, 0.3f);
+	Color colorRobot = new Color(0.16f, 0.58f, 1f);
 
 	public override void Initialize()
 	{

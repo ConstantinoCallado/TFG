@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class Scenario : MonoBehaviour 
 {
@@ -24,7 +26,9 @@ public class Scenario : MonoBehaviour
 												};
 
 
-	
+	public List<Vector2> robotSpawnPoints = new List<Vector2>();
+	public Vector2 playerSpawnPoint;
+
 	public void Awake()
 	{
 		scenarioRef = this;

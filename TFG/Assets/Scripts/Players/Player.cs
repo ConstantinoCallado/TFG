@@ -5,10 +5,12 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public BasicMovement basicMovementRef;
+	public PlayerGraphics playerGraphics;
 
 	public void Awake()
 	{
 		basicMovementRef = GetComponent<BasicMovement>();
+		playerGraphics = GetComponent<PlayerGraphics>();
 	}
 
 	public void Start()

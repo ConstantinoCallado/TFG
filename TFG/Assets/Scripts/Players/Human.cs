@@ -8,8 +8,9 @@ public class Human : Player
 	public override void Initialize()
 	{
 		base.Initialize();
-
+		gameObject.layer = LayerMask.NameToLayer("Human");
 		base.basicMovementRef.speed = speed;
+		base.playerGraphics.setHuman();
 
 		Debug.Log("inicializado Humano");
 	}

@@ -8,8 +8,9 @@ public class Robot : Player
 	public override void Initialize()
 	{
 		base.Initialize();
-
 		base.basicMovementRef.speed = speed;
+		gameObject.layer = LayerMask.NameToLayer("Robot");
+		base.playerGraphics.setRobot(GetColor());
 		Debug.Log("inicializado Robot con color " + GetColor());
 	}
 

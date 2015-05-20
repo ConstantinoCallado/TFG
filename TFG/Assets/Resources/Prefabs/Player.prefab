@@ -24,6 +24,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 448580}
   - 95: {fileID: 9537198}
+  - 114: {fileID: 11478788}
   m_Layer: 8
   m_Name: GraphicsRobot
   m_TagString: Untagged
@@ -95,6 +96,7 @@ GameObject:
   - 50: {fileID: 5025140}
   - 58: {fileID: 5858084}
   - 114: {fileID: 11443686}
+  - 114: {fileID: 11421750}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -110,13 +112,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414898}
+  - 114: {fileID: 11406386}
   m_Layer: 8
   m_Name: GraphicsHuman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &187200
 GameObject:
   m_ObjectHideFlags: 1
@@ -478,6 +481,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b00efe5badd6c48841dce173f90170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11406386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e3d46c40b007e4f8c94703242563ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11421750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c105a09db2f6c459e7bb26610beda5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGraphics: {fileID: 11406386}
+  robotGraphics: {fileID: 11478788}
 --- !u!114 &11422322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,6 +533,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicMovementRef: {fileID: 11422322}
+  playerGraphics: {fileID: 0}
+--- !u!114 &11478788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54d7d9fdb145e244a2c5cd7a980b7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderersDeColores:
+  - {fileID: 2301632}
+  - {fileID: 2378634}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

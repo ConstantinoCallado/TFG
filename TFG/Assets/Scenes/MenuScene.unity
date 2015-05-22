@@ -248,21 +248,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listaJugadores:
-  - playerName: Bot
+  - playerName: IA
     characterName: 
     activePlayer: 0
-  - playerName: Bot
+    isReady: 1
+  - playerName: IA
     characterName: 
     activePlayer: 0
-  - playerName: Bot
+    isReady: 1
+  - playerName: IA
     characterName: 
     activePlayer: 0
-  - playerName: Bot
+    isReady: 1
+  - playerName: IA
     characterName: 
     activePlayer: 0
-  - playerName: Bot
+    isReady: 1
+  - playerName: IA
     characterName: 
     activePlayer: 0
+    isReady: 1
   networkView: {fileID: 65600388}
 --- !u!4 &65600387
 Transform:

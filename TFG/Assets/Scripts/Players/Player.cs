@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
 
+	public string playerName;
+	public string characterName;
+
 	public void Awake()
 	{
 		basicMovementRef = GetComponent<BasicMovement>();

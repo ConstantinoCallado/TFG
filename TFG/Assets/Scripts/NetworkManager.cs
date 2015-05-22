@@ -17,6 +17,8 @@ public class NetworkManager : MonoBehaviour
 
 	private string nombreJugador = "DefaultName";
 
+	private const bool dedicatedServer = false;
+
 	public void Awake()
 	{
 		if(networkManagerRef != null)
@@ -39,6 +41,13 @@ public class NetworkManager : MonoBehaviour
 	{
 		Debug.Log("Server Initializied");
 		Application.LoadLevel("LobbyScene");
+
+		if(!dedicatedServer)
+		{
+			jugCon(Network.player);
+			networkView.RPC("jugCon", RPCMode.OthersBuffered, Network.player);
+			networkView.RPC("bcstName", RPCMode.AllBuffered, Network.player, nombreJugador);
+		}
 	}
 
 	void OnPlayerDisconnected(NetworkPlayer player) 
@@ -62,7 +71,6 @@ public class NetworkManager : MonoBehaviour
 	
 	public void entradaLocalNombre(string name)
 	{
-		Debug.Log(name);
 		nombreJugador = name;
 	}
 
@@ -90,20 +98,8 @@ public class NetworkManager : MonoBehaviour
 		{
 			if(listaJugadores[i].networkPlayer == player)
 			{
+				Debug.Log(listaJugadores[i].playerName + "se ha desconectado"); 
 				listaJugadores[i].resetPlayer();
-				break;
-			}
-		}
-	}
-
-	[RPC]
-	void setName(NetworkPlayer player, string name)
-	{	
-		for(int i=0; i<listaJugadores.Length; i++)
-		{
-			if(listaJugadores[i].networkPlayer == player)
-			{
-				listaJugadores[i].playerName = name;
 				break;
 			}
 		}
@@ -112,8 +108,23 @@ public class NetworkManager : MonoBehaviour
 	[RPC]
 	void askName()
 	{	
-		networkView.RPC("setName", RPCMode.AllBuffered, Network.player, nombreJugador);
+		networkView.RPC("bcstName", RPCMode.AllBuffered, Network.player, nombreJugador);
 	}
+	
+	[RPC]
+	void bcstName(NetworkPlayer player, string name)
+	{	
+		for(int i=0; i<listaJugadores.Length; i++)
+		{
+			if(listaJugadores[i].networkPlayer == player)
+			{
+				listaJugadores[i].playerName = name;
+				Debug.Log(listaJugadores[i].playerName + "se ha conectado");
+				break;
+			}
+		}
+	}
+
 
 	// Lado del cliente
 	public void RefreshHostList()
@@ -149,4 +160,9 @@ public class NetworkManager : MonoBehaviour
 	{
 		Application.Quit();
 	}	
+
+	void OnDisconnectedFromServer(NetworkDisconnection info) 
+	{
+		Application.LoadLevel("MenuScene");
+	}
 }

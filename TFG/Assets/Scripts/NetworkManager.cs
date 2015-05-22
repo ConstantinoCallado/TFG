@@ -8,11 +8,14 @@ public class NetworkManager : MonoBehaviour
 	private const int numJugadores = 5;
 	private const string typeName = "Robot-Name";
 	private string gameName = "RoomName";
-
 	private HostData[] hostList;
 	public PlayerInfo[] listaJugadores = new PlayerInfo[5];
 
+	public NetworkView networkView;
+
 	public static NetworkManager networkManagerRef;
+
+	private string nombreJugador = "DefaultName";
 
 	public void Awake()
 	{
@@ -40,9 +43,48 @@ public class NetworkManager : MonoBehaviour
 
 	void OnPlayerDisconnected(NetworkPlayer player) 
 	{
+		// Quitamos el jugador de nuestra lista de jugadores
+		jugDescon(player);
+
+		// Invocamos la RPC para todos los clientes
+		networkView.RPC("jugDescon", RPCMode.OthersBuffered, player);
+	}
+
+	void OnPlayerConnected(NetworkPlayer player) 
+	{
+		// Anyadimos el jugador a nuestra lista de jugadores
+		jugCon(player);
+
+		// Invocamos la RPC para todos los clientes
+		networkView.RPC("jugCon", RPCMode.OthersBuffered, player);
+		networkView.RPC("askName", player);
+	}
+	
+	public void entradaLocalNombre(string name)
+	{
+		Debug.Log(name);
+		nombreJugador = name;
+	}
+
+	[RPC]
+	void jugCon(NetworkPlayer player)
+	{
+		for(int i=0; i<listaJugadores.Length; i++)
+		{
+			if(!listaJugadores[i].activePlayer)
+			{
+				listaJugadores[i].activePlayer = true;
+				listaJugadores[i].networkPlayer = player;
+				break;
+			}
+		}
+	}
+
+	[RPC]
+	void jugDescon(NetworkPlayer player)
+	{
 		Network.RemoveRPCs(player);
 		Network.DestroyPlayerObjects(player);
-
 
 		for(int i=0; i<listaJugadores.Length; i++)
 		{
@@ -54,17 +96,23 @@ public class NetworkManager : MonoBehaviour
 		}
 	}
 
-	void OnPlayerConnected(NetworkPlayer player) 
-	{
+	[RPC]
+	void setName(NetworkPlayer player, string name)
+	{	
 		for(int i=0; i<listaJugadores.Length; i++)
 		{
-			if(!listaJugadores[i].activePlayer)
+			if(listaJugadores[i].networkPlayer == player)
 			{
-				listaJugadores[i].activePlayer = true;
-				listaJugadores[i].networkPlayer = player;
+				listaJugadores[i].playerName = name;
 				break;
 			}
 		}
+	}
+
+	[RPC]
+	void askName()
+	{	
+		networkView.RPC("setName", RPCMode.AllBuffered, Network.player, nombreJugador);
 	}
 
 	// Lado del cliente
@@ -100,5 +148,5 @@ public class NetworkManager : MonoBehaviour
 	public void ExitGame()
 	{
 		Application.Quit();
-	}
+	}	
 }

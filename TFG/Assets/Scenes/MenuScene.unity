@@ -229,6 +229,7 @@ GameObject:
   - 4: {fileID: 65600387}
   - 114: {fileID: 65600386}
   - 148: {fileID: 65600388}
+  - 114: {fileID: 65600389}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -298,6 +299,26 @@ NetworkView:
   m_ViewID:
     m_ID: 1
     m_Type: 1
+--- !u!114 &65600389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65600385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710bcc5e0ecd92843a2b9cd408a53ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listaTexturasAvatares:
+  - {fileID: 21300000, guid: 1905ed13a140fc04fa2f431fb54a8019, type: 3}
+  - {fileID: 21300000, guid: ee1b7ada3696a6444b607dc4a53da54a, type: 3}
+  - {fileID: 21300000, guid: f0a73f76e8562364b8ef8dbc525c55e9, type: 3}
+  - {fileID: 21300000, guid: f5e586bb22188bf4b9326506c20a4466, type: 3}
+  - {fileID: 21300000, guid: 119dc7c0bcb794b4baa49a0a6c0c02ce, type: 3}
+  - {fileID: 21300000, guid: ae5941c48c7975c42bc125586662ca4a, type: 3}
+  - {fileID: 21300000, guid: f1ea265adbf55264fba911008270caa1, type: 3}
+  - {fileID: 21300000, guid: ed72ec2600ce8664c89731d16a0411cb, type: 3}
 --- !u!1 &204194414
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class LobbyPlayerUIElement : MonoBehaviour
 	public Text textPlayerName;
 	public Text textCharacterName;
 	public Image imageCharacter;
+	public Text textoInterrogacion;
 	public Image panelReady;
 
 	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, bool isReady)
@@ -14,18 +15,13 @@ public class LobbyPlayerUIElement : MonoBehaviour
 		textPlayerName.text = playerName;
 		textCharacterName.text = enumPersonaje.ToString();
 
-		if(isReady)
-		{
-			panelReady.enabled = true;
-		}
-		else
-		{
-			panelReady.enabled = false;
-		}
+		panelReady.enabled = isReady;
 
 		if(enumPersonaje != EnumPersonaje.Ninguno)
 		{
-			//TODO: PONER IMAGEN
+			imageCharacter.sprite = AvatarManager.avatarManager.getAvatar(enumPersonaje);
+			imageCharacter.enabled = true;
+			textoInterrogacion.enabled = false;
 		}
 	}
 }

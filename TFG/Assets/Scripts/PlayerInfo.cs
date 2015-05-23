@@ -5,10 +5,10 @@ using System.Collections;
 public class PlayerInfo 
 {
 	public string playerName = "IA";
-	public string characterName = "";
 	public bool activePlayer = false;
 	public bool isReady = true;
-
+	public Player player;
+	public EnumPersonaje enumPersonaje = EnumPersonaje.Ninguno;
 	public NetworkPlayer networkPlayer;
 
 	public void resetPlayer()
@@ -16,6 +16,5 @@ public class PlayerInfo
 		playerName = "IA";
 		activePlayer = false;
 		isReady = true;
-		characterName = "";
 	}
 }

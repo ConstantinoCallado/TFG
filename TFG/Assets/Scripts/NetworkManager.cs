@@ -9,7 +9,7 @@ public class NetworkManager : MonoBehaviour
 	private const string typeName = "Robot-Name";
 	private string gameName = "RoomName";
 	private HostData[] hostList;
-	public PlayerInfo[] listaJugadores = new PlayerInfo[5];
+	public PlayerInfo[] listaJugadores = new PlayerInfo[numJugadores];
 
 	public NetworkView networkView;
 
@@ -19,7 +19,8 @@ public class NetworkManager : MonoBehaviour
 
 	private const bool dedicatedServer = false;
 
-	
+	private bool personajesGenerados = false;
+
 	//TODO: DESACOPLAR ESTO DE AQUI, PLS
 	// Funcion para meter el nombre a pelo
 	public void entradaLocalNombre(string name)
@@ -150,8 +151,7 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 	}
-
-
+	
 	// Lado del cliente
 	public void RefreshHostList()
 	{
@@ -209,5 +209,63 @@ public class NetworkManager : MonoBehaviour
 				break;
 			}
 		}
+
+		if(Network.isServer && !personajesGenerados)
+		{
+			comprobarTodosListos();
+		}
+	}
+
+	public void comprobarTodosListos()
+	{
+		for(int i=0; i<listaJugadores.Length; i++)
+		{
+			if(!listaJugadores[i].isReady)
+			{
+				return;
+			}
+		}		 
+
+		Debug.Log("Todos los jugadores listos");
+		generarPersonajesAleatorios();
+	}
+
+	// Genera personajes aleatorios y los comunica a los clientes
+	public void generarPersonajesAleatorios()
+	{
+		personajesGenerados = true;
+
+		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
+		int indiceHumano = (int)Random.Range(0, listaJugadores.Length); 
+		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
+		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje);
+
+		// Creamos una lista con todos los personajes restantes
+		List<EnumPersonaje> listaPersonajes = new List<EnumPersonaje>();
+		for(int i=2; i< System.Enum.GetValues(typeof(EnumPersonaje)).Length; i++)
+		{
+			listaPersonajes.Add((EnumPersonaje) i);
+		}
+
+		// Recorremos la lista de jugadores y les vamos asignando personajes aleatorios
+		for(int i=0; i<listaJugadores.Length; i++)
+		{
+			if(i != indiceHumano)
+			{
+				int randomCharacterIndex = Random.Range(0, listaPersonajes.Count);
+
+				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
+				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje);
+				listaPersonajes.RemoveAt(randomCharacterIndex);
+			}
+		}
+	}
+
+
+	// FUncion que recibiran los clientes para comunicar el personaje que le toca a cada uno
+	[RPC]
+	void bcstChar(int indiceJugador, int enumPersonajeEntero)
+	{
+		listaJugadores[indiceJugador].enumPersonaje = (EnumPersonaje) enumPersonajeEntero;
 	}
 }

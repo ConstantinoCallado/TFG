@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviour
 			for(int i=0; i< NetworkManager.networkManagerRef.listaJugadores.Length && i < listaInfoJugadores.Count; i++)
 			{
 				listaInfoJugadores[i].setPlayerName(NetworkManager.networkManagerRef.listaJugadores[i].playerName,
-				                                    NetworkManager.networkManagerRef.listaJugadores[i].characterName,
+				                                    NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje,
 				                                    NetworkManager.networkManagerRef.listaJugadores[i].isReady);
 			}
 

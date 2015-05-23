@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum EnumPersonaje {Ninguno, Humano, RobotRojo, RobotNaranja, RobotAzul, RobotRosa, RobotVerde, RobotBlanco, RobotMorado};
+
 [RequireComponent (typeof (BasicMovement))]
 public class Player : MonoBehaviour 
 {
 	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
-
-	public string playerName;
-	public string characterName;
 
 	public void Awake()
 	{

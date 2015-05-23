@@ -9,10 +9,10 @@ public class LobbyPlayerUIElement : MonoBehaviour
 	public Image imageCharacter;
 	public Image panelReady;
 
-	public void setPlayerName(string playerName, string characterName, bool isReady)
+	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, bool isReady)
 	{
 		textPlayerName.text = playerName;
-		textCharacterName.text = characterName;
+		textCharacterName.text = enumPersonaje.ToString();
 
 		if(isReady)
 		{
@@ -23,7 +23,7 @@ public class LobbyPlayerUIElement : MonoBehaviour
 			panelReady.enabled = false;
 		}
 
-		if(characterName != "")
+		if(enumPersonaje != EnumPersonaje.Ninguno)
 		{
 			//TODO: PONER IMAGEN
 		}

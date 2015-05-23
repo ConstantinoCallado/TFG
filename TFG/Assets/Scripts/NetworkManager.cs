@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviour
 	{
 		if(networkManagerRef != null)
 		{
-			Destroy(networkManagerRef);
+			Destroy(networkManagerRef.gameObject);
 		}
 
 		networkManagerRef = this;
@@ -228,6 +228,7 @@ public class NetworkManager : MonoBehaviour
 
 		Debug.Log("Todos los jugadores listos");
 		StartCoroutine(corutinaGenerarPersonajesAleatorios());
+		networkView.RPC("strtCountdwn", RPCMode.All, 10);
 	}
 
 	// Genera personajes aleatorios y los comunica a los clientes
@@ -242,7 +243,7 @@ public class NetworkManager : MonoBehaviour
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje);
 
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(2f);
 
 		// Creamos una lista con todos los personajes restantes
 		List<EnumPersonaje> listaPersonajes = new List<EnumPersonaje>();
@@ -261,8 +262,18 @@ public class NetworkManager : MonoBehaviour
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje);
 				listaPersonajes.RemoveAt(randomCharacterIndex);
+				yield return new WaitForSeconds(0.25f);
 			}
 		}
+
+
+	//	yield return new WaitForSeconds(5f);
+	//	CargarPantallaJuego();
+	}
+
+	public void CargarPantallaJuego()
+	{
+		Application.LoadLevel("test");
 	}
 
 	// FUncion que recibiran los clientes para comunicar el personaje que le toca a cada uno
@@ -270,5 +281,12 @@ public class NetworkManager : MonoBehaviour
 	void bcstChar(int indiceJugador, int enumPersonajeEntero)
 	{
 		listaJugadores[indiceJugador].enumPersonaje = (EnumPersonaje) enumPersonajeEntero;
+	}
+
+	// Funcion que recibiran los clientes para empezar la cuenta atras
+	[RPC]
+	void strtCountdwn(int segundos)
+	{
+		LobbyManager.lobbyManager.StartCountDown(segundos);
 	}
 }

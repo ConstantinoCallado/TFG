@@ -227,18 +227,22 @@ public class NetworkManager : MonoBehaviour
 		}		 
 
 		Debug.Log("Todos los jugadores listos");
-		generarPersonajesAleatorios();
+		StartCoroutine(corutinaGenerarPersonajesAleatorios());
 	}
 
 	// Genera personajes aleatorios y los comunica a los clientes
-	public void generarPersonajesAleatorios()
+	IEnumerator corutinaGenerarPersonajesAleatorios()
 	{
 		personajesGenerados = true;
+
+		yield return new WaitForSeconds(.5f);
 
 		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
 		int indiceHumano = (int)Random.Range(0, listaJugadores.Length); 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje);
+
+		yield return new WaitForSeconds(1.5f);
 
 		// Creamos una lista con todos los personajes restantes
 		List<EnumPersonaje> listaPersonajes = new List<EnumPersonaje>();
@@ -246,21 +250,20 @@ public class NetworkManager : MonoBehaviour
 		{
 			listaPersonajes.Add((EnumPersonaje) i);
 		}
-
+		
 		// Recorremos la lista de jugadores y les vamos asignando personajes aleatorios
 		for(int i=0; i<listaJugadores.Length; i++)
 		{
 			if(i != indiceHumano)
 			{
 				int randomCharacterIndex = Random.Range(0, listaPersonajes.Count);
-
+				
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje);
 				listaPersonajes.RemoveAt(randomCharacterIndex);
 			}
 		}
 	}
-
 
 	// FUncion que recibiran los clientes para comunicar el personaje que le toca a cada uno
 	[RPC]

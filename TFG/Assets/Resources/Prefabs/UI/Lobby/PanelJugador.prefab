@@ -28,7 +28,7 @@ GameObject:
   - 222: {fileID: 22272658}
   - 114: {fileID: 11434378}
   m_Layer: 5
-  m_Name: Avatar
+  m_Name: PanelAvatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   imageCharacter: {fileID: 11400294}
   textoInterrogacion: {fileID: 11409484}
   panelReady: {fileID: 11466720}
+  panelAvatar: {fileID: 111794}
 --- !u!222 &22204504
 CanvasRenderer:
   m_ObjectHideFlags: 1

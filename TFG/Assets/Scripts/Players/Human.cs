@@ -3,13 +3,11 @@ using System.Collections;
 
 public class Human : Player 
 {
-	const float speed = 3.75f;
-
 	public override void Initialize()
 	{
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Human");
-		base.basicMovementRef.speed = speed;
+		speed = 3.75f;
 		base.playerGraphics.setHuman();
 
 		Debug.Log("inicializado Humano");

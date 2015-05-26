@@ -21,4 +21,9 @@ public class WhiteRobot : Robot
 	{
 		return colorRobot;
 	}
+	
+	public override string getColorString()
+	{
+		return "white";
+	}
 }

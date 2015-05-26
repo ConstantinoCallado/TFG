@@ -242,7 +242,8 @@ public class NetworkManager : MonoBehaviour
 		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
 		int indiceHumano = (int)Random.Range(0, listaJugadores.Length); 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
-		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje);
+		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
+		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje, listaJugadores[indiceHumano].viewID);
 		
 		yield return new WaitForSeconds(2f);
 		
@@ -261,7 +262,8 @@ public class NetworkManager : MonoBehaviour
 				int randomCharacterIndex = Random.Range(0, listaPersonajes.Count);
 				
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
-				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje);
+				listaJugadores[i].viewID = Network.AllocateViewID();
+				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
 				listaPersonajes.RemoveAt(randomCharacterIndex);
 				yield return new WaitForSeconds(0.25f);
 			}
@@ -280,9 +282,10 @@ public class NetworkManager : MonoBehaviour
 	
 	// FUncion que recibiran los clientes para comunicar el personaje que le toca a cada uno
 	[RPC]
-	void bcstChar(int indiceJugador, int enumPersonajeEntero)
+	void bcstChar(int indiceJugador, int enumPersonajeEntero, NetworkViewID networkViewID)
 	{
 		listaJugadores[indiceJugador].enumPersonaje = (EnumPersonaje) enumPersonajeEntero;
+		listaJugadores[indiceJugador].viewID = networkViewID;
 	}
 	
 	// Funcion que recibiran los clientes para empezar la cuenta atras
@@ -296,5 +299,30 @@ public class NetworkManager : MonoBehaviour
 	void LdGame()
 	{
 		Application.LoadLevel("GameScene");
+	}
+
+	// Funcion que se invocara cada cliente al cargarse la escena de juego
+	public void NotificarPartidaCargada()
+	{
+		networkView.RPC("LdedGame", RPCMode.Server, Network.player);
+	}
+
+	// Funcion que recibe el servidor cuando un cliente carga la partida
+	[RPC]
+	void LdedGame(NetworkPlayer networkPlayer)
+	{
+		for(int i=0; i<listaJugadores.Length; i++)
+		{
+			networkView.RPC("spwn", networkPlayer, i, listaJugadores[i].viewID, (int)listaJugadores[i].enumPersonaje);
+		}
+	}
+
+	// Funcion que recibe un cliente para spawnear 
+	[RPC]
+	void spwn(int playerIndex, NetworkViewID viewID, int enumPersonaje)
+	{
+		listaJugadores[playerIndex].player = PlayerFactory.playerFactoryRef.InstanciarPlayerEnCliente(
+													viewID,
+													enumPersonaje);
 	}
 }

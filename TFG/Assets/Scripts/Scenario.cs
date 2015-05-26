@@ -50,6 +50,7 @@ public class Scenario : MonoBehaviour
 					GameObject cube = GameObject.Instantiate(prefabMuro);
 					cube.transform.position = new Vector3(j, i, -1);
 					cube.transform.localScale = new Vector3(1, 1, 2f);
+					cube.transform.parent = transform;
 				}
 			}
 		}

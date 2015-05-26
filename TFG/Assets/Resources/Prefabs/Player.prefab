@@ -91,11 +91,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 415428}
-  - 114: {fileID: 11422322}
-  - 114: {fileID: 11400994}
   - 50: {fileID: 5025140}
   - 58: {fileID: 5858084}
-  - 114: {fileID: 11443686}
   - 114: {fileID: 11421750}
   m_Layer: 8
   m_Name: Player
@@ -470,17 +467,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11400994
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b00efe5badd6c48841dce173f90170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11406386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -505,35 +491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanGraphics: {fileID: 11406386}
   robotGraphics: {fileID: 11478788}
---- !u!114 &11422322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74dfdf6f4ad6d24c99cdad99b79a7c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphicsTransform: {fileID: 432884}
-  inputDirection: {x: 0, y: 0, z: 0}
-  speed: 3.75
-  characterTransform: {fileID: 415428}
-  playerNumber: 1
---- !u!114 &11443686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e065979b7c8eb434e89daed8a6bc575a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basicMovementRef: {fileID: 11422322}
-  playerGraphics: {fileID: 0}
 --- !u!114 &11478788
 MonoBehaviour:
   m_ObjectHideFlags: 1

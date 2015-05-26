@@ -10,6 +10,7 @@ public class PlayerInfo
 	public Player player;
 	public EnumPersonaje enumPersonaje = EnumPersonaje.Ninguno;
 	public NetworkPlayer networkPlayer;
+	public NetworkViewID viewID;
 
 	public void resetPlayer()
 	{

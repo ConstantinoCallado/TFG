@@ -8,7 +8,7 @@ public class Robot : Player
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Robot");
 		base.playerGraphics.setRobot(GetColor());
-		//Debug.Log("inicializado Robot con color " + GetColor());
+		gameObject.name = "Robot " + getColorString();
 	}
 
 	public virtual void ActivatePower()
@@ -25,5 +25,10 @@ public class Robot : Player
 	{
 		Debug.Log("La clase hija deberia sobreescribir este metodo");
 		return Color.black;
+	}
+
+	public virtual string getColorString()
+	{
+		return "";
 	}
 }

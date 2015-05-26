@@ -202,19 +202,28 @@ public class NetworkManager : MonoBehaviour
 	[RPC]
 	public void plyrIsRdy(NetworkPlayer player)
 	{
-		for(int i=0; i<listaJugadores.Length; i++)
+		if(!partidaEmpezada)
 		{
-			if(listaJugadores[i].networkPlayer == player)
+			for(int i=0; i<listaJugadores.Length; i++)
 			{
-				listaJugadores[i].isReady = !listaJugadores[i].isReady;
-				break;
+				if(listaJugadores[i].networkPlayer == player)
+				{
+					listaJugadores[i].isReady = true;
+					break;
+				}
+			}
+			
+			if(Network.isServer && !personajesGenerados)
+			{
+				comprobarTodosListos();
 			}
 		}
-		
-		if(Network.isServer && !personajesGenerados && !personajesGenerados)
+		// Si un jugador se conecta a mitad de la partida el servidor le dira que cargue la pantalla de juego
+		else if(Network.isServer)
 		{
-			comprobarTodosListos();
+			networkView.RPC("LdGame", player);
 		}
+
 	}
 	
 	public void comprobarTodosListos()
@@ -276,7 +285,8 @@ public class NetworkManager : MonoBehaviour
 	{
 		networkView.RPC("strtCountdwn", RPCMode.All, waitTime);
 		yield return new WaitForSeconds(waitTime + 1);
-		
+
+		partidaEmpezada = true;
 		networkView.RPC("LdGame", RPCMode.All);
 	}
 	

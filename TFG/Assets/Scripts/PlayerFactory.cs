@@ -55,6 +55,8 @@ public class PlayerFactory : MonoBehaviour
 
 		gameObjectInstanciado.GetComponent<NetworkView>().viewID = viewID;
 
+		gameObjectInstanciado.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
+
 		Player jugadorInstanciado = (Player)gameObjectInstanciado.GetComponent<Player>();
 		jugadorInstanciado.Initialize();
 

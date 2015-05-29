@@ -14,6 +14,9 @@ public class BasicMovement : MonoBehaviour
 	public Transform characterTransform;
 	public int playerNumber = 1;
 
+	private float floatPositionX;
+	private float floatPositionY;
+
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player>();
@@ -36,7 +39,6 @@ public class BasicMovement : MonoBehaviour
 				targetPos = vectorObjetivo;
 				if(inputDirection != oldInputDirection)
 				{
-					rotarModelo();
 					oldInputDirection = inputDirection;
 				}
 			}
@@ -74,25 +76,6 @@ public class BasicMovement : MonoBehaviour
 		}
 	}
 
-	void rotarModelo()
-	{
-		if(inputDirection == Vector3.right)
-		{
-			characterTransform.eulerAngles = Vector3.zero;
-		}
-		else if(inputDirection == Vector3.left)
-		{
-			characterTransform.eulerAngles = new Vector3(0, 0, 180);
-		}
-		else if(inputDirection == Vector3.up)
-		{
-			characterTransform.eulerAngles = new Vector3(0, 0, 90);
-		}
-		else if(inputDirection == Vector3.down)
-		{
-			characterTransform.eulerAngles = new Vector3(0, 0, -90);
-		}
-	}
 
 	Vector3 redondearPosicion(Vector3 position)
 	{
@@ -139,5 +122,19 @@ public class BasicMovement : MonoBehaviour
 	public void inpt(int enumMovimiento)
 	{
 		ActualizarInput(enumMovimiento);
+	}
+
+	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) 
+	{
+		// Sending
+		if (stream.isWriting) 
+		{
+			Debug.Log("SENDING");
+			floatPositionX = characterTransform.position.x;
+			floatPositionY = characterTransform.position.y;
+
+			stream.Serialize (ref floatPositionX);
+			stream.Serialize (ref floatPositionY);
+		} 
 	}
 }

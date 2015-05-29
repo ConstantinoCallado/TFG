@@ -73,6 +73,9 @@ public class PlayerFactory : MonoBehaviour
 	public Player InstanciarPlayerEnCliente(NetworkViewID viewID, int enumPersonajeInt)
 	{
 		Player jugadorInst = InstanciarPlayerComun(viewID, enumPersonajeInt);
+		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
+
+		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<Player>();
 
 		//jugadorInst.gameObject.AddComponent<LocalInput>();
 
@@ -81,19 +84,21 @@ public class PlayerFactory : MonoBehaviour
 	
 	public Player InstanciarPlayerEnServidor(NetworkViewID viewID, int enumPersonajeInt)
 	{
-		Player jugadorInstanciado = InstanciarPlayerComun(viewID, enumPersonajeInt);
-
-		jugadorInstanciado.gameObject.AddComponent<BasicMovement>();
+		Player jugadorInst = InstanciarPlayerComun(viewID, enumPersonajeInt);
+		jugadorInst.gameObject.AddComponent<BasicMovement>();
+				
+		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
+		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovement>();
 
 		if((EnumPersonaje)enumPersonajeInt == EnumPersonaje.Humano)
 		{
-			jugadorInstanciado.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
+			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
 		}
 		else
 		{
-			jugadorInstanciado.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
+			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
 		}
 		
-		return jugadorInstanciado; 
+		return jugadorInst; 
 	}
 }

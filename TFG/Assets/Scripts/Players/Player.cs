@@ -11,7 +11,12 @@ public class Player : MonoBehaviour
 	public float speed = 3.5f;
 	public Vector3 spawnPoint;
 
-	
+	private float floatPositionX;
+	private float floatPositionY;
+
+	private Vector3 posicionVieja = Vector3.zero;
+	private Vector3 diferenciasPosiciones;
+
 	public void Awake()
 	{
 		//		basicMovementRef = GetComponent<BasicMovement>();
@@ -38,5 +43,41 @@ public class Player : MonoBehaviour
 	{
 		this.spawnPoint = spawnPoint;
 		transform.position = spawnPoint;
+	}
+
+	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) 
+	{
+		// Sending
+		if (stream.isReading) 
+		{
+			stream.Serialize (ref floatPositionX);
+			stream.Serialize (ref floatPositionY);
+		
+			transform.position = new Vector3(floatPositionX, floatPositionY, 0);
+
+			diferenciasPosiciones = transform.position - posicionVieja;
+
+
+			Debug.Log("RECIBIENDO");
+
+			if(diferenciasPosiciones.x > 0)
+			{
+				transform.eulerAngles = Vector3.zero;
+			}
+			else if(diferenciasPosiciones.x < 0)
+			{
+				transform.eulerAngles = new Vector3(0, 0, 180);
+			}
+			else if(diferenciasPosiciones.y < 0)
+			{
+				transform.eulerAngles = new Vector3(0, 0, 90);
+			}
+			else if(diferenciasPosiciones.y < 0)
+			{
+				transform.eulerAngles = new Vector3(0, 0, -90);
+			}
+
+			posicionVieja = transform.position;	
+		} 
 	}
 }

@@ -314,16 +314,39 @@ public class NetworkManager : MonoBehaviour
 	// Funcion que se invocara cada cliente al cargarse la escena de juego
 	public void NotificarPartidaCargada()
 	{
-		networkView.RPC("LdedGame", RPCMode.Server, Network.player);
+		if(!Network.isServer)
+		{
+			networkView.RPC("LdedGame", RPCMode.Server, Network.player);
+		}
+		else
+		{
+			//TODO: BUSCAR DINAMICAMENTE EL JUGADOR QUE HAGA DE SERVER
+			ctrl (0);
+			/*// Recorremos todos los jugadores y asignamos el control al jugador que controle el server
+			for(int i=0; i<listaJugadores.Length; i++)
+			{
+				// Si el personaje pertenece al jugador se le notificara para que le anyada control local
+				if(Network.player == listaJugadores[i].networkPlayer)
+				{
+					ctrl(i);
+				}
+			}*/
+		}
 	}
 
 	// Funcion que recibe el servidor cuando un cliente carga la partida
 	[RPC]
-	void LdedGame(NetworkPlayer networkPlayer)
+	public void LdedGame(NetworkPlayer networkPlayer)
 	{
 		for(int i=0; i<listaJugadores.Length; i++)
 		{
 			networkView.RPC("spwn", networkPlayer, i, listaJugadores[i].viewID, (int)listaJugadores[i].enumPersonaje);
+
+			// Si el personaje pertenece al jugador se le notificara para que le anyada control local
+			if(networkPlayer == listaJugadores[i].networkPlayer)
+			{
+				networkView.RPC("ctrl", networkPlayer, i);
+			}
 		}
 	}
 
@@ -334,5 +357,12 @@ public class NetworkManager : MonoBehaviour
 		listaJugadores[playerIndex].player = PlayerFactory.playerFactoryRef.InstanciarPlayerEnCliente(
 													viewID,
 													enumPersonaje);
+	}
+
+	// Funcion que recibe un cliente para notificar que debe tomar el control 
+	[RPC]
+	void ctrl(int playerIndex)
+	{
+		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
 	}
 }

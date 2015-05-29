@@ -1,35 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (BasicMovement))]
+public enum EnumMovimiento{None, Up, Right, Down, Left};
+
 public class LocalInput : MonoBehaviour 
 {
 	Camera cameraRef;
-	BasicMovement basicMovement;
+	int enumMovimiento = (int)EnumMovimiento.None;
+	int oldEnumMovimiento = (int)EnumMovimiento.None;
+	NetworkView networkView;
+	BasicMovement movementRef;
 
 	void Awake()
 	{
-		basicMovement = GetComponent<BasicMovement>();
+		networkView = GetComponent<NetworkView>();
 		cameraRef = Camera.main;
+
+		if(Network.isServer)
+		{
+			movementRef = gameObject.GetComponent<BasicMovement>();
+		}
 	}
 
-	// Update is called once per frame
+	// Actualizamos la entrada y la enviamos al servidor... si ya estamos en el propio servidor invocamos la funcion directamente
 	void Update () 
 	{
 		getUserInput();
+
+		if(oldEnumMovimiento != enumMovimiento)
+		{
+			if(!movementRef)
+			{
+				networkView.RPC("inpt", RPCMode.Server, enumMovimiento);
+			}
+			else
+			{
+				movementRef.inpt(enumMovimiento);
+			}
+
+			oldEnumMovimiento = enumMovimiento;
+		}
 	}
 
 	void getUserInput()
 	{
 		#if UNITY_STANDALONE
-		if(basicMovement.playerNumber == 1)
-		{
-			getEntradaTecladoWASD();
-		}
-		else
-		{
-			getEntradaTecladoFlechas();
-		}
+		getEntradaTecladoWASD();
 		#else
 		//getEntradaBordeMovil();
 		getEntradaRelativaMovil();
@@ -40,19 +56,19 @@ public class LocalInput : MonoBehaviour
 	{
 		if(Input.GetKey(KeyCode.D))
 		{
-			basicMovement.inputDirection = Vector3.right;
+			enumMovimiento = (int)EnumMovimiento.Right;
 		}
 		else if(Input.GetKey(KeyCode.A))
 		{
-			basicMovement.inputDirection = Vector3.left;
+			enumMovimiento =(int)EnumMovimiento.Left;
 		}
 		else if(Input.GetKey(KeyCode.W))
 		{
-			basicMovement.inputDirection = Vector3.up;
+			enumMovimiento = (int)EnumMovimiento.Up;
 		}
 		else if(Input.GetKey(KeyCode.S))
 		{
-			basicMovement.inputDirection = Vector3.down;
+			enumMovimiento = (int)EnumMovimiento.Down;
 		}
 	}
 
@@ -60,19 +76,19 @@ public class LocalInput : MonoBehaviour
 	{
 		if(Input.GetKey(KeyCode.RightArrow))
 		{
-			basicMovement.inputDirection = Vector3.right;
+			enumMovimiento = (int)EnumMovimiento.Right;
 		}
 		else if(Input.GetKey(KeyCode.LeftArrow))
 		{
-			basicMovement.inputDirection = Vector3.left;
+			enumMovimiento = (int)EnumMovimiento.Left;
 		}
 		else if(Input.GetKey(KeyCode.UpArrow))
 		{
-			basicMovement.inputDirection = Vector3.up;
+			enumMovimiento = (int)EnumMovimiento.Up;
 		}
 		else if(Input.GetKey(KeyCode.DownArrow))
 		{
-			basicMovement.inputDirection = Vector3.down;
+			enumMovimiento = (int)EnumMovimiento.Down;
 		}
 	}
 
@@ -86,19 +102,19 @@ public class LocalInput : MonoBehaviour
 			
 			if(toqueJugador.x > Screen.width * 0.7f)
 			{
-				basicMovement.inputDirection = Vector3.right;
+				enumMovimiento = (int)EnumMovimiento.Right;
 			}
 			else if(toqueJugador.x < Screen.width * 0.3f)
 			{
-				basicMovement.inputDirection = Vector3.left;
+				enumMovimiento = (int)EnumMovimiento.Left;
 			}
 			else if(toqueJugador.y > Screen.height * 0.7f)
 			{
-				basicMovement.inputDirection = Vector3.up;
+				enumMovimiento = (int)EnumMovimiento.Up;
 			}
 			else if(toqueJugador.y < Screen.height * 0.3f)
 			{
-				basicMovement.inputDirection = Vector3.down;
+				enumMovimiento = (int)EnumMovimiento.Down;
 			}
 		}
 	}
@@ -108,30 +124,38 @@ public class LocalInput : MonoBehaviour
 	{
 		if(Input.GetButton("Fire1"))
 		{
-			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(basicMovement.characterTransform.position));
+			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
 			
 			if(Mathf.Abs(toqueJugadorRelativo.x) > Mathf.Abs(toqueJugadorRelativo.y))
 			{
 				if(toqueJugadorRelativo.x > 0)
 				{
-					basicMovement.inputDirection = Vector3.right;
+					enumMovimiento = (int)EnumMovimiento.Right;
 				}
 				else
 				{
-					basicMovement.inputDirection = Vector3.left;
+					enumMovimiento = (int)EnumMovimiento.Left;
 				}
 			}
 			else
 			{
 				if(toqueJugadorRelativo.y > 0)
 				{
-					basicMovement.inputDirection = Vector3.up;
+					enumMovimiento = (int)EnumMovimiento.Up;
 				}
 				else
 				{
-					basicMovement.inputDirection = Vector3.down;
+					enumMovimiento = (int)EnumMovimiento.Down;
 				}
 			}
 		}
+	}
+
+
+	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
+	[RPC]
+	void inpt(int enumMovimiento)
+	{
+		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}
 }

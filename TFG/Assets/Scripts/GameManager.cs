@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 		if(Network.isServer)
 		{
 			SpawnearPersonajesEnServer();
+			NotificarPartidaCargada();
 		}
 		else
 		{

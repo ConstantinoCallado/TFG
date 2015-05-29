@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 	public PlayerGraphics playerGraphics;
 	public float speed = 3.5f;
 	public Vector3 spawnPoint;
-	public NetworkViewID viewID;
+
 	
 	public void Awake()
 	{

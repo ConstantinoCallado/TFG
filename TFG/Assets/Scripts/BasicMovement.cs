@@ -88,24 +88,28 @@ public class BasicMovement : MonoBehaviour
 		{
 			case EnumMovimiento.Right:
 			{
+				transform.eulerAngles = new Vector3(0, 0, 180);
 				inputDirection = Vector3.right;
 			}
 			break;
 
 			case EnumMovimiento.Left:
 			{
+				transform.eulerAngles = Vector3.zero;
 				inputDirection = Vector3.left;
 			}
 			break;
 
 			case EnumMovimiento.Up:
 			{
-				inputDirection = Vector3.up;	
+				transform.eulerAngles = new Vector3(0, 0, -90);
+				inputDirection = Vector3.up;
 			}
 			break;
 
 			case EnumMovimiento.Down:
 			{
+				transform.eulerAngles = new Vector3(0, 0, 90);
 				inputDirection = Vector3.down;
 			}
 			break;

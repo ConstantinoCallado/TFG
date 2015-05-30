@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
 	//	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
-	public float speed = 3.5f;
+	public float speed = 3.25f;
 	public Vector3 spawnPoint;
 
 	private float floatPositionX;
@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
 		// Sending
 		if (stream.isReading) 
 		{
+			Debug.Log("ASDAS");
 			stream.Serialize (ref floatPositionX);
 			stream.Serialize (ref floatPositionY);
 		
@@ -57,24 +58,21 @@ public class Player : MonoBehaviour
 
 			diferenciasPosiciones = transform.position - posicionVieja;
 
-
-			Debug.Log("RECIBIENDO");
-
 			if(diferenciasPosiciones.x > 0)
 			{
-				transform.eulerAngles = Vector3.zero;
+				transform.eulerAngles = new Vector3(0, 0, 180);
 			}
 			else if(diferenciasPosiciones.x < 0)
 			{
-				transform.eulerAngles = new Vector3(0, 0, 180);
+				transform.eulerAngles = Vector3.zero;
+			}
+			else if(diferenciasPosiciones.y > 0)
+			{
+				transform.eulerAngles = new Vector3(0, 0, -90);
 			}
 			else if(diferenciasPosiciones.y < 0)
 			{
 				transform.eulerAngles = new Vector3(0, 0, 90);
-			}
-			else if(diferenciasPosiciones.y < 0)
-			{
-				transform.eulerAngles = new Vector3(0, 0, -90);
 			}
 
 			posicionVieja = transform.position;	

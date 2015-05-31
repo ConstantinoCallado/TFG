@@ -36,6 +36,7 @@ public class BasicMovement : MonoBehaviour
 				targetPos = vectorObjetivo;
 				if(inputDirection != oldInputDirection)
 				{
+					ActualizarRotacion(inputDirection);
 					oldInputDirection = inputDirection;
 				}
 			}
@@ -78,35 +79,55 @@ public class BasicMovement : MonoBehaviour
 	{
 		return new Vector3(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), 0);
 	}
-	
+
+	void ActualizarRotacion(Vector3 vectorInput)
+	{
+		if(vectorInput ==  Vector3.right)
+		{
+			transform.eulerAngles = new Vector3(0, 0, 180);
+		}
+		else if(vectorInput ==  Vector3.left)
+		{
+			transform.eulerAngles = Vector3.zero;
+		}
+		else if(vectorInput ==  Vector3.up)
+		{
+			transform.eulerAngles = new Vector3(0, 0, -90);
+		}
+		else if(vectorInput ==  Vector3.down)
+		{
+			transform.eulerAngles = new Vector3(0, 0, 90);
+		}
+	}
+
 	void ActualizarInput(int enumMovimiento)
 	{
 		switch((EnumMovimiento) enumMovimiento)
 		{
 			case EnumMovimiento.Right:
 			{
-				transform.eulerAngles = new Vector3(0, 0, 180);
+				//transform.eulerAngles = new Vector3(0, 0, 180);
 				inputDirection = Vector3.right;
 			}
 			break;
 
 			case EnumMovimiento.Left:
 			{
-				transform.eulerAngles = Vector3.zero;
+				//transform.eulerAngles = Vector3.zero;
 				inputDirection = Vector3.left;
 			}
 			break;
 
 			case EnumMovimiento.Up:
 			{
-				transform.eulerAngles = new Vector3(0, 0, -90);
+				//transform.eulerAngles = new Vector3(0, 0, -90);
 				inputDirection = Vector3.up;
 			}
 			break;
 
 			case EnumMovimiento.Down:
 			{
-				transform.eulerAngles = new Vector3(0, 0, 90);
+				//transform.eulerAngles = new Vector3(0, 0, 90);
 				inputDirection = Vector3.down;
 			}
 			break;

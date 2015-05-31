@@ -14,9 +14,6 @@ public class BasicMovement : MonoBehaviour
 	public Transform characterTransform;
 	public int playerNumber = 1;
 
-	private float floatPositionX;
-	private float floatPositionY;
-
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player>();
@@ -133,12 +130,29 @@ public class BasicMovement : MonoBehaviour
 		// Sending
 		if (stream.isWriting) 
 		{
-			Debug.Log("SENDING");
-			floatPositionX = characterTransform.position.x;
-			floatPositionY = characterTransform.position.y;
-
-			stream.Serialize (ref floatPositionX);
-			stream.Serialize (ref floatPositionY);
+			//Serialize2Float(stream, transform.position);
+			Serialize1Int(stream, transform.position);
 		} 
+	}
+
+	void Serialize2Float(BitStream stream, Vector3 position)
+	{
+		float floatPositionX = position.x;
+		float floatPositionY = position.y;
+		
+		stream.Serialize (ref floatPositionX);
+		stream.Serialize (ref floatPositionY);
+	}
+
+	void Serialize1Int(BitStream stream, Vector3 position)
+	{
+		// Trabajaremos con una precision de 2 decimales
+		short packageX = (short)(position.x * 100);
+		short packageY = (short)(position.y * 100);
+	
+		// Acumulamos la posicionX en los 16 bits de la izq, y la Y en los 16 de la derecha
+		int positionPackage = packageY + (packageX << 16);
+
+		stream.Serialize (ref positionPackage);
 	}
 }

@@ -11,11 +11,11 @@ public class Player : MonoBehaviour
 	public float speed = 3.25f;
 	public Vector3 spawnPoint;
 
-	private float floatPositionX;
-	private float floatPositionY;
-
 	private Vector3 posicionVieja = Vector3.zero;
 	private Vector3 diferenciasPosiciones;
+
+	const int mascaraD = 65535;
+	const uint mascaraI = 4294901760;
 
 	public void Awake()
 	{
@@ -50,11 +50,8 @@ public class Player : MonoBehaviour
 		// Sending
 		if (stream.isReading) 
 		{
-			Debug.Log("ASDAS");
-			stream.Serialize (ref floatPositionX);
-			stream.Serialize (ref floatPositionY);
-		
-			transform.position = new Vector3(floatPositionX, floatPositionY, 0);
+			//DesSerialize2Float(stream, transform);
+			DesSerialize1Int(stream, transform);
 
 			diferenciasPosiciones = transform.position - posicionVieja;
 
@@ -77,5 +74,25 @@ public class Player : MonoBehaviour
 
 			posicionVieja = transform.position;	
 		} 
+	}
+
+	void DesSerialize2Float(BitStream stream, Transform transform)
+	{
+		float floatPositionX = 0;
+		float floatPositionY = 0;
+
+		stream.Serialize (ref floatPositionX);
+		stream.Serialize (ref floatPositionY);
+		
+		transform.position = new Vector3(floatPositionX, floatPositionY, 0);
+	}
+
+
+	void DesSerialize1Int(BitStream stream, Transform transform)
+	{
+		int packagePosition = 0;
+		stream.Serialize (ref packagePosition);
+
+		transform.position = new Vector3(((packagePosition & mascaraI) >> 16) / 100.0f, (packagePosition & mascaraD) / 100.0f, 0);
 	}
 }

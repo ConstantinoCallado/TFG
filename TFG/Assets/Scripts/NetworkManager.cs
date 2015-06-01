@@ -10,7 +10,7 @@ public class NetworkManager : MonoBehaviour
 	private string gameName = "RoomName";
 	private HostData[] hostList;
 	public PlayerInfo[] listaJugadores = new PlayerInfo[numJugadores];
-	
+	public NetworkPlayer networkPlayerServer;
 	public NetworkView networkView;
 	
 	public static NetworkManager networkManagerRef;
@@ -53,7 +53,10 @@ public class NetworkManager : MonoBehaviour
 	{
 		Debug.Log("Server Initializied");
 		Application.LoadLevel("LobbyScene");
-		
+
+		// Enviamos al resto de cliente la informacion del servidor
+		networkView.RPC("stsrvr", RPCMode.OthersBuffered, Network.player);
+
 		// Si ademas tambien es un cliente
 		if(!dedicatedServer)
 		{
@@ -364,5 +367,12 @@ public class NetworkManager : MonoBehaviour
 	void ctrl(int playerIndex)
 	{
 		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
+	}
+
+	// Funcion que envia a los jugadores la informacion del servidor 
+	[RPC]
+	void stsrvr(NetworkPlayer networkPlayerServer)
+	{
+		this.networkPlayerServer = networkPlayerServer;
 	}
 }

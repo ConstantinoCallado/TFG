@@ -74,8 +74,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 415428}
-  - 50: {fileID: 5025140}
-  - 58: {fileID: 5858084}
   - 114: {fileID: 11421750}
   m_Layer: 8
   m_Name: Player
@@ -300,34 +298,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193778}
   m_Mesh: {fileID: 4300004, guid: 6bb072b65805f304cab2c88ed1a9f873, type: 3}
---- !u!50 &5025140
-Rigidbody2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158900}
-  m_Mass: 9.99999975e-05
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 1
-  m_Interpolate: 2
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
---- !u!58 &5858084
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158900}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: .5
 --- !u!95 &9537198
 Animator:
   serializedVersion: 3

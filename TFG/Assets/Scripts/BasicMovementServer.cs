@@ -8,7 +8,7 @@ public class BasicMovementServer : MonoBehaviour
 	FaceDirection faceDirection = FaceDirection.Right;
 	public Vector3 inputDirection = Vector3.zero;
 	private Vector3 oldInputDirection = Vector3.zero;
-	Vector3 targetPos;
+	public Vector3 targetPos;
 	public Player player;
 	Vector3 vectorObjetivo;
 	public Transform characterTransform;
@@ -27,7 +27,7 @@ public class BasicMovementServer : MonoBehaviour
 		{
 			// Calculamos la posicion a donde quiere moverse el jugador
 
-				vectorObjetivo = redondearPosicion(characterTransform.position + inputDirection);
+			vectorObjetivo = redondearPosicion(characterTransform.position + inputDirection);
 
 			// Si la posicion esta libre la ponemos como objetivo
 			if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)

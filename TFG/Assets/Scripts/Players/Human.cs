@@ -7,6 +7,7 @@ public class Human : Player
 	{
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Human");
+		gameObject.tag = "Human";
 		speed = 3.5f;
 		base.playerGraphics.setHuman();
 		gameObject.name = "Human";
@@ -17,5 +18,16 @@ public class Human : Player
 	{
 		Debug.Log("Matando Humano");
 
+		SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
+		Respawn();
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.tag == "Robot")
+		{
+			Debug.Log("He tocado un robot");
+			Kill ();
+		}
 	}
 }

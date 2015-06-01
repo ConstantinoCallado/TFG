@@ -88,15 +88,26 @@ public class PlayerFactory : MonoBehaviour
 		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
 		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovementServer>();
 
+		jugadorInst.gameObject.AddComponent<CircleCollider2D>();
+		jugadorInst.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+
+		jugadorInst.gameObject.AddComponent<Rigidbody2D>();
+		Rigidbody2D rigidbodyInstanciado = jugadorInst.gameObject.GetComponent<Rigidbody2D>();
+		rigidbodyInstanciado.fixedAngle = true;
+
 		if((EnumPersonaje)enumPersonajeInt == EnumPersonaje.Humano)
-		{
+		{		
+			rigidbodyInstanciado.gravityScale = 0;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
 		}
 		else
 		{
+			rigidbodyInstanciado.isKinematic = true;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
 		}
-		
+
+		jugadorInst.Respawn();
+
 		return jugadorInst; 
 	}
 }

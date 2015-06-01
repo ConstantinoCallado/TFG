@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
 	//	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
-	public float speed = 3f;
+	public float speed = 2.75f;
 	public Vector3 spawnPoint;
 	
 	public void Awake()
@@ -31,6 +31,13 @@ public class Player : MonoBehaviour
 	public void SetSpawnPoint(Vector2 spawnPoint)
 	{
 		this.spawnPoint = spawnPoint;
+	}
+
+	public void Respawn()
+	{
 		transform.position = spawnPoint;
+
+		gameObject.GetComponent<BasicMovementServer>().targetPos = transform.position;
+		gameObject.GetComponent<BasicMovementServer>().inputDirection = Vector3.zero;
 	}
 }

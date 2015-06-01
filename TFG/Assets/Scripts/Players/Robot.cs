@@ -7,6 +7,7 @@ public class Robot : Player
 	{
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Robot");
+		gameObject.tag = "Robot";
 		base.playerGraphics.setRobot(GetColor());
 		gameObject.name = "Robot " + getColorString();
 	}
@@ -30,5 +31,13 @@ public class Robot : Player
 	public virtual string getColorString()
 	{
 		return "";
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.tag == "Human")
+		{
+			Debug.Log("He tocado al humano");
+		}
 	}
 }

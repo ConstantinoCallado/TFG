@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
 	//	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
-	public float speed = 3.25f;
+	public float speed = 3f;
 	public Vector3 spawnPoint;
 	
 	public void Awake()

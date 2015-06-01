@@ -10,7 +10,7 @@ public class BasicMovementServer : MonoBehaviour
 	private Vector3 oldInputDirection = Vector3.zero;
 	public Vector3 targetPos;
 	public Player player;
-	Vector3 vectorObjetivo;
+	Vector3 vectorObjetivoTemp;
 	public Transform characterTransform;
 
 	void Awake()
@@ -27,12 +27,12 @@ public class BasicMovementServer : MonoBehaviour
 		{
 			// Calculamos la posicion a donde quiere moverse el jugador
 
-			vectorObjetivo = redondearPosicion(characterTransform.position + inputDirection);
+			vectorObjetivoTemp = redondearPosicion(characterTransform.position + inputDirection);
 
 			// Si la posicion esta libre la ponemos como objetivo
-			if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)
+			if((int)vectorObjetivoTemp.x < 0 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 			{
-				targetPos = vectorObjetivo;
+				targetPos = vectorObjetivoTemp;
 				if(inputDirection != oldInputDirection)
 				{
 					ActualizarRotacion(inputDirection);
@@ -42,12 +42,12 @@ public class BasicMovementServer : MonoBehaviour
 			// Si no, intentamos mover el jugador siguiendo el movimiento anterior
 			else
 			{
-				vectorObjetivo = redondearPosicion(characterTransform.position + oldInputDirection);
+				vectorObjetivoTemp = redondearPosicion(characterTransform.position + oldInputDirection);
 			
 				// Si esta libre el movimiento anterior lo ponemos como objetivo
-				if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivo.y, (int)vectorObjetivo.x] != 0)
+				if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 				{					
-					targetPos = vectorObjetivo;
+					targetPos = vectorObjetivoTemp;
 				}
 				// Si esta ocupada detenemos el jugador
 				else
@@ -57,7 +57,21 @@ public class BasicMovementServer : MonoBehaviour
 			}
 		}
 
-		characterTransform.position = Vector2.MoveTowards(characterTransform.position, targetPos, Time.deltaTime * player.speed);	
+		// Desplazamos el jugador
+		characterTransform.position = Vector2.MoveTowards(characterTransform.position, targetPos, Time.deltaTime * player.speed);
+
+
+		// Si ha salido por los margenes del mapa, lo reintroducimos por el otro lado
+		if(characterTransform.position.x < 0.1f)
+		{
+			characterTransform.position = new Vector2(Scenario.tamanyoMapaX-1.2f , characterTransform.position.y); 
+			targetPos = characterTransform.position;
+		}
+		else if(characterTransform.position.x > Scenario.tamanyoMapaX - 1.1f)
+		{
+			characterTransform.position = new Vector2(0.1f , characterTransform.position.y); 
+			targetPos = characterTransform.position;
+		}
 	}
 
 	// Se podra cambiar de direccion si se ha alcanzado la objetivo o si la direccion es la contraria a la actual

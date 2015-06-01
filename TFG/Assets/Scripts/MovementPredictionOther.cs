@@ -20,6 +20,7 @@ public class MovementPredictionOtherClient : BasicMovementClient
 		refJugador = gameObject.GetComponent<Player>();
 	}
 
+	//TODO: Hacer que la prediccion de movimiento funcione cuando el jugador salga por los laterales del mapa
 	// Update is called once per frame
 	void Update () 
 	{

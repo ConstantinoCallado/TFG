@@ -6,7 +6,7 @@ public class BasicMovementClient : MonoBehaviour
 	public Transform transformRef;
 
 	private Vector3 posicionVieja = Vector3.zero;
-	private Vector3 diferenciasPosiciones;
+	protected Vector2 diferenciasPosiciones;
 	
 	const int mascaraD = 65535;
 	const uint mascaraI = 4294901760;
@@ -25,26 +25,7 @@ public class BasicMovementClient : MonoBehaviour
 		{
 			//DesSerialize2Float(stream, transform);
 			DesSerialize1Int(stream, transformRef);
-			
-			diferenciasPosiciones = transformRef.position - posicionVieja;
-			
-			if(diferenciasPosiciones.x > 0)
-			{
-				transformRef.eulerAngles = new Vector3(0, 0, 180);
-			}
-			else if(diferenciasPosiciones.x < 0)
-			{
-				transformRef.eulerAngles = Vector3.zero;
-			}
-			else if(diferenciasPosiciones.y > 0)
-			{
-				transformRef.eulerAngles = new Vector3(0, 0, -90);
-			}
-			else if(diferenciasPosiciones.y < 0)
-			{
-				transformRef.eulerAngles = new Vector3(0, 0, 90);
-			}
-			
+		
 			posicionVieja = transformRef.position;	
 		} 
 	}
@@ -71,5 +52,22 @@ public class BasicMovementClient : MonoBehaviour
 	public virtual void RecievedNewPosition(Vector3 positionRecieved)
 	{
 		transformRef.position = positionRecieved;
+		diferenciasPosiciones = transformRef.position - posicionVieja;
+		if(diferenciasPosiciones.x > 0)
+		{
+			transformRef.eulerAngles = new Vector3(0, 0, 180);
+		}
+		else if(diferenciasPosiciones.x < 0)
+		{
+			transformRef.eulerAngles = Vector3.zero;
+		}
+		else if(diferenciasPosiciones.y > 0)
+		{
+			transformRef.eulerAngles = new Vector3(0, 0, -90);
+		}
+		else if(diferenciasPosiciones.y < 0)
+		{
+			transformRef.eulerAngles = new Vector3(0, 0, 90);
+		}
 	}
 }

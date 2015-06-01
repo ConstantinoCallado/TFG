@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BasicMovementClient : MonoBehaviour 
 {
-	Transform transformRef;
+	public Transform transformRef;
 
 	private Vector3 posicionVieja = Vector3.zero;
 	private Vector3 diferenciasPosiciones;
@@ -13,7 +13,7 @@ public class BasicMovementClient : MonoBehaviour
 
 
 	// Use this for initialization
-	void Awake () 
+	public void Awake () 
 	{
 		transformRef = transform;
 	}
@@ -30,22 +30,22 @@ public class BasicMovementClient : MonoBehaviour
 			
 			if(diferenciasPosiciones.x > 0)
 			{
-				transform.eulerAngles = new Vector3(0, 0, 180);
+				transformRef.eulerAngles = new Vector3(0, 0, 180);
 			}
 			else if(diferenciasPosiciones.x < 0)
 			{
-				transform.eulerAngles = Vector3.zero;
+				transformRef.eulerAngles = Vector3.zero;
 			}
 			else if(diferenciasPosiciones.y > 0)
 			{
-				transform.eulerAngles = new Vector3(0, 0, -90);
+				transformRef.eulerAngles = new Vector3(0, 0, -90);
 			}
 			else if(diferenciasPosiciones.y < 0)
 			{
-				transform.eulerAngles = new Vector3(0, 0, 90);
+				transformRef.eulerAngles = new Vector3(0, 0, 90);
 			}
 			
-			posicionVieja = transform.position;	
+			posicionVieja = transformRef.position;	
 		} 
 	}
 	
@@ -70,6 +70,6 @@ public class BasicMovementClient : MonoBehaviour
 
 	public virtual void RecievedNewPosition(Vector3 positionRecieved)
 	{
-		transform.position = positionRecieved;
+		transformRef.position = positionRecieved;
 	}
 }

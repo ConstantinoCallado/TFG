@@ -74,9 +74,9 @@ public class PlayerFactory : MonoBehaviour
 	{
 		Player jugadorInst = InstanciarPlayerComun(viewID, enumPersonajeInt);
 		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
-		jugadorInst.gameObject.AddComponent<BasicMovementClient>();
+		jugadorInst.gameObject.AddComponent<MovementPredictionClient>();
 
-		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovementClient>();
+		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<MovementPredictionClient>();
 
 
 

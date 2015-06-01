@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum FaceDirection{None, Right, Down, Left, Up}
 
-public class BasicMovement : MonoBehaviour 
+public class BasicMovementServer : MonoBehaviour 
 {
 	FaceDirection faceDirection = FaceDirection.Right;
 	public Vector3 inputDirection = Vector3.zero;
@@ -12,7 +12,6 @@ public class BasicMovement : MonoBehaviour
 	public Player player;
 	Vector3 vectorObjetivo;
 	public Transform characterTransform;
-	public int playerNumber = 1;
 
 	void Awake()
 	{
@@ -145,7 +144,7 @@ public class BasicMovement : MonoBehaviour
 	{
 		ActualizarInput(enumMovimiento);
 	}
-
+	
 	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) 
 	{
 		// Sending
@@ -160,7 +159,7 @@ public class BasicMovement : MonoBehaviour
 	{
 		float floatPositionX = position.x;
 		float floatPositionY = position.y;
-		
+
 		stream.Serialize (ref floatPositionX);
 		stream.Serialize (ref floatPositionY);
 	}

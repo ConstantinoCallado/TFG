@@ -9,7 +9,7 @@ public class LocalInput : MonoBehaviour
 	int enumMovimiento = (int)EnumMovimiento.None;
 	int oldEnumMovimiento = (int)EnumMovimiento.None;
 	NetworkView networkView;
-	BasicMovement movementRef;
+	BasicMovementServer movementRef;
 
 	void Awake()
 	{
@@ -18,7 +18,7 @@ public class LocalInput : MonoBehaviour
 
 		if(Network.isServer)
 		{
-			movementRef = gameObject.GetComponent<BasicMovement>();
+			movementRef = gameObject.GetComponent<BasicMovementServer>();
 		}
 	}
 

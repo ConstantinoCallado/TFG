@@ -74,10 +74,11 @@ public class PlayerFactory : MonoBehaviour
 	{
 		Player jugadorInst = InstanciarPlayerComun(viewID, enumPersonajeInt);
 		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
+		jugadorInst.gameObject.AddComponent<BasicMovementClient>();
 
-		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<Player>();
+		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovementClient>();
 
-		//jugadorInst.gameObject.AddComponent<LocalInput>();
+
 
 		return jugadorInst;
 	}
@@ -85,10 +86,10 @@ public class PlayerFactory : MonoBehaviour
 	public Player InstanciarPlayerEnServidor(NetworkViewID viewID, int enumPersonajeInt)
 	{
 		Player jugadorInst = InstanciarPlayerComun(viewID, enumPersonajeInt);
-		jugadorInst.gameObject.AddComponent<BasicMovement>();
+		jugadorInst.gameObject.AddComponent<BasicMovementServer>();
 				
 		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
-		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovement>();
+		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<BasicMovementServer>();
 
 		if((EnumPersonaje)enumPersonajeInt == EnumPersonaje.Humano)
 		{

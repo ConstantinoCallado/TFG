@@ -254,26 +254,31 @@ MonoBehaviour:
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
+    index: 0
   - playerName: IA
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
+    index: 0
   - playerName: IA
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
+    index: 0
   - playerName: IA
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
+    index: 0
   - playerName: IA
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
+    index: 0
   networkView: {fileID: 65600388}
 --- !u!4 &65600387
 Transform:

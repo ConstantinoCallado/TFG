@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 415428}
   - 114: {fileID: 11421750}
+  - 114: {fileID: 11466632}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -135,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.1840897, y: 8.19087791, z: 10.6455679}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432884}
@@ -339,6 +340,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanGraphics: {fileID: 11406386}
   robotGraphics: {fileID: 11478788}
+  hoveringName: {fileID: 11466632}
+--- !u!114 &11466632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0de54090d57e74419a779354e6abcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  textUI: {fileID: 0}
+  index: 0
 --- !u!114 &11478788
 MonoBehaviour:
   m_ObjectHideFlags: 1

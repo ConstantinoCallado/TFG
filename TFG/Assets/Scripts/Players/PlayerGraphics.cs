@@ -5,6 +5,7 @@ public class PlayerGraphics : MonoBehaviour
 {
 	public HumanGraphics humanGraphics;
 	public RobotGraphics robotGraphics;
+	public HoveringName hoveringName;
 
 	public void setHuman()
 	{
@@ -21,12 +22,14 @@ public class PlayerGraphics : MonoBehaviour
 
 	public void DisableGraphics()
 	{
+		hoveringName.active = false;
 		if(humanGraphics != null) humanGraphics.gameObject.SetActive(false);
 		if(robotGraphics != null) robotGraphics.gameObject.SetActive(false);
 	}
 	
 	public void EnableGraphics()
 	{
+		hoveringName.active = true;
 		if(humanGraphics != null) humanGraphics.gameObject.SetActive(true);
 		if(robotGraphics != null) robotGraphics.gameObject.SetActive(true);
 	}

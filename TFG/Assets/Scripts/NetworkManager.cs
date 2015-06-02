@@ -362,6 +362,7 @@ public class NetworkManager : MonoBehaviour
 		listaJugadores[playerIndex].player = PlayerFactory.playerFactoryRef.InstanciarPlayerEnCliente(
 													viewID,
 													enumPersonaje);
+		listaJugadores[playerIndex].player.id = playerIndex;
 	}
 
 	// Funcion que recibe un cliente para notificar que debe tomar el control 

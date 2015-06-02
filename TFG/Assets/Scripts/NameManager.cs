@@ -13,6 +13,7 @@ public class NameManager : MonoBehaviour
 	{
 		nameManagerRef = this;
 
+		// Creamos los 5 textos que asignaremos a cada jugador
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 		{
 			GameObject textoInstanciado = GameObject.Instantiate(textPlayerPrefab);
@@ -20,11 +21,6 @@ public class NameManager : MonoBehaviour
 			textoInstanciado.transform.parent = canvas.transform;
 			textoInstanciado.transform.localScale = Vector3.one;
 			listaTextos.Add(textoInstanciado.GetComponent<Text>());
-
-			//TODO: Esto en el cliente no funciona
-			NetworkManager.networkManagerRef.listaJugadores[i].player.playerGraphics.hoveringName.textUI = listaTextos[i];
-			NetworkManager.networkManagerRef.listaJugadores[i].player.playerGraphics.hoveringName.active = true;
-			NetworkManager.networkManagerRef.listaJugadores[i].player.playerGraphics.hoveringName.index = i;
 		}
 
 		HoveringName.canvasRect = canvas.GetComponent<RectTransform>();

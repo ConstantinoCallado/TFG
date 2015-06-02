@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 	{
 		Debug.Log("inicializado Player");
 		transform.position = spawnPoint;
+		gameObject.GetComponent<HoveringName>().playerRef = this;
 	}
 	
 	public virtual void Kill()

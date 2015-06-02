@@ -26,8 +26,9 @@ public class Human : Player
 			{
 				if(!isDead)
 				{
-					base.Kill ();
-					GameManager.gameManager.KillHumanServer();
+					base.Kill();
+
+					GameManager.gameManager.KillPlayerServer(base.id);
 				}
 			}
 		}

@@ -90,6 +90,8 @@ public class NetworkManager : MonoBehaviour
 				listaJugadores[i].activePlayer = true;
 				listaJugadores[i].networkPlayer = player;
 				listaJugadores[i].isReady = false;
+				listaJugadores[i].index = i;
+
 				// Sincronizamos el jugador y su posicion en la lista con el resto de clientes
 				networkView.RPC("jugCon", RPCMode.OthersBuffered, player, i);
 				break;
@@ -376,16 +378,16 @@ public class NetworkManager : MonoBehaviour
 		this.networkPlayerServer = networkPlayerServer;
 	}
 
-	public void NotificarHumanoMatado ()
+	public void NotificarJugadorMatado (int index)
 	{
-		networkView.RPC("hklld", RPCMode.Others);
+		networkView.RPC("pklld", RPCMode.Others, index);
 	}
 	
 	// Funcion que envia a los jugadores la informacion del servidor 
 	[RPC]
-	void hklld()
+	void pklld(int index)
 	{
-		GameManager.gameManager.KillHumanClient();
+		GameManager.gameManager.KillPlayerClient(index);
 	}
 
 }

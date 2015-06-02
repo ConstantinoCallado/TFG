@@ -16,11 +16,7 @@ public class Robot : Player
 	{
 		Debug.Log("La clase hija deberia sobreescribir este metodo");
 	}
-
-	public override void Kill()
-	{
-		Debug.Log("Matando robot");
-	}
+	
 
 	public virtual Color GetColor()
 	{
@@ -38,6 +34,12 @@ public class Robot : Player
 		if(other.tag == "Human")
 		{
 			Debug.Log("He tocado al humano");
+	
+			if(other.gameObject.GetComponent<Human>().aggressiveMode)
+			{
+				GameManager.gameManager.KillPlayerServer(base.id);
+				base.Kill();
+			}
 		}
 	}
 }

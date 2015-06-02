@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
 	public int humanTries = 3;
+	public const int timeRespawnRobot = 20;
 
 	void Awake () 
 	{
@@ -28,7 +29,8 @@ public class GameManager : MonoBehaviour
 			// Instanciamos el personaje y lo asignamos al jugador
 			NetworkManager.networkManagerRef.listaJugadores[i].player = playerFactory.InstanciarPlayerEnServidor(NetworkManager.networkManagerRef.listaJugadores[i].viewID,
 			                                                                   (int)NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje);
-			
+
+			NetworkManager.networkManagerRef.listaJugadores[i].player.id = i;
 			/*	networkView.RPC("instPlyr", RPCMode.OthersBuffered, viewID,
 			                (int)NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje);*/
 		}
@@ -39,54 +41,67 @@ public class GameManager : MonoBehaviour
 		NetworkManager.networkManagerRef.NotificarPartidaCargada();
 	}
 
-	public void KillHumanServer()
+	public void KillPlayerServer(int index)
 	{
-		NetworkManager.networkManagerRef.NotificarHumanoMatado();
-		--humanTries;
-		StartCoroutine(coroutineKillHumanServer());
+		NetworkManager.networkManagerRef.NotificarJugadorMatado(index);
+		StartCoroutine(coroutineKillPlayerServer(index));
 	}
 
-	public IEnumerator coroutineKillHumanServer()
+	public IEnumerator coroutineKillPlayerServer(int index)
 	{
-		yield return new WaitForSeconds(2);
-
-		// Recorremos todos los jugadores y los respawneamos
-		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
+		// Si es el humano el que muere... tras 2 segundos respawneamos a todos
+		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
-			if(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje != EnumPersonaje.Humano)
+			--humanTries;
+			yield return new WaitForSeconds(2);
+
+			NetworkManager.networkManagerRef.listaJugadores[index].player.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
+
+			// Recorremos todos los jugadores y los respawneamos
+			for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 			{
 				NetworkManager.networkManagerRef.listaJugadores[i].player.Respawn();
 			}
-			else
+		}
+		else
+		{
+			yield return new WaitForSeconds(timeRespawnRobot);
+
+			if(NetworkManager.networkManagerRef.listaJugadores[index].player.isDead)
 			{
-				NetworkManager.networkManagerRef.listaJugadores[i].player.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
-				NetworkManager.networkManagerRef.listaJugadores[i].player.Respawn();
+				NetworkManager.networkManagerRef.listaJugadores[index].player.Respawn();
 			}
 		}
 	}
 	
-	public void KillHumanClient()
+	public void KillPlayerClient(int index)
 	{	
-		--humanTries;
-		StartCoroutine(coroutineKillHumanClient());
+		StartCoroutine(coroutineKillPlayerClient(index));
 	}
 
-	public IEnumerator coroutineKillHumanClient()
+	public IEnumerator coroutineKillPlayerClient(int index)
 	{
-		// Recorremos todos los jugadores y los respawneamos
-		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
+		// Si es el humano el que muere... tras 2 segundos respawneamos a todos
+		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
-			if(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje == EnumPersonaje.Humano)
+			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
+			--humanTries;
+
+			yield return new WaitForSeconds(2);
+
+			// Recorremos todos los jugadores y los respawneamos
+			for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 			{
-				NetworkManager.networkManagerRef.listaJugadores[i].player.Kill();
+				NetworkManager.networkManagerRef.listaJugadores[i].player.Respawn();
 			}
 		}
-
-		yield return new WaitForSeconds(2);
-
-		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
+		else
 		{
-			NetworkManager.networkManagerRef.listaJugadores[i].player.Respawn();
+			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
+
+			yield return new WaitForSeconds(timeRespawnRobot);
+
+			NetworkManager.networkManagerRef.listaJugadores[index].player.Respawn();
 		}
 	}
 }

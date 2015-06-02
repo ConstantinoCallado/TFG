@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	public Vector3 spawnPoint;
 	public bool isFreeze = false;
 	public bool isDead = false;
+	public int id;
 
 	public void Awake()
 	{
@@ -39,11 +40,15 @@ public class Player : MonoBehaviour
 
 	public void Respawn()
 	{
+		if(Network.isServer)
+		{
+			transform.position = spawnPoint;
+			gameObject.GetComponent<BasicMovementServer>().targetPos = transform.position;
+			gameObject.GetComponent<BasicMovementServer>().inputDirection = Vector3.zero;
+		}
 		isDead = false;
 		isFreeze = false;
-		transform.position = spawnPoint;
+
 		playerGraphics.EnableGraphics();
-		gameObject.GetComponent<BasicMovementServer>().targetPos = transform.position;
-		gameObject.GetComponent<BasicMovementServer>().inputDirection = Vector3.zero;
 	}
 }

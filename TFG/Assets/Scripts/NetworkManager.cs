@@ -375,4 +375,17 @@ public class NetworkManager : MonoBehaviour
 	{
 		this.networkPlayerServer = networkPlayerServer;
 	}
+
+	public void NotificarHumanoMatado ()
+	{
+		networkView.RPC("hklld", RPCMode.Others);
+	}
+	
+	// Funcion que envia a los jugadores la informacion del servidor 
+	[RPC]
+	void hklld()
+	{
+		GameManager.gameManager.KillHumanClient();
+	}
+
 }

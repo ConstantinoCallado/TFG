@@ -4,10 +4,10 @@ using System.Collections;
 public class BasicMovementClient : MonoBehaviour 
 {
 	public Transform transformRef;
-
 	private Vector3 posicionVieja = Vector3.zero;
 	protected Vector2 diferenciasPosiciones;
-	
+	protected Player playerRef;
+
 	const int mascaraD = 65535;
 	const uint mascaraI = 4294901760;
 
@@ -15,6 +15,7 @@ public class BasicMovementClient : MonoBehaviour
 	// Use this for initialization
 	public void Awake () 
 	{
+		playerRef = gameObject.GetComponent<Player>();
 		transformRef = transform;
 	}
 	
@@ -46,7 +47,10 @@ public class BasicMovementClient : MonoBehaviour
 		int packagePosition = 0;
 		stream.Serialize (ref packagePosition);
 
-		RecievedNewPosition(new Vector3(((packagePosition & mascaraI) >> 16) / 100.0f, (packagePosition & mascaraD) / 100.0f, 0));
+		if(!playerRef.isFreeze)
+		{
+			RecievedNewPosition(new Vector3(((packagePosition & mascaraI) >> 16) / 100.0f, (packagePosition & mascaraD) / 100.0f, 0));
+		}
 	}
 
 	public virtual void RecievedNewPosition(Vector3 positionRecieved)

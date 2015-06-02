@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
 	public PlayerGraphics playerGraphics;
 	public float speed = 2.75f;
 	public Vector3 spawnPoint;
-	
+	public bool isFreeze = false;
+	public bool isDead = false;
+
 	public void Awake()
 	{
 		//		basicMovementRef = GetComponent<BasicMovement>();
@@ -25,7 +27,9 @@ public class Player : MonoBehaviour
 	
 	public virtual void Kill()
 	{
-		Debug.Log("La clase hija deberia sobreescribir este metodo");
+		isDead = true;
+		isFreeze = true;
+		playerGraphics.DisableGraphics();
 	}
 	
 	public void SetSpawnPoint(Vector2 spawnPoint)
@@ -35,8 +39,10 @@ public class Player : MonoBehaviour
 
 	public void Respawn()
 	{
+		isDead = false;
+		isFreeze = false;
 		transform.position = spawnPoint;
-
+		playerGraphics.EnableGraphics();
 		gameObject.GetComponent<BasicMovementServer>().targetPos = transform.position;
 		gameObject.GetComponent<BasicMovementServer>().inputDirection = Vector3.zero;
 	}

@@ -9,13 +9,25 @@ public class PlayerGraphics : MonoBehaviour
 	public void setHuman()
 	{
 		humanGraphics.gameObject.SetActive(true);
-		robotGraphics.gameObject.SetActive(false);
+		Destroy(robotGraphics.gameObject);
 	}
 
 	public void setRobot(Color color)
 	{
-		humanGraphics.gameObject.SetActive(false);
+		Destroy(humanGraphics.gameObject);
 		robotGraphics.gameObject.SetActive(true);
 		robotGraphics.setColor(color);
+	}
+
+	public void DisableGraphics()
+	{
+		if(humanGraphics != null) humanGraphics.gameObject.SetActive(false);
+		if(robotGraphics != null) robotGraphics.gameObject.SetActive(false);
+	}
+	
+	public void EnableGraphics()
+	{
+		if(humanGraphics != null) humanGraphics.gameObject.SetActive(true);
+		if(robotGraphics != null) robotGraphics.gameObject.SetActive(true);
 	}
 }

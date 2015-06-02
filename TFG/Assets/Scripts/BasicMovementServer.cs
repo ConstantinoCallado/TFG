@@ -22,55 +22,58 @@ public class BasicMovementServer : MonoBehaviour
 	
 	void Update () 
 	{
-		// Cuando se este en un frame en el que se pueda cambiar de direccion ...
-		if(puedeCambiarDireccion())
+		if(!player.isFreeze)
 		{
-			// Calculamos la posicion a donde quiere moverse el jugador
-
-			vectorObjetivoTemp = redondearPosicion(characterTransform.position + inputDirection);
-
-			// Si la posicion esta libre la ponemos como objetivo
-			if((int)vectorObjetivoTemp.x < 0 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
+			// Cuando se este en un frame en el que se pueda cambiar de direccion ...
+			if(puedeCambiarDireccion())
 			{
-				targetPos = vectorObjetivoTemp;
-				if(inputDirection != oldInputDirection)
+				// Calculamos la posicion a donde quiere moverse el jugador
+
+				vectorObjetivoTemp = redondearPosicion(characterTransform.position + inputDirection);
+
+				// Si la posicion esta libre la ponemos como objetivo
+				if((int)vectorObjetivoTemp.x < 0 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 				{
-					ActualizarRotacion(inputDirection);
-					oldInputDirection = inputDirection;
-				}
-			}
-			// Si no, intentamos mover el jugador siguiendo el movimiento anterior
-			else
-			{
-				vectorObjetivoTemp = redondearPosicion(characterTransform.position + oldInputDirection);
-			
-				// Si esta libre el movimiento anterior lo ponemos como objetivo
-				if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
-				{					
 					targetPos = vectorObjetivoTemp;
+					if(inputDirection != oldInputDirection)
+					{
+						ActualizarRotacion(inputDirection);
+						oldInputDirection = inputDirection;
+					}
 				}
-				// Si esta ocupada detenemos el jugador
+				// Si no, intentamos mover el jugador siguiendo el movimiento anterior
 				else
 				{
-					targetPos = transform.position;
+					vectorObjetivoTemp = redondearPosicion(characterTransform.position + oldInputDirection);
+				
+					// Si esta libre el movimiento anterior lo ponemos como objetivo
+					if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
+					{					
+						targetPos = vectorObjetivoTemp;
+					}
+					// Si esta ocupada detenemos el jugador
+					else
+					{
+						targetPos = transform.position;
+					}
 				}
 			}
-		}
 
-		// Desplazamos el jugador
-		characterTransform.position = Vector2.MoveTowards(characterTransform.position, targetPos, Time.deltaTime * player.speed);
+			// Desplazamos el jugador
+			characterTransform.position = Vector2.MoveTowards(characterTransform.position, targetPos, Time.deltaTime * player.speed);
 
 
-		// Si ha salido por los margenes del mapa, lo reintroducimos por el otro lado
-		if(characterTransform.position.x < 0.1f)
-		{
-			characterTransform.position = new Vector2(Scenario.tamanyoMapaX-1.2f , characterTransform.position.y); 
-			targetPos = characterTransform.position;
-		}
-		else if(characterTransform.position.x > Scenario.tamanyoMapaX - 1.1f)
-		{
-			characterTransform.position = new Vector2(0.1f , characterTransform.position.y); 
-			targetPos = characterTransform.position;
+			// Si ha salido por los margenes del mapa, lo reintroducimos por el otro lado
+			if(characterTransform.position.x < 0.1f)
+			{
+				characterTransform.position = new Vector2(Scenario.tamanyoMapaX-1.2f , characterTransform.position.y); 
+				targetPos = characterTransform.position;
+			}
+			else if(characterTransform.position.x > Scenario.tamanyoMapaX - 1.1f)
+			{
+				characterTransform.position = new Vector2(0.1f , characterTransform.position.y); 
+				targetPos = characterTransform.position;
+			}
 		}
 	}
 

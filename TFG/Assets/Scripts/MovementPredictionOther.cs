@@ -7,7 +7,6 @@ public class MovementPredictionOtherClient : BasicMovementClient
 	private Vector2 posPredicted;
 	private Vector2 posAseguradaNueva;
 	private Vector2 posComprobacionMuro;
-	private Player refJugador;
 	private bool initialized = false;
 	private Transform refTransform;
 	private float magnitudDistancia;
@@ -17,27 +16,29 @@ public class MovementPredictionOtherClient : BasicMovementClient
 	{
 		base.Awake();
 		refTransform = transform;
-		refJugador = gameObject.GetComponent<Player>();
 	}
 
 	//TODO: Hacer que la prediccion de movimiento funcione cuando el jugador salga por los laterales del mapa
 	// Update is called once per frame
 	void Update () 
 	{
-		// Si el error de la prediccion esta dentro de un margen aceptable movemos el jugador
-		if(((Vector2)refTransform.position - posAseguradaNueva).sqrMagnitude < 1f)
+		if(!base.playerRef.isFreeze)
 		{
-			// Si no hay un muro donde predecimos el movimiento... movemos al jugador
-			if(!hayMuroEnPrediccion())
+			// Si el error de la prediccion esta dentro de un margen aceptable movemos el jugador
+			if(((Vector2)refTransform.position - posAseguradaNueva).sqrMagnitude < 1f)
 			{
-				refTransform.position = Vector2.MoveTowards(refTransform.position, posPredicted, Time.deltaTime * refJugador.speed);
+				// Si no hay un muro donde predecimos el movimiento... movemos al jugador
+				if(!hayMuroEnPrediccion())
+				{
+					refTransform.position = Vector2.MoveTowards(refTransform.position, posPredicted, Time.deltaTime * base.playerRef.speed);
+				}
 			}
-		}
-		// Sino lo movemos directamente a mano
-		else
-		{
-			refTransform.position = posAseguradaNueva;
-			posPredicted = posAseguradaNueva;
+			// Sino lo movemos directamente a mano
+			else
+			{
+				refTransform.position = posAseguradaNueva;
+				posPredicted = posAseguradaNueva;
+			}
 		}
 	}
 

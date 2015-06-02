@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Human : Player 
 {
+	public bool aggressiveMode = false;
+
 	public override void Initialize()
 	{
 		base.Initialize();
@@ -13,21 +15,21 @@ public class Human : Player
 		gameObject.name = "Human";
 		Debug.Log("inicializado Humano");
 	}
-	
-	public override void Kill()
-	{
-		Debug.Log("Matando Humano");
-
-		SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
-		Respawn();
-	}
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Robot")
 		{
 			Debug.Log("He tocado un robot");
-			Kill ();
+
+			if(!aggressiveMode)
+			{
+				if(!isDead)
+				{
+					base.Kill ();
+					GameManager.gameManager.KillHumanServer();
+				}
+			}
 		}
 	}
 }

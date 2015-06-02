@@ -18,37 +18,37 @@ public class PlayerFactory : MonoBehaviour
 		
 		switch((EnumPersonaje)enumPersonajeInt)
 		{
-		case EnumPersonaje.Humano:
-			gameObjectInstanciado.AddComponent<Human>();
-			break;
-			
-		case EnumPersonaje.RobotRojo:
-			gameObjectInstanciado.AddComponent<RedRobot>();
-			break;
-			
-		case EnumPersonaje.RobotNaranja:
-			gameObjectInstanciado.AddComponent<OrangeRobot>();
-			break;
-			
-		case EnumPersonaje.RobotAzul:
-			gameObjectInstanciado.AddComponent<BlueRobot>();
-			break;
-			
-		case EnumPersonaje.RobotRosa:
-			gameObjectInstanciado.AddComponent<PinkRobot>();
-			break;
-			
-		case EnumPersonaje.RobotVerde:
-			gameObjectInstanciado.AddComponent<GreenRobot>();
-			break;
-			
-		case EnumPersonaje.RobotBlanco:
-			gameObjectInstanciado.AddComponent<WhiteRobot>();
-			break;
-			
-		case EnumPersonaje.RobotMorado:
-			gameObjectInstanciado.AddComponent<PurpleRobot>();
-			break;
+			case EnumPersonaje.Humano:
+				gameObjectInstanciado.AddComponent<Human>();
+				break;
+				
+			case EnumPersonaje.RobotRojo:
+				gameObjectInstanciado.AddComponent<RedRobot>();
+				break;
+				
+			case EnumPersonaje.RobotNaranja:
+				gameObjectInstanciado.AddComponent<OrangeRobot>();
+				break;
+				
+			case EnumPersonaje.RobotAzul:
+				gameObjectInstanciado.AddComponent<BlueRobot>();
+				break;
+				
+			case EnumPersonaje.RobotRosa:
+				gameObjectInstanciado.AddComponent<PinkRobot>();
+				break;
+				
+			case EnumPersonaje.RobotVerde:
+				gameObjectInstanciado.AddComponent<GreenRobot>();
+				break;
+				
+			case EnumPersonaje.RobotBlanco:
+				gameObjectInstanciado.AddComponent<WhiteRobot>();
+				break;
+				
+			case EnumPersonaje.RobotMorado:
+				gameObjectInstanciado.AddComponent<PurpleRobot>();
+				break;
 		}
 		
 		gameObjectInstanciado.AddComponent<NetworkView>();
@@ -90,6 +90,7 @@ public class PlayerFactory : MonoBehaviour
 
 		jugadorInst.gameObject.AddComponent<CircleCollider2D>();
 		jugadorInst.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+		jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.3f;
 
 		jugadorInst.gameObject.AddComponent<Rigidbody2D>();
 		Rigidbody2D rigidbodyInstanciado = jugadorInst.gameObject.GetComponent<Rigidbody2D>();

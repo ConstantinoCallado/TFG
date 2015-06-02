@@ -198,12 +198,12 @@ public class NetworkManager : MonoBehaviour
 	
 	public void setPlayerReady (NetworkPlayer player)
 	{
-		networkView.RPC("plyrIsRdy", RPCMode.AllBuffered, Network.player);
+		networkView.RPC("plyrdy", RPCMode.AllBuffered, Network.player);
 	}
 	
 	// FUncion que recibira el servidor y los clientes cuando un jugador pulse que esta listo
 	[RPC]
-	public void plyrIsRdy(NetworkPlayer player)
+	public void plyrdy(NetworkPlayer player)
 	{
 		if(!partidaEmpezada)
 		{
@@ -286,7 +286,7 @@ public class NetworkManager : MonoBehaviour
 	
 	public IEnumerator CargarPantallaJuegoDelayed(int waitTime)
 	{
-		networkView.RPC("strtCountdwn", RPCMode.All, waitTime);
+		networkView.RPC("strtCount", RPCMode.All, waitTime);
 		yield return new WaitForSeconds(waitTime + 1);
 
 		partidaEmpezada = true;
@@ -303,7 +303,7 @@ public class NetworkManager : MonoBehaviour
 	
 	// Funcion que recibiran los clientes para empezar la cuenta atras
 	[RPC]
-	void strtCountdwn(int segundos)
+	void strtCount(int segundos)
 	{
 		LobbyManager.lobbyManager.StartCountDown(segundos);
 	}

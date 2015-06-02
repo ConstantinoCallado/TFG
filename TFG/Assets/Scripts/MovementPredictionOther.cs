@@ -37,6 +37,7 @@ public class MovementPredictionOtherClient : BasicMovementClient
 		else
 		{
 			refTransform.position = posAseguradaNueva;
+			posPredicted = posAseguradaNueva;
 		}
 	}
 
@@ -47,23 +48,26 @@ public class MovementPredictionOtherClient : BasicMovementClient
 			posAseguradaAnterior = posAseguradaNueva;
 			posAseguradaNueva = positionRecieved;
 			base.diferenciasPosiciones = posAseguradaNueva - posAseguradaAnterior;
-			posPredicted = posAseguradaNueva + base.diferenciasPosiciones;
+			posPredicted = posAseguradaNueva + base.diferenciasPosiciones * 2;
 
-			if(base.diferenciasPosiciones.x > 0)
+			if(base.diferenciasPosiciones.sqrMagnitude < 5)
 			{
-				transformRef.eulerAngles = new Vector3(0, 0, 180);
-			}
-			else if(base.diferenciasPosiciones.x < 0)
-			{
-				transformRef.eulerAngles = Vector3.zero;
-			}
-			else if(base.diferenciasPosiciones.y > 0)
-			{
-				transformRef.eulerAngles = new Vector3(0, 0, -90);
-			}
-			else if(base.diferenciasPosiciones.y < 0)
-			{
-				transformRef.eulerAngles = new Vector3(0, 0, 90);
+				if(base.diferenciasPosiciones.x > 0)
+				{
+					transformRef.eulerAngles = new Vector3(0, 0, 180);
+				}
+				else if(base.diferenciasPosiciones.x < 0)
+				{
+					transformRef.eulerAngles = Vector3.zero;
+				}
+				else if(base.diferenciasPosiciones.y > 0)
+				{
+					transformRef.eulerAngles = new Vector3(0, 0, -90);
+				}
+				else if(base.diferenciasPosiciones.y < 0)
+				{
+					transformRef.eulerAngles = new Vector3(0, 0, 90);
+				}
 			}
 		}
 		else

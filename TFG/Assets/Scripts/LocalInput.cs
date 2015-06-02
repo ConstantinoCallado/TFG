@@ -10,6 +10,7 @@ public class LocalInput : MonoBehaviour
 	int oldEnumMovimiento = (int)EnumMovimiento.None;
 	NetworkView networkView;
 	BasicMovementServer movementRef;
+	private string methodName = "";
 
 	void Awake()
 	{
@@ -29,13 +30,32 @@ public class LocalInput : MonoBehaviour
 
 		if(oldEnumMovimiento != enumMovimiento)
 		{
+			switch(enumMovimiento)
+			{
+				case (int)EnumMovimiento.Right:
+					methodName = "ir";
+					break;
+
+				case (int)EnumMovimiento.Left:
+					methodName = "il";
+					break;
+
+				case (int)EnumMovimiento.Up:
+					methodName = "iu";
+					break;
+
+				case (int)EnumMovimiento.Down:
+					methodName = "id";
+					break;
+			}
+			
 			if(!movementRef)
 			{
-				networkView.RPC("inpt", RPCMode.Server, enumMovimiento);
+				networkView.RPC(methodName, RPCMode.Server);
 			}
 			else
 			{
-				movementRef.inpt(enumMovimiento);
+				movementRef.Invoke(methodName, 0);
 			}
 
 			oldEnumMovimiento = enumMovimiento;
@@ -154,7 +174,28 @@ public class LocalInput : MonoBehaviour
 
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
-	void inpt(int enumMovimiento)
+	void ir()
+	{
+		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
+	}
+	
+	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
+	[RPC]
+	void il()
+	{
+		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
+	}
+	
+	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
+	[RPC]
+	void iu()
+	{
+		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
+	}
+	
+	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
+	[RPC]
+	void id()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}

@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
 	public bool isFreeze = false;
 	public bool isDead = false;
 	public int id;
+	public LocalInput localInput;
 
 	public void Awake()
 	{
-		//		basicMovementRef = GetComponent<BasicMovement>();
 		playerGraphics = GetComponent<PlayerGraphics>();
 	}
 
@@ -43,9 +43,18 @@ public class Player : MonoBehaviour
 		if(Network.isServer)
 		{
 			transform.position = spawnPoint;
+
 			gameObject.GetComponent<BasicMovementServer>().targetPos = transform.position;
 			gameObject.GetComponent<BasicMovementServer>().inputDirection = Vector3.zero;
 		}
+
+		// Ponemos su direccion anterior a 0 para que cualquier nueva direccion se pueda enviar
+		if(localInput != null)
+		{
+			localInput.oldEnumMovimiento = 0;
+			localInput.enumMovimiento = 0;
+		}
+		
 		isDead = false;
 		isFreeze = false;
 

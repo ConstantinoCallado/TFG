@@ -369,6 +369,7 @@ public class NetworkManager : MonoBehaviour
 	void ctrl(int playerIndex)
 	{
 		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
+		listaJugadores[playerIndex].player.localInput = listaJugadores[playerIndex].player.gameObject.GetComponent<LocalInput>();
 	}
 
 	// Funcion que envia a los jugadores la informacion del servidor 

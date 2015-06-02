@@ -6,8 +6,8 @@ public enum EnumMovimiento{None, Up, Right, Down, Left};
 public class LocalInput : MonoBehaviour 
 {
 	Camera cameraRef;
-	int enumMovimiento = (int)EnumMovimiento.None;
-	int oldEnumMovimiento = (int)EnumMovimiento.None;
+	public int enumMovimiento = (int)EnumMovimiento.None;
+	public int oldEnumMovimiento = (int)EnumMovimiento.None;
 	NetworkView networkView;
 	BasicMovementServer movementRef;
 	private string methodName = "";
@@ -65,13 +65,35 @@ public class LocalInput : MonoBehaviour
 	void getUserInput()
 	{
 		#if UNITY_STANDALONE
-		getEntradaTecladoWASD();
+		getEntradaTecladoEjes();
+		//getEntradaTecladoWASD();
 		#else
 		//getEntradaBordeMovil();
 		getEntradaRelativaMovil();
 		#endif
 	}
+
+	void getEntradaTecladoEjes()
+	{
+		if(Input.GetAxis("Horizontal") > 0)
+		{
+			enumMovimiento = (int)EnumMovimiento.Right;
+		}
+		else if(Input.GetAxis("Horizontal") < 0)
+		{
+			enumMovimiento = (int)EnumMovimiento.Left;
+		}
+		else if(Input.GetAxis("Vertical") > 0)
+		{
+			enumMovimiento = (int)EnumMovimiento.Up;
+		}
+		else if(Input.GetAxis("Vertical") < 0)
+		{
+			enumMovimiento = (int)EnumMovimiento.Down;
+		}
+	}
 	
+	/*
 	void getEntradaTecladoWASD()
 	{
 		if(Input.GetKey(KeyCode.D))
@@ -111,7 +133,7 @@ public class LocalInput : MonoBehaviour
 			enumMovimiento = (int)EnumMovimiento.Down;
 		}
 	}
-
+	*/
 	
 	// La direccion a moverse sera calculada teniendo en cuenta en que borde de la pantalla toque el jugador
 	void getEntradaBordeMovil()

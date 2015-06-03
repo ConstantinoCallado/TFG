@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 
 public class NetworkManager : MonoBehaviour 
 {
-	private const string masterServerIP = "127.0.0.1";
+	private const string masterServerIP = "67.255.180.24";
+	private const int masterServerPort = 23466;
+
 	private const int numJugadores = 5;
 	private const string typeName = "Robot-Name";
 	private string gameName = "RoomName";
@@ -21,7 +25,12 @@ public class NetworkManager : MonoBehaviour
 	
 	private bool personajesGenerados = false;
 	private bool partidaEmpezada = false;
-	
+
+	public GameObject panelNoPartidasEncontradas;
+	public GameObject panelNoInternet;
+	public GameObject panelInternetRestringido;
+
+
 	//TODO: DESACOPLAR ESTO DE AQUI, PLS
 	// Funcion para meter el nombre a pelo
 	public void entradaLocalNombre(string name)
@@ -38,16 +47,53 @@ public class NetworkManager : MonoBehaviour
 		
 		networkManagerRef = this;
 		DontDestroyOnLoad(gameObject);
+
+//		MasterServer.ipAddress = masterServerIP;
+//		MasterServer.port = masterServerPort;
 	}
 	
 	// Lado del servidor
-	public void StartServer()
+	public void RequestLaunchServer()
 	{
-		//MasterServer.ipAddress = masterServerIP;
+		if(checkInternet())
+		{
+			LaunchServer ();
+		}
+	}
+
+	private void LaunchServer()
+	{
 		Network.InitializeServer(numJugadores, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 	}
+
+	public bool checkInternet()
+	{
+		WebResponse response = null;
+
+		try
+		{
+			WebRequest webResquest = WebRequest.Create("http://www.google.com/");
+			webResquest.Timeout = 2000;
+
+			response = webResquest.GetResponse();
+
+			if(response.GetResponseStream() != null)
+			{
+				response.Close();
+
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			if(response != null) response.Close();
+		}
 	
+		panelNoInternet.SetActive(true);
+		return false;
+	}
+
 	// Funcion que se invocara cuando se inicialize el servidor
 	void OnServerInitialized()
 	{
@@ -157,12 +203,21 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 	}
+
+	// Funcion que comprueba internet y conecta a un host
+	public void RequestRefreshHost()
+	{
+		if(checkInternet())
+		{
+			RefreshHostList();
+		}
+	}
 	
-	// Lado del cliente
 	public void RefreshHostList()
 	{
 		MasterServer.RequestHostList(typeName);
 	}
+
 	
 	void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
@@ -173,6 +228,11 @@ public class NetworkManager : MonoBehaviour
 			if(hostList.Length > 0)
 			{
 				JoinServer(hostList[0]);
+			}
+			else
+			{
+				Debug.Log("No se han encontrado partidas");
+				panelNoPartidasEncontradas.SetActive(true);
 			}
 		}
 	}
@@ -254,7 +314,7 @@ public class NetworkManager : MonoBehaviour
 		yield return new WaitForSeconds(.5f);
 		
 		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
-		int indiceHumano = (int)Random.Range(0, listaJugadores.Length); 
+		int indiceHumano = (int)UnityEngine.Random.Range(0, listaJugadores.Length); 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
 		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje, listaJugadores[indiceHumano].viewID);
@@ -273,7 +333,7 @@ public class NetworkManager : MonoBehaviour
 		{
 			if(i != indiceHumano)
 			{
-				int randomCharacterIndex = Random.Range(0, listaPersonajes.Count);
+				int randomCharacterIndex = UnityEngine.Random.Range(0, listaPersonajes.Count);
 				
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 				listaJugadores[i].viewID = Network.AllocateViewID();

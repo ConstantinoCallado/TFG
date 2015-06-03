@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using UnityEngine;	
 using System.Collections;
 
 public class Human : Player 
 {
 	public bool aggressiveMode = false;
 	float aggressiveTimeEnd = 0;
-	const float aggressiveTime = 5;
+	const float aggressiveTime = 8;
 
 	public override void Initialize()
 	{
@@ -20,7 +20,12 @@ public class Human : Player
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "Robot")
+		if(other.tag == "Piece")
+		{
+			//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
+			Destroy(other.gameObject);
+		}
+		else if(other.tag == "Robot")
 		{
 			Debug.Log("He tocado un robot");
 
@@ -34,9 +39,12 @@ public class Human : Player
 				}
 			}
 		}
-		if(other.tag == "Weapon")
+		else if(other.tag == "Weapon")
 		{
 			pickUpAggressive();
+
+			//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
+			Destroy(other.gameObject);
 		}
 	}
 

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabMuro: {fileID: 185668, guid: 3543b0a32178f69499960323c151ca15, type: 2}
   prefabWeapon: {fileID: 170798, guid: 159ca48260f8b9a40a708d323f88523c, type: 2}
+  prefabPiece: {fileID: 104322, guid: 8f301eb8cf6785749bd981b8658ea34b, type: 2}
   robotSpawnPoints:
   - {x: 9, y: 7}
   - {x: 9, y: 6}

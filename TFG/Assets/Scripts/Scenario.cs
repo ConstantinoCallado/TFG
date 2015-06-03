@@ -10,23 +10,24 @@ public class Scenario : MonoBehaviour
 	public static Scenario scenarioRef;
 	public GameObject prefabMuro;
 	public GameObject prefabWeapon;
+	public GameObject prefabPiece;
 	public const int tamanyoMapaX = 20;
 	public const int tamanyoMapaY = 14;
 
 	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] { 
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 3, 2, 1, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 1, 2, 3, 0, 0},
-		{0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0},
-		{0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0},
-		{0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0},
+		{0, 0, 3, 1, 2, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 2, 1, 3, 0, 0},
+		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
+		{0, 0, 2, 1, 2, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 2, 1, 2, 0, 0},
+		{0, 0, 1, 0, 1, 0, 1, 1, 2, 1, 1, 2, 1, 1, 0, 1, 0, 1, 0, 0},
 		{0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0},
-		{0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0},
-		{1, 1, 1, 0, 0, 0, 2, 1, 0, 1, 1, 0, 1, 2, 0, 0, 0, 1, 1, 1},
-		{0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0},
-		{0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0},
-		{0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0},
-		{0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0},
-		{0, 0, 3, 2, 1, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 1, 2, 3, 0, 0},
+		{0, 0, 2, 0, 0, 0, 2, 1, 0, 1, 1, 0, 1, 2, 0, 0, 0, 2, 0, 0},
+		{1, 2, 2, 0, 0, 0, 2, 1, 0, 1, 1, 0, 1, 2, 0, 0, 0, 2, 2, 1},
+		{0, 0, 2, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 2, 0, 0},
+		{0, 0, 1, 0, 1, 0, 1, 1, 2, 1, 1, 2, 1, 1, 0, 1, 0, 1, 0, 0},
+		{0, 0, 2, 1, 2, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 2, 1, 2, 0, 0},
+		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
+		{0, 0, 3, 1, 2, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 2, 1, 3, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	};
 	
@@ -50,19 +51,26 @@ public class Scenario : MonoBehaviour
 		{
 			for(int j=0; j<tamanyoMapaX; j++)
 			{
-				if(arrayNivel[i,j] == 0)
+				if(arrayNivel[i,j] != 1)
 				{
-					GameObject cube = GameObject.Instantiate(prefabMuro);
-					cube.transform.position = new Vector3(j, i, -1);
-					cube.transform.localScale = new Vector3(1, 1, 2f);
-					cube.transform.parent = transform;
-				}
-				else if(arrayNivel[i,j] == 3)
-				{
-					GameObject weapon = GameObject.Instantiate(prefabWeapon);
-					weapon.transform.position = new Vector3(j, i, -1);
-					weapon.transform.localScale = new Vector3(1, 1, 2f);
-					weapon.transform.parent = transform;
+					GameObject gameObjectInstanciado;
+
+					if(arrayNivel[i,j] == 0)
+					{
+						gameObjectInstanciado = GameObject.Instantiate(prefabMuro);
+					}
+					else if(arrayNivel[i,j] == 2)
+					{
+						gameObjectInstanciado = GameObject.Instantiate(prefabPiece);
+					}
+					else
+					{
+						gameObjectInstanciado = GameObject.Instantiate(prefabWeapon);
+					}
+
+					gameObjectInstanciado.transform.position = new Vector3(j, i, -1);
+					//gameObjectInstanciado.transform.localScale = new Vector3(1, 1, 2f);
+					gameObjectInstanciado.transform.parent = transform;
 				}
 			}
 		}

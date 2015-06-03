@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
 	public int humanTries = 3;
-	public const int timeRespawnRobot = 20;
+	public const int timeRespawnRobot = 15;
 
 	void Awake () 
 	{

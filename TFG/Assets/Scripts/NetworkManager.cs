@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviour
 	public GameObject panelNoPartidasEncontradas;
 	public GameObject panelNoInternet;
 	public GameObject panelInternetRestringido;
+	public GameObject panelSpinner;
 
 
 	//TODO: DESACOPLAR ESTO DE AQUI, PLS
@@ -55,6 +56,8 @@ public class NetworkManager : MonoBehaviour
 	// Lado del servidor
 	public void RequestLaunchServer()
 	{
+		panelSpinner.SetActive(true);
+
 		if(checkInternet())
 		{
 			LaunchServer ();
@@ -63,8 +66,10 @@ public class NetworkManager : MonoBehaviour
 
 	private void LaunchServer()
 	{
+		Debug.Log("Registrando");
 		Network.InitializeServer(numJugadores, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
+	
 	}
 
 	public bool checkInternet()
@@ -90,30 +95,11 @@ public class NetworkManager : MonoBehaviour
 			if(response != null) response.Close();
 		}
 	
+		panelSpinner.SetActive(false);
 		panelNoInternet.SetActive(true);
 		return false;
 	}
 
-	// Funcion que se invocara cuando se inicialize el servidor
-	void OnServerInitialized()
-	{
-		Debug.Log("Server Initializied");
-		Application.LoadLevel("LobbyScene");
-
-		// Enviamos al resto de cliente la informacion del servidor
-		networkView.RPC("stsrvr", RPCMode.OthersBuffered, Network.player);
-
-		// Si ademas tambien es un cliente
-		if(!dedicatedServer)
-		{
-			// Lo insertamos en la lista
-			InsertarClienteEnLista(Network.player);
-			
-			// Broadcasteamos el nombre al resto de clientes
-			bcstName(Network.player, nombreJugador);
-			networkView.RPC("bcstName", RPCMode.OthersBuffered, Network.player, nombreJugador);
-		}
-	}
 	
 	// Evento que recibe el servidor al conectarse un jugador
 	void OnPlayerConnected(NetworkPlayer player) 
@@ -207,6 +193,7 @@ public class NetworkManager : MonoBehaviour
 	// Funcion que comprueba internet y conecta a un host
 	public void RequestRefreshHost()
 	{
+		panelSpinner.SetActive(true);
 		if(checkInternet())
 		{
 			RefreshHostList();
@@ -221,7 +208,32 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
-		if (msEvent == MasterServerEvent.HostListReceived)
+		Debug.Log("MasterServerEvent");
+	
+
+		// Si el servidor se registra bien... cargamos la escena de looby
+		if (msEvent == MasterServerEvent.RegistrationSucceeded)
+		{
+			Debug.Log("Server Initializied");
+			panelSpinner.SetActive(false);
+
+			Application.LoadLevel("LobbyScene");
+			
+			// Enviamos al resto de cliente la informacion del servidor
+			networkView.RPC("stsrvr", RPCMode.OthersBuffered, Network.player);
+			
+			// Si ademas tambien es un cliente
+			if(!dedicatedServer)
+			{
+				// Lo insertamos en la lista
+				InsertarClienteEnLista(Network.player);
+				
+				// Broadcasteamos el nombre al resto de clientes
+				bcstName(Network.player, nombreJugador);
+				networkView.RPC("bcstName", RPCMode.OthersBuffered, Network.player, nombreJugador);
+			}
+		}
+		else if (msEvent == MasterServerEvent.HostListReceived)
 		{
 			hostList = MasterServer.PollHostList();
 			
@@ -233,6 +245,7 @@ public class NetworkManager : MonoBehaviour
 			{
 				Debug.Log("No se han encontrado partidas");
 				panelNoPartidasEncontradas.SetActive(true);
+				panelSpinner.SetActive(false);
 			}
 		}
 	}
@@ -240,6 +253,21 @@ public class NetworkManager : MonoBehaviour
 	private void JoinServer(HostData hostData)
 	{
 		Network.Connect(hostData);
+	}
+
+	void OnFailedToConnectToMasterServer(NetworkConnectionError info) 
+	{
+		Debug.Log("Could not connect to master server: " + info);
+		panelInternetRestringido.SetActive(true);
+		panelSpinner.SetActive(false);
+	
+	}
+	
+	void OnFailedToConnect(NetworkConnectionError error) 
+	{
+		Debug.Log("Could not connect to server: " + error);
+		panelInternetRestringido.SetActive(true);
+		panelSpinner.SetActive(false);
 	}
 	
 	void OnConnectedToServer()

@@ -65,7 +65,6 @@ public class PlayerFactory : MonoBehaviour
 		
 		Player jugadorInstanciado = (Player)gameObjectInstanciado.GetComponent<Player>();
 
-		jugadorInstanciado.Initialize();
 		
 		return jugadorInstanciado;
 	}
@@ -77,6 +76,8 @@ public class PlayerFactory : MonoBehaviour
 		NetworkView netViewInstanciada = jugadorInst.gameObject.GetComponent<NetworkView>();
 		jugadorInst.gameObject.AddComponent<MovementPredictionOtherClient>();
 		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<MovementPredictionOtherClient>();
+
+		jugadorInst.Initialize();
 
 		return jugadorInst;
 	}
@@ -107,6 +108,8 @@ public class PlayerFactory : MonoBehaviour
 			rigidbodyInstanciado.isKinematic = true;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
 		}
+
+		jugadorInst.Initialize();
 
 		jugadorInst.Respawn();
 

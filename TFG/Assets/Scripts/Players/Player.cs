@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public int id;
 	public LocalInput localInput;
 	public NetworkView networkView;
+	public CircleCollider2D colliderJugador;
 
 	public void Awake()
 	{
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
 		transform.position = spawnPoint;
 		gameObject.GetComponent<HoveringName>().playerRef = this;
 		networkView = GetComponent<NetworkView>();
+		colliderJugador = GetComponent<CircleCollider2D>();
 	}
 	
 	public virtual void Kill()
@@ -32,6 +34,11 @@ public class Player : MonoBehaviour
 		isDead = true;
 		isFreeze = true;
 		playerGraphics.DisableGraphics();
+
+		if(colliderJugador)
+		{
+			colliderJugador.enabled = false;
+		}
 	}
 	
 	public void SetSpawnPoint(Vector2 spawnPoint)
@@ -61,6 +68,11 @@ public class Player : MonoBehaviour
 		isFreeze = false;
 
 		playerGraphics.EnableGraphics();
+
+		if(colliderJugador)
+		{
+			colliderJugador.enabled = true;
+		}
 	}
 
 	public virtual void ActivatePower()

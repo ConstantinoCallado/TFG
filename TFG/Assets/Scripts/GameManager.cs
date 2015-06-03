@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 		// Si es el humano el que muere... tras 2 segundos respawneamos a todos
 		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
+			GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
 			--humanTries;
 			yield return new WaitForSeconds(2);
 
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
 		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
 			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
+			GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
 			--humanTries;
 
 			yield return new WaitForSeconds(2);

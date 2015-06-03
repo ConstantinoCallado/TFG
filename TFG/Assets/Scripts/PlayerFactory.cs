@@ -64,6 +64,7 @@ public class PlayerFactory : MonoBehaviour
 		//gameObjectInstanciado.AddComponent<LocalInput>();
 		
 		Player jugadorInstanciado = (Player)gameObjectInstanciado.GetComponent<Player>();
+
 		jugadorInstanciado.Initialize();
 		
 		return jugadorInstanciado;

@@ -20,7 +20,8 @@ public class HoveringName : MonoBehaviour
 	{
 		if(playerRef != null)
 		{
-			if(NetworkManager.networkManagerRef.listaJugadores[playerRef.id].activePlayer)
+			// Si el personaje lo controla un jugador y no esta muerto, dibujaremos el nombre encima de el
+			if(NetworkManager.networkManagerRef.listaJugadores[playerRef.id].activePlayer && !NetworkManager.networkManagerRef.listaJugadores[playerRef.id].player.isDead)
 			{
 				Vector2 ViewportPosition = mainCamera.WorldToViewportPoint(transformRef.position);
 				Vector2 WorldObject_ScreenPosition = new Vector2(

@@ -3,10 +3,8 @@ using System.Collections;
 
 public enum EnumPersonaje {Ninguno, Humano, RobotRojo, RobotNaranja, RobotAzul, RobotRosa, RobotVerde, RobotBlanco, RobotMorado};
 
-//[RequireComponent (typeof (BasicMovement))]
 public class Player : MonoBehaviour 
 {
-	//	public BasicMovement basicMovementRef;
 	public PlayerGraphics playerGraphics;
 	public float speed = 2.75f;
 	public Vector3 spawnPoint;
@@ -14,6 +12,7 @@ public class Player : MonoBehaviour
 	public bool isDead = false;
 	public int id;
 	public LocalInput localInput;
+	public NetworkView networkView;
 
 	public void Awake()
 	{
@@ -25,6 +24,7 @@ public class Player : MonoBehaviour
 		Debug.Log("inicializado Player");
 		transform.position = spawnPoint;
 		gameObject.GetComponent<HoveringName>().playerRef = this;
+		networkView = GetComponent<NetworkView>();
 	}
 	
 	public virtual void Kill()
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 		this.spawnPoint = spawnPoint;
 	}
 
+	// Mueve el jugador a la posicion de spawn, resucitandolo si murio
 	public void Respawn()
 	{
 		if(Network.isServer)
@@ -60,5 +61,10 @@ public class Player : MonoBehaviour
 		isFreeze = false;
 
 		playerGraphics.EnableGraphics();
+	}
+
+	public virtual void ActivatePower()
+	{
+		Debug.Log("La clase hija deberia sobreescribir este metodo");
 	}
 }

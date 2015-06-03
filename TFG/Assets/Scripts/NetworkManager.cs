@@ -391,5 +391,4 @@ public class NetworkManager : MonoBehaviour
 	{
 		GameManager.gameManager.KillPlayerClient(index);
 	}
-
 }

@@ -128,16 +128,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabMuro: {fileID: 185668, guid: 3543b0a32178f69499960323c151ca15, type: 2}
+  prefabWeapon: {fileID: 170798, guid: 159ca48260f8b9a40a708d323f88523c, type: 2}
   robotSpawnPoints:
   - {x: 9, y: 7}
   - {x: 9, y: 6}
   - {x: 10, y: 7}
   - {x: 10, y: 6}
   playerSpawnPoints:
-  - {x: 2, y: 1}
-  - {x: 17, y: 1}
-  - {x: 17, y: 12}
-  - {x: 2, y: 12}
+  - {x: 2, y: 3}
+  - {x: 17, y: 3}
+  - {x: 17, y: 10}
+  - {x: 2, y: 10}
 --- !u!1 &501723072
 GameObject:
   m_ObjectHideFlags: 0

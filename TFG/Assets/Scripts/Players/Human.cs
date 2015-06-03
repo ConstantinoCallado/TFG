@@ -4,6 +4,8 @@ using System.Collections;
 public class Human : Player 
 {
 	public bool aggressiveMode = false;
+	float aggressiveTimeEnd = 0;
+	const float aggressiveTime = 5;
 
 	public override void Initialize()
 	{
@@ -32,5 +34,38 @@ public class Human : Player
 				}
 			}
 		}
+		if(other.tag == "Weapon")
+		{
+			pickUpAggressive();
+		}
+	}
+
+	public void pickUpAggressive()
+	{
+		aggr();
+		base.networkView.RPC("aggr", RPCMode.Others);
+	}
+
+	// Funcion que envia el servidor a los clientes para notificar que el humano pasa a estado agresivo 
+	[RPC]
+	void aggr()
+	{
+		aggressiveMode = true;
+		aggressiveTimeEnd = Time.time + aggressiveTime;
+		StartCoroutine(coroutineAggressive());
+	}
+
+	IEnumerator coroutineAggressive()
+	{
+		base.playerGraphics.SetAggressive(true);
+
+		while(Time.time < aggressiveTimeEnd)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		base.playerGraphics.SetAggressive(false);
+
+		aggressiveMode = false;
 	}
 }

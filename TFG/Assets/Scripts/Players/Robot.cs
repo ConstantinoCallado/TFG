@@ -12,11 +12,7 @@ public class Robot : Player
 		gameObject.name = "Robot " + getColorString();
 	}
 
-	public virtual void ActivatePower()
-	{
-		Debug.Log("La clase hija deberia sobreescribir este metodo");
-	}
-	
+
 
 	public virtual Color GetColor()
 	{

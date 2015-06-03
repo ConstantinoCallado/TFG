@@ -33,4 +33,9 @@ public class PlayerGraphics : MonoBehaviour
 		if(humanGraphics != null) humanGraphics.gameObject.SetActive(true);
 		if(robotGraphics != null) robotGraphics.gameObject.SetActive(true);
 	}
+
+	public void SetAggressive(bool status)
+	{
+		if(humanGraphics != null) humanGraphics.SetAggressive(status);
+	}
 }

@@ -3,27 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+public enum EnumTile{Wall, Empty, Piece, Weapon};
+
 public class Scenario : MonoBehaviour 
 {
 	public static Scenario scenarioRef;
 	public GameObject prefabMuro;
+	public GameObject prefabWeapon;
 	public const int tamanyoMapaX = 20;
 	public const int tamanyoMapaY = 14;
 
 	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] { 
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0},
-		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
+		{0, 0, 3, 2, 1, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 1, 2, 3, 0, 0},
+		{0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0},
 		{0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0},
 		{0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0},
 		{0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0},
 		{0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0},
-		{1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1},
+		{1, 1, 1, 0, 0, 0, 2, 1, 0, 1, 1, 0, 1, 2, 0, 0, 0, 1, 1, 1},
 		{0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0},
 		{0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0},
 		{0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0},
-		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
-		{0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0},
+		{0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0},
+		{0, 0, 3, 2, 1, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 1, 2, 3, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	};
 	
@@ -53,6 +56,13 @@ public class Scenario : MonoBehaviour
 					cube.transform.position = new Vector3(j, i, -1);
 					cube.transform.localScale = new Vector3(1, 1, 2f);
 					cube.transform.parent = transform;
+				}
+				else if(arrayNivel[i,j] == 3)
+				{
+					GameObject weapon = GameObject.Instantiate(prefabWeapon);
+					weapon.transform.position = new Vector3(j, i, -1);
+					weapon.transform.localScale = new Vector3(1, 1, 2f);
+					weapon.transform.parent = transform;
 				}
 			}
 		}

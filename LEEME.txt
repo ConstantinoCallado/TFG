@@ -5,7 +5,8 @@ Dispositivos soportados: Android, PC(Windows y linux), seguramente iOS y OSX (au
 
 
 Instrucciones para jugar:
-	- 0 Abrir la escena MenuScene contenida dentro de la carpeta Assets/Scenes
+	- 0a Abrir la escena MenuScene contenida dentro de la carpeta Assets/Scenes
+	- 0b Es recomendable exportar el juego para la plataforma donde se vaya a probar, ya que es imposible abrir varias instancias de Unity en una misma maquina
 
 	- 1 Es recomendable ponerse un nombre en el campo de texto de arriba a la derecha
 		NOTA: Toda la interfaz es temporal.
@@ -33,9 +34,10 @@ Instrucciones para jugar:
 	- 9 Cualquier robot puede matar al humano solo tocandolo, lo que hara que el humano pierda una vida (mostradas arriba). 
 		NOTA: Cuando el humano pierde las 3 vidas puede seguir jugando.  Todvia no he implementado el fin de partida
 
-	- 10 Si el humano recoge las bolas rojas en las esquinas (en un futuro seran armas) puede matar cualquier fantasma mientras le dure el efecto (8 Segundos)
+	- 10 Si el humano recoge las bolas rojas en las esquinas (en un futuro seran armas) puede matar cualquier robot mientras le dure el efecto (8 Segundos)
 		NOTA: Cada robot tiene un tiempo de respawn de 15 segundos, esto se balanceara mas adelante
 
+	
 
 NOTAS VARIAS:
 - Todavia no existe boton de salir cuando se esta dentro de la propia partida. En el futuro salirse supondra una penalizacion de X tiempo sin jugar

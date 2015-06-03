@@ -77,6 +77,20 @@ public class PlayerFactory : MonoBehaviour
 		jugadorInst.gameObject.AddComponent<MovementPredictionOtherClient>();
 		netViewInstanciada.observed = jugadorInst.gameObject.GetComponent<MovementPredictionOtherClient>();
 
+		if((EnumPersonaje)enumPersonajeInt == EnumPersonaje.Humano)
+		{		
+			jugadorInst.gameObject.AddComponent<CircleCollider2D>();
+			jugadorInst.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+			jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.3f;
+			
+			jugadorInst.gameObject.AddComponent<Rigidbody2D>();
+			Rigidbody2D rigidbodyInstanciado = jugadorInst.gameObject.GetComponent<Rigidbody2D>();
+			rigidbodyInstanciado.fixedAngle = true;
+
+			rigidbodyInstanciado.gravityScale = 0;
+		}
+
+
 		jugadorInst.Initialize();
 
 		return jugadorInst;

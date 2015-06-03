@@ -20,31 +20,47 @@ public class Human : Player
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
+		// Comprobamos si ha cogido una pieza en todos los juegos
 		if(other.tag == "Piece")
 		{
 			//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
+			//TODO: Hacer un objeto que cada 5 segundos envie de Servidor a cliente el estado de todas las bolitas
+				// SI hay 32 bolitas o menos se pueden serializar en un solo entero de 32 bits
 			Destroy(other.gameObject);
 		}
-		else if(other.tag == "Robot")
+		// Si estamos en el servidor comprobamos la colision con los robots y las armas
+		else if(Network.isServer)
 		{
-			Debug.Log("He tocado un robot");
-
-			if(!aggressiveMode)
+			if(other.tag == "Robot")
 			{
-				if(!isDead)
+				Debug.Log("He tocado un robot");
+				
+				if(!aggressiveMode)
 				{
-					base.Kill();
-
-					GameManager.gameManager.KillPlayerServer(base.id);
+					if(!isDead)
+					{
+						base.Kill();
+						
+						GameManager.gameManager.KillPlayerServer(base.id);
+					}
 				}
 			}
+			else if(other.tag == "Weapon")
+			{
+				pickUpAggressive();
+				
+				//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
+				Destroy(other.gameObject);
+			}
 		}
-		else if(other.tag == "Weapon")
+		else
 		{
-			pickUpAggressive();
-
-			//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
-			Destroy(other.gameObject);
+			if(other.tag == "Weapon")
+			{
+				
+				//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
+				Destroy(other.gameObject);
+			}
 		}
 	}
 

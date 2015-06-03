@@ -6,12 +6,12 @@ using System.Net;
 
 public class NetworkManager : MonoBehaviour 
 {
-	private const string masterServerIP = "67.255.180.24";
+	private const string masterServerIP = "localhost";
 	private const int masterServerPort = 23466;
 
 	private const int numJugadores = 5;
-	private const string typeName = "Robot-Name";
-	private string gameName = "RoomName";
+	private const string typeName = "RobotMan";
+	private string gameName = "room";
 	private HostData[] hostList;
 	public PlayerInfo[] listaJugadores = new PlayerInfo[numJugadores];
 	public NetworkPlayer networkPlayerServer;
@@ -49,8 +49,8 @@ public class NetworkManager : MonoBehaviour
 		networkManagerRef = this;
 		DontDestroyOnLoad(gameObject);
 
-//		MasterServer.ipAddress = masterServerIP;
-//		MasterServer.port = masterServerPort;
+		//MasterServer.ipAddress = masterServerIP;
+		//MasterServer.port = masterServerPort;
 	}
 	
 	// Lado del servidor

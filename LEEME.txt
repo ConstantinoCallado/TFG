@@ -1,0 +1,58 @@
+Este documento contiene una lista con instrucciones para jugar, anotaciones y comentarios sobre features aun no implementadas.
+
+Dispositivos soportados: Android, PC(Windows y linux), seguramente iOS y OSX (aun no he podido probarlos)
+	NOTA: En Windows Phone es imposible ejecutarlo, las librerias de Unity para networking aun no estan portadas
+
+
+Instrucciones para jugar:
+	- 0 Abrir la escena MenuScene contenida dentro de la carpeta Assets/Scenes
+
+	- 1 Es recomendable ponerse un nombre en el campo de texto de arriba a la derecha
+		NOTA: Toda la interfaz es temporal.
+
+	- 2 Crear una partida desde el dispositivo que actuara de host
+		
+	- 3 Unirse a partida desde cualquier otro dispositivo (tambien vale el mismo dispositivo usado para host)
+		NOTA: Todavia no se muestra la lista de partidas, el cliente solo se une a la primera que encuentre
+
+	- 4 Repetir el paso 3 las veces que se quiera
+
+	- 5 Pulsar el boton de listo en todos los dispositivos
+		NOTA: Los personajes sin jugador seran controlados por IA, todavia no se ha implementado
+
+	- 6 Esperar a que se asignen personajes aleatorios (1 humano y 4 robots). 
+		NOTA: Ingame el humano se ve como una caja del estilo Metal Gear. Esto es temporal
+
+	- 7a Para controlar el personaje desde el movil se debera tocar hacia donde se quiera ir
+	- 7b Para controlar el personaje desde el ordenador bastara con usar WASD o las flechas del teclado
+
+	- 8 El humano debera recoger todos los puntos del mapa. 
+		NOTA: Los puntos recogidos no se sincronizan en los clientes aun
+		NOTA: Al recoger todos los puntos no pasara nada (todavia esta sin implementar)
+
+	- 9 Cualquier robot puede matar al humano solo tocandolo, lo que hara que el humano pierda una vida (mostradas arriba). 
+		NOTA: Cuando el humano pierde las 3 vidas puede seguir jugando.  Todvia no he implementado el fin de partida
+
+	- 10 Si el humano recoge las bolas rojas en las esquinas (en un futuro seran armas) puede matar cualquier fantasma mientras le dure el efecto (8 Segundos)
+		NOTA: Cada robot tiene un tiempo de respawn de 15 segundos, esto se balanceara mas adelante
+
+
+NOTAS VARIAS:
+- Todavia no existe boton de salir cuando se esta dentro de la propia partida. En el futuro salirse supondra una penalizacion de X tiempo sin jugar
+
+- Todavia no se ha programado ningun tipo de IA
+
+- Los jugadores aun no pueden usar skills (cada uno tendra la suya propia, tal y como se escribio en el GDD)
+
+- Todavia hay que hacer que los robots tengan un rango de vision reducido. Al estilo "niebla de guerra" de muchos RTS (vease Age of Empires)
+
+- El escenario es temporal. Falta por hacer uno mas grande, mejor distribuido, y con esquinas redondeadas.
+
+- Se han hecho pruebas en entornos con un ping de hasta 300ms con resultados medio decentes. Todavia falta por hacer la prediccion de movimiento del jugador controlado
+		(esto le permitira empezar a moverse antes de que el servidor se lo confirme, y reducira el lag que percibira al realizar inputs)
+
+- El juego puede NO funcionar en algunas redes con puertos cerrados, he tenido problemas con alguna operadora movil y SOBRETODO con el Wi-Fi de la UA
+
+- El juego requiere una conexion con una velocidad de bajada de 1.5 kb/s y con una subida de 0.5 kb/s para los clientes. Y a la inversa para el host.
+	Gracias a la prediccion de movimiento es posible realizar solo 10 sincronizaciones por segundo entre el host y cada cliente, 
+	en las cuales se envia la posicion del jugador (X e Y) codificadas en un solo entero de 32 bits

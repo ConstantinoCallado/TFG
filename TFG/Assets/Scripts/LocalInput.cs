@@ -64,7 +64,7 @@ public class LocalInput : MonoBehaviour
 
 	void getUserInput()
 	{
-		#if UNITY_STANDALONE || UNITY_WEBPLAYER
+		#if UNITY_STANDALONE || UNITY_STANDALONE_OSX 
 		getEntradaTecladoEjes();
 		//getEntradaTecladoWASD();
 		#else

@@ -49,8 +49,8 @@ public class NetworkManager : MonoBehaviour
 		networkManagerRef = this;
 		DontDestroyOnLoad(gameObject);
 
-		//MasterServer.ipAddress = masterServerIP;
-		//MasterServer.port = masterServerPort;
+		MasterServer.ipAddress = masterServerIP;
+		MasterServer.port = masterServerPort;
 	}
 	
 	// Lado del servidor

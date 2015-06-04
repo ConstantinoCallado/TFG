@@ -26,4 +26,14 @@ public class HumanGraphics : MonoBehaviour
 			renderersDeColores[i].material.color = color;
 		}
 	}
+
+	public void Kill()
+	{
+		gameObject.transform.localScale = new Vector3(1.2f, 1.1f, 0.1f);
+	}
+
+	public void UnKill()
+	{
+		gameObject.transform.localScale = Vector3.one;
+	}
 }

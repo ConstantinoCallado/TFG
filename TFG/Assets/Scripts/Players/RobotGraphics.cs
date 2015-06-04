@@ -4,6 +4,9 @@ using System.Collections;
 public class RobotGraphics : MonoBehaviour 
 {
 	public Renderer[] renderersDeColores;
+	public Animator animator;
+
+	public GameObject particulasMuerto;
 
 	public void setColor(Color color)
 	{
@@ -12,5 +15,20 @@ public class RobotGraphics : MonoBehaviour
 		{
 			renderersDeColores[i].material.color = color;
 		}
+	}
+
+	public void Kill()
+	{
+		animator.enabled = false;
+		gameObject.transform.localScale = new Vector3(1.1f, 1.1f, 0.1f);
+		gameObject.transform.localPosition = new Vector3(0, 0, -0.5f);
+		particulasMuerto.SetActive(true);
+	}
+
+	public void UnKill()
+	{
+		animator.enabled = true;
+		gameObject.transform.localScale = Vector3.one;
+		particulasMuerto.SetActive(false);
 	}
 }

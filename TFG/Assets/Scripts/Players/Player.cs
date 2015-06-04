@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 	{
 		isDead = true;
 		isFreeze = true;
-		playerGraphics.DisableGraphics();
+		playerGraphics.Kill();
 
 		if(colliderJugador)
 		{

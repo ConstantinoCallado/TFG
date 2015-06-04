@@ -3,65 +3,27 @@ using System.Collections;
 
 public class Sight : MonoBehaviour 
 {	
-	private CircleCollider2D circleCollider;
-	public float radius = 4;
+	public bool isEnabled = true;
+	public float radius = 3;
 
-	public static short cantidadViendo = 0;
-	public static bool isHumanInSight = false;
-
-	public void InitializeComun()
+	public Transform transformRef;
+	
+	public void Start()
 	{
-		gameObject.transform.parent.GetComponent<Robot>().sightGameObject = this;
+		transformRef = transform;
+		WarFog.warFogRef.listaVisiones.Add(this);
 	}
-
-	public void InitializeInClient()
+	
+	public bool isPlayerInSight(Vector3 playerPosition)
 	{
-		InitializeComun();
-		setRadius(radius);
-	}
-
-	public void InitializeInServer()
-	{
-		InitializeComun();
-		gameObject.AddComponent<CircleCollider2D>();
-		circleCollider = gameObject.GetComponent<CircleCollider2D>();
-		setRadius(radius);
-		circleCollider.isTrigger = true;
-		gameObject.AddComponent<Rigidbody2D>();
-
-		Rigidbody2D rigidInst = gameObject.GetComponent<Rigidbody2D>();
-		rigidInst.isKinematic = true;
-	}
-
-	public void setRadius(float radiusParam)
-	{
-		radius = radiusParam;
-
-		if(circleCollider)
+		if(isEnabled)
 		{
-			circleCollider.radius = radius;
+			return ((playerPosition - transformRef.position).magnitude < radius);
 		}
-	}
-
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-		Debug.Log("He avistado al humano");
-
-		++cantidadViendo;
-		checkCuantosViendo();
-	}
-
-	public void OnTriggerExit2D(Collider2D other)
-	{
-		Debug.Log("Se ha perdido de vista al humano");
-
-		--cantidadViendo;
-		checkCuantosViendo();
-	}
-
-	void checkCuantosViendo()
-	{
-		isHumanInSight = cantidadViendo > 0;
+		else
+		{
+			return false;
+		}
 	}
 }
 

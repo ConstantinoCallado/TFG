@@ -1,29 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WarFog : MonoBehaviour 
 {
-	public bool canSightHuman = false;
-	public bool oldCanSightHuman = true;
+	public bool actualIsHumanInSight = false;
+	public bool oldIsHumanInSight = false;
 
-	void Update()
+	[HideInInspector]
+	public List<Sight> listaVisiones = new List<Sight>();
+	public static WarFog warFogRef;
+
+	public void Awake()
 	{
-		if(Human.humanRef)
+		warFogRef = this;
+	}
+
+	public void Start()
+	{
+		if(Network.isServer)
 		{
-			canSightHuman = Sight.isHumanInSight;
-
-			if(canSightHuman != oldCanSightHuman)
-			{
-				// TODO: Activar o desactivar la vision del jugador
-				Human.humanRef.playerGraphics.EnableGraphics(canSightHuman);
-
-				oldCanSightHuman = canSightHuman;
-			}
+			StartCoroutine(coroutineCheckSight());
 		}
 	}
 
-	void LateUpdate () 
+	public IEnumerator coroutineCheckSight()
 	{
-		//TODO: Actualizar niebla de guerra
+		while(true)
+		{
+			actualIsHumanInSight = false;
+
+			for(int i=0; i<listaVisiones.Count && !actualIsHumanInSight; i++)
+			{
+				if(listaVisiones[i].isPlayerInSight(Human.humanRef.transform.position))
+				{
+					actualIsHumanInSight = true;
+				}
+				yield return new WaitForEndOfFrame();
+			}
+
+			if(actualIsHumanInSight != oldIsHumanInSight)
+			{
+				if(actualIsHumanInSight)
+				{
+					Debug.Log("Humano dentro de vista");
+				}
+				else
+				{
+					Debug.Log("Humano fuera de vista");
+				}
+
+				oldIsHumanInSight = actualIsHumanInSight;
+			}
+
+			yield return new WaitForSeconds(0.5f);
+		}
 	}
 }

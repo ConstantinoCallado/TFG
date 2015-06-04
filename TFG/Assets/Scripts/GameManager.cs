@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 			SpawnearPersonajesEnServer();
 		}
 		NotificarPartidaCargada();
-
-		gameObject.AddComponent<WarFog>();
 	}
 	
 	public void SpawnearPersonajesEnServer()
@@ -75,8 +73,6 @@ public class GameManager : MonoBehaviour
 				NetworkManager.networkManagerRef.listaJugadores[index].player.Respawn();
 			}
 		}
-
-		Sight.cantidadViendo = 0;
 	}
 	
 	public void KillPlayerClient(int index)

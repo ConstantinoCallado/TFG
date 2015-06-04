@@ -7,6 +7,15 @@ public class Human : Player
 	float aggressiveTimeEnd = 0;
 	const float aggressiveTime = 8;
 
+	public static Human humanRef;
+
+	public void Awake()
+	{
+		base.Awake();
+
+		humanRef = this;
+	}
+
 	public override void Initialize()
 	{
 		base.Initialize();

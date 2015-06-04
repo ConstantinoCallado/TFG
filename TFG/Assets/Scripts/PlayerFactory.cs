@@ -3,8 +3,11 @@ using System.Collections;
 
 public class PlayerFactory : MonoBehaviour 
 {
-	public GameObject playerPrefab;
 	public static PlayerFactory playerFactoryRef;
+
+	public GameObject playerPrefab;
+	public GameObject sightPrefab;
+
 
 
 	public void Awake()
@@ -89,6 +92,14 @@ public class PlayerFactory : MonoBehaviour
 
 			rigidbodyInstanciado.gravityScale = 0;
 		}
+		else
+		{	
+			// Le anyadimos un objeto de vision
+			Sight visionInstanciada = (Sight)GameObject.Instantiate(sightPrefab).GetComponent<Sight>();
+			visionInstanciada.transform.parent = jugadorInst.transform;
+			visionInstanciada.transform.localPosition = Vector3.zero;
+			visionInstanciada.InitializeInClient();
+		}
 
 
 		jugadorInst.Initialize();
@@ -121,6 +132,12 @@ public class PlayerFactory : MonoBehaviour
 		{
 			rigidbodyInstanciado.isKinematic = true;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
+
+			// Le anyadimos un objeto de vision
+			Sight visionInstanciada = (Sight)GameObject.Instantiate(sightPrefab).GetComponent<Sight>();
+			visionInstanciada.transform.parent = jugadorInst.transform;
+			visionInstanciada.transform.localPosition = Vector3.zero;
+			visionInstanciada.InitializeInServer();
 		}
 
 		jugadorInst.Initialize();

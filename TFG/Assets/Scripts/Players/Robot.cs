@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Robot : Player 
 {
+	public Sight sightGameObject;
+
 	public override void Initialize()
 	{
 		base.Initialize();
@@ -12,7 +14,17 @@ public class Robot : Player
 		gameObject.name = "Robot " + getColorString();
 	}
 
+	public override void Kill()
+	{
+		base.Kill();
+		sightGameObject.gameObject.SetActive(false);
+	}
 
+	public override void Respawn()
+	{
+		base.Respawn();
+		sightGameObject.gameObject.SetActive(true);
+	}
 
 	public virtual Color GetColor()
 	{
@@ -27,15 +39,12 @@ public class Robot : Player
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "Human")
+		Debug.Log("He tocado al humano");
+
+		if(other.gameObject.GetComponent<Human>().aggressiveMode)
 		{
-			Debug.Log("He tocado al humano");
-	
-			if(other.gameObject.GetComponent<Human>().aggressiveMode)
-			{
-				GameManager.gameManager.KillPlayerServer(base.id);
-				base.Kill();
-			}
+			GameManager.gameManager.KillPlayerServer(base.id);
+			Kill();
 		}
 	}
 }

@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 	}
 
 	// Mueve el jugador a la posicion de spawn, resucitandolo si murio
-	public void Respawn()
+	public virtual void Respawn()
 	{
 		if(Network.isServer)
 		{
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
 		isDead = false;
 		isFreeze = false;
 
-		playerGraphics.EnableGraphics();
+		playerGraphics.EnableGraphics(true);
 
 		if(colliderJugador)
 		{

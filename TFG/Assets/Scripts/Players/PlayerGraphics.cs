@@ -19,26 +19,19 @@ public class PlayerGraphics : MonoBehaviour
 		robotGraphics.gameObject.SetActive(true);
 		robotGraphics.setColor(color);
 	}
-
-	public void DisableGraphics()
-	{
-		hoveringName.active = false;
-		if(humanGraphics != null) humanGraphics.gameObject.SetActive(false);
-		if(robotGraphics != null) robotGraphics.gameObject.SetActive(false);
-	}
 	
-	public void EnableGraphics()
+	public void EnableGraphics(bool status)
 	{
-		hoveringName.active = true;
+		hoveringName.active = status;
 		if(humanGraphics != null)
 		{
-			humanGraphics.gameObject.SetActive(true);
-			humanGraphics.UnKill();
+			humanGraphics.gameObject.SetActive(status);
+			if(status) humanGraphics.UnKill();
 		}
 		if(robotGraphics != null)
 		{
-			robotGraphics.gameObject.SetActive(true);
-			robotGraphics.UnKill();
+			robotGraphics.gameObject.SetActive(status);
+			if(status) robotGraphics.UnKill();
 		}
 	}
 

@@ -79,4 +79,10 @@ public class Player : MonoBehaviour
 	{
 		Debug.Log("La clase hija deberia sobreescribir este metodo");
 	}
+
+	public void RemoveFOW ()
+	{
+		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
+		Debug.Log("QUITANDO NIEBLA");
+	}
 }

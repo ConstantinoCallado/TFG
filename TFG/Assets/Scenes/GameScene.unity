@@ -497,7 +497,7 @@ GameObject:
   - 4: {fileID: 1459370737}
   m_Layer: 0
   m_Name: Fog_Of_War
-  m_TagString: Untagged
+  m_TagString: FogOfWar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -636,7 +636,7 @@ GameObject:
   - 20: {fileID: 1780501749}
   m_Layer: 11
   m_Name: CameraFogStatic
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,7 +794,7 @@ GameObject:
   - 20: {fileID: 1787898509}
   m_Layer: 11
   m_Name: CameraFogDinamic
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

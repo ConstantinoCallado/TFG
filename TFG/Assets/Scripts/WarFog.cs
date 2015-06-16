@@ -36,7 +36,6 @@ public class WarFog : MonoBehaviour
 				{
 					actualIsHumanInSight = true;
 				}
-				yield return new WaitForEndOfFrame();
 			}
 
 			if(actualIsHumanInSight != oldIsHumanInSight)
@@ -53,7 +52,7 @@ public class WarFog : MonoBehaviour
 				oldIsHumanInSight = actualIsHumanInSight;
 			}
 
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.1f);
 		}
 	}
 }

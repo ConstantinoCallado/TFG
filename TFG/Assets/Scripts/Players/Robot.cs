@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Robot : Player 
 {
-	private Sight sightScript;
+	public Sight sightScript;
 
 	public override void Initialize()
 	{
@@ -12,19 +12,21 @@ public class Robot : Player
 		gameObject.tag = "Robot";
 		base.playerGraphics.setRobot(GetColor());
 		gameObject.name = "Robot " + getColorString();
-		sightScript = gameObject.GetComponent<Sight>();
+		sightScript = gameObject.GetComponentInChildren<Sight>();
+
+		sightScript.SetSight(2.5f);
 	}
 
 	public override void Kill()
 	{
 		base.Kill();
-		sightScript.isEnabled = false;
+		sightScript.EnableSight(false);
 	}
 
 	public override void Respawn()
 	{
 		base.Respawn();
-		sightScript.isEnabled = true;
+		sightScript.EnableSight(true);
 	}
 
 	public virtual Color GetColor()

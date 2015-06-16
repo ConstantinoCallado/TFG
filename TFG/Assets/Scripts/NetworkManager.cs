@@ -1,4 +1,5 @@
 ﻿#define jumpNetworkConnectionCheck
+//#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;
@@ -359,7 +360,15 @@ public class NetworkManager : MonoBehaviour
 		yield return new WaitForSeconds(.5f);
 		
 		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
+
+
+		#if !firstPlayerControlHuman
 		int indiceHumano = (int)UnityEngine.Random.Range(0, listaJugadores.Length); 
+		#else
+		int indiceHumano = 0;
+		#endif
+
+
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
 		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje, listaJugadores[indiceHumano].viewID);
@@ -476,6 +485,10 @@ public class NetworkManager : MonoBehaviour
 	{
 		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
 		listaJugadores[playerIndex].player.localInput = listaJugadores[playerIndex].player.gameObject.GetComponent<LocalInput>();
+		if(listaJugadores[playerIndex].enumPersonaje == EnumPersonaje.Humano)
+		{
+			listaJugadores[playerIndex].player.RemoveFOW();
+		}
 	}
 
 	// Funcion que envia a los jugadores la informacion del servidor 

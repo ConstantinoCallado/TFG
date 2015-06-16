@@ -8,6 +8,7 @@ TagManager:
   - Robot
   - Weapon
   - Piece
+  - FogOfWar
   layers:
   - Default
   - TransparentFX

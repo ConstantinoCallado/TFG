@@ -70,7 +70,10 @@ public class PlayerFactory : MonoBehaviour
 
 		if((EnumPersonaje)enumPersonajeInt != EnumPersonaje.Humano)
 		{
-			gameObjectInstanciado.AddComponent<Sight>();
+			GameObject sightInstanciado = GameObject.Instantiate(sightPrefab);
+
+			sightInstanciado.transform.parent = gameObjectInstanciado.transform;
+			sightInstanciado.transform.position = gameObjectInstanciado.transform.position;
 		}
 		
 		return jugadorInstanciado;

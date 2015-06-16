@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#define jumpNetworkConnectionCheck
+
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +34,7 @@ public class NetworkManager : MonoBehaviour
 	public GameObject panelInternetRestringido;
 	public GameObject panelSpinner;
 
+	private bool serverLaunched = false;
 
 	//TODO: DESACOPLAR ESTO DE AQUI, PLS
 	// Funcion para meter el nombre a pelo
@@ -59,13 +62,18 @@ public class NetworkManager : MonoBehaviour
 	{
 		panelSpinner.SetActive(true);
 
-		if(checkInternet())
-		{
-			LaunchServer ();
-		}
+		#if !jumpNetworkConnectionCheck
+			if(checkInternet())
+			{
+				RegisterServer ();
+			}
+		#else
+			RegisterServer();
+			LaunchServer();
+		#endif
 	}
 
-	private void LaunchServer()
+	private void RegisterServer()
 	{
 		Debug.Log("Registrando");
 		Network.InitializeServer(numJugadores, 25000, !Network.HavePublicAddress());
@@ -206,18 +214,14 @@ public class NetworkManager : MonoBehaviour
 		MasterServer.RequestHostList(typeName);
 	}
 
-	
-	void OnMasterServerEvent(MasterServerEvent msEvent)
+	public void LaunchServer()
 	{
-		Debug.Log("MasterServerEvent");
-	
-
-		// Si el servidor se registra bien... cargamos la escena de looby
-		if (msEvent == MasterServerEvent.RegistrationSucceeded)
+		if(!serverLaunched)
 		{
+			serverLaunched = true;
 			Debug.Log("Server Initializied");
 			panelSpinner.SetActive(false);
-
+			
 			Application.LoadLevel("LobbyScene");
 			
 			// Enviamos al resto de cliente la informacion del servidor
@@ -233,6 +237,18 @@ public class NetworkManager : MonoBehaviour
 				bcstName(Network.player, nombreJugador);
 				networkView.RPC("bcstName", RPCMode.OthersBuffered, Network.player, nombreJugador);
 			}
+		}
+	}
+	
+	void OnMasterServerEvent(MasterServerEvent msEvent)
+	{
+		Debug.Log("MasterServerEvent");
+	
+
+		// Si el servidor se registra bien... cargamos la escena de looby
+		if (msEvent == MasterServerEvent.RegistrationSucceeded)
+		{
+			LaunchServer();
 		}
 		else if (msEvent == MasterServerEvent.HostListReceived)
 		{

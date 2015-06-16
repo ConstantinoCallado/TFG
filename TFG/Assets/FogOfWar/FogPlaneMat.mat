@@ -42,7 +42,11 @@ Material:
           m_Texture: {fileID: 8400000, guid: 70771bb380d9de84b8108c51f594d654, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _BlurPower
+        second: .00499999989
     m_Colors:
       data:
         first:

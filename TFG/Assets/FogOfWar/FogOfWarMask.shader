@@ -7,7 +7,6 @@
 	SubShader {
 		Tags {"Queue"="Transparent" "RenderType"="Transparent" "LightMode"="ForwardBase" }
 		Blend SrcAlpha OneMinusSrcAlpha
-		LOD 200
 		
 		CGPROGRAM
 		#pragma surface surf Lambert alpha:blend
@@ -33,7 +32,7 @@
 
 		void surf (Input IN, inout SurfaceOutput o) 
 		{	
-			const float _BlurPower = 0.005;
+			const float _BlurPower = 0.006;
 			
 			half4 dinColor =  tex2D (_DinTex, IN.uv_DinTex);
 
@@ -45,9 +44,8 @@
 						
 			//half4 statColor =  tex2D (_StatTex, IN.uv_StatTex);
 			
-			
 			o.Albedo = _Color.rgb;
-			o.Alpha = (_Color.a - dinColor.g) - statColor.g/6; //green - color of aperture mask
+			o.Alpha = (_Color.a - dinColor.g) - statColor.g/5; //green - color of aperture mask
 		}
 		ENDCG
 	} 

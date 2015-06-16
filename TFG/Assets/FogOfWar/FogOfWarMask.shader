@@ -5,7 +5,7 @@
 		_StatTex ("Base (RGB)", 2D) = "white" {}
 	}
 	SubShader {
-		Tags {"RenderType"="Transparent" "LightMode"="ForwardBase" }
+		Tags {"Queue"="Transparent" "RenderType"="Transparent" "LightMode"="ForwardBase" }
 		Blend SrcAlpha OneMinusSrcAlpha
 		LOD 200
 		

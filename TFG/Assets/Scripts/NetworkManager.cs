@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 
+
 public class NetworkManager : MonoBehaviour 
 {
 	private const string masterServerIP = "localhost";
@@ -79,7 +80,7 @@ public class NetworkManager : MonoBehaviour
 		try
 		{
 			WebRequest webResquest = WebRequest.Create("http://www.google.com/");
-			webResquest.Timeout = 2000;
+			webResquest.Timeout = 3000;
 
 			response = webResquest.GetResponse();
 

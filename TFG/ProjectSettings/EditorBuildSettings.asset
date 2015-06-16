@@ -10,6 +10,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LobbyScene.unity
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/GameSceneOld.unity
   - enabled: 0
-    path: Assets/Scenes/test.unity
+    path: Assets/Scenes/GameScene.unity
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity

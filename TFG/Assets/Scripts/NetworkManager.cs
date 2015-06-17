@@ -46,6 +46,7 @@ public class NetworkManager : MonoBehaviour
 	
 	public void Awake()
 	{
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		if(networkManagerRef != null)
 		{
 			Destroy(networkManagerRef.gameObject);

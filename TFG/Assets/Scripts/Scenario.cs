@@ -8,13 +8,13 @@ public enum EnumTile{Wall, Empty, Piece, Weapon};
 public class Scenario : MonoBehaviour 
 {
 	public static Scenario scenarioRef;
-	public GameObject prefabMuro;
+	//public GameObject prefabMuro;
 	public GameObject prefabWeapon;
 	public GameObject prefabPiece;
 	public const int tamanyoMapaX = 20;
 	public const int tamanyoMapaY = 14;
 
-	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] { 
+	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] {
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 3, 1, 2, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 2, 1, 3, 0, 0},
 		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
@@ -47,19 +47,15 @@ public class Scenario : MonoBehaviour
 	
 	void crearMuros()
 	{
+		GameObject gameObjectInstanciado;
+
 		for(int i=0; i<tamanyoMapaY; i++)
 		{
 			for(int j=0; j<tamanyoMapaX; j++)
 			{
 				if(arrayNivel[i,j] != 1)
 				{
-					GameObject gameObjectInstanciado;
-
-					if(arrayNivel[i,j] == 0)
-					{
-						gameObjectInstanciado = GameObject.Instantiate(prefabMuro);
-					}
-					else if(arrayNivel[i,j] == 2)
+					if(arrayNivel[i,j] == 2)
 					{
 						gameObjectInstanciado = GameObject.Instantiate(prefabPiece);
 					}

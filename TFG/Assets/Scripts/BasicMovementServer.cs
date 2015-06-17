@@ -159,25 +159,25 @@ public class BasicMovementServer : MonoBehaviour
 
 	// RPCS para inputs del jugador, se hacen 4 funciones sin parametros para ahorrar ancho de banda
 	[RPC]
-	public void ir()
+	public void r()
 	{
 		ActualizarInput((int)EnumMovimiento.Right);
 	}
 	
 	[RPC]
-	public void il()
+	public void l()
 	{
 		ActualizarInput((int)EnumMovimiento.Left);
 	}
 
 	[RPC]
-	public void iu()
+	public void u()
 	{
 		ActualizarInput((int)EnumMovimiento.Up);
 	}
 
 	[RPC]
-	public void id()
+	public void d()
 	{
 		ActualizarInput((int)EnumMovimiento.Down);
 	}

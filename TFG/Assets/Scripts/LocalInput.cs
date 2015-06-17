@@ -12,6 +12,14 @@ public class LocalInput : MonoBehaviour
 	BasicMovementServer movementRef;
 	private string methodName = "";
 
+
+	#if !UNITY_STANDALONE && !UNITY_STANDALONE_OSX 
+	Vector2 firstTapPosition;
+	Vector2 actualTapPosition;
+	Vector2 difTapPosition;
+	bool dragStarted = false;
+	#endif
+
 	void Awake()
 	{
 		networkView = GetComponent<NetworkView>();
@@ -33,19 +41,19 @@ public class LocalInput : MonoBehaviour
 			switch(enumMovimiento)
 			{
 				case (int)EnumMovimiento.Right:
-					methodName = "ir";
+					methodName = "r";
 					break;
 
 				case (int)EnumMovimiento.Left:
-					methodName = "il";
+					methodName = "l";
 					break;
 
 				case (int)EnumMovimiento.Up:
-					methodName = "iu";
+					methodName = "u";
 					break;
 
 				case (int)EnumMovimiento.Down:
-					methodName = "id";
+					methodName = "d";
 					break;
 			}
 			
@@ -66,10 +74,9 @@ public class LocalInput : MonoBehaviour
 	{
 		#if UNITY_STANDALONE || UNITY_STANDALONE_OSX 
 		getEntradaTecladoEjes();
-		//getEntradaTecladoWASD();
 		#else
-		//getEntradaBordeMovil();
-		getEntradaRelativaMovil();
+		//getEntradaRelativaMovil();
+		getEntradaDragMovil();
 		#endif
 	}
 
@@ -92,85 +99,17 @@ public class LocalInput : MonoBehaviour
 			enumMovimiento = (int)EnumMovimiento.Down;
 		}
 	}
-	
-	/*
-	void getEntradaTecladoWASD()
-	{
-		if(Input.GetKey(KeyCode.D))
-		{
-			enumMovimiento = (int)EnumMovimiento.Right;
-		}
-		else if(Input.GetKey(KeyCode.A))
-		{
-			enumMovimiento =(int)EnumMovimiento.Left;
-		}
-		else if(Input.GetKey(KeyCode.W))
-		{
-			enumMovimiento = (int)EnumMovimiento.Up;
-		}
-		else if(Input.GetKey(KeyCode.S))
-		{
-			enumMovimiento = (int)EnumMovimiento.Down;
-		}
-	}
 
-	void getEntradaTecladoFlechas()
-	{
-		if(Input.GetKey(KeyCode.RightArrow))
-		{
-			enumMovimiento = (int)EnumMovimiento.Right;
-		}
-		else if(Input.GetKey(KeyCode.LeftArrow))
-		{
-			enumMovimiento = (int)EnumMovimiento.Left;
-		}
-		else if(Input.GetKey(KeyCode.UpArrow))
-		{
-			enumMovimiento = (int)EnumMovimiento.Up;
-		}
-		else if(Input.GetKey(KeyCode.DownArrow))
-		{
-			enumMovimiento = (int)EnumMovimiento.Down;
-		}
-	}
-	*/
-	
-	// La direccion a moverse sera calculada teniendo en cuenta en que borde de la pantalla toque el jugador
-	void getEntradaBordeMovil()
-	{
-		if(Input.GetButton("Fire1"))
-		{
-			Vector2 toqueJugador = (Vector2)Input.mousePosition;
-			
-			if(toqueJugador.x > Screen.width * 0.7f)
-			{
-				enumMovimiento = (int)EnumMovimiento.Right;
-			}
-			else if(toqueJugador.x < Screen.width * 0.3f)
-			{
-				enumMovimiento = (int)EnumMovimiento.Left;
-			}
-			else if(toqueJugador.y > Screen.height * 0.7f)
-			{
-				enumMovimiento = (int)EnumMovimiento.Up;
-			}
-			else if(toqueJugador.y < Screen.height * 0.3f)
-			{
-				enumMovimiento = (int)EnumMovimiento.Down;
-			}
-		}
-	}
-	
 	// La direccion a moverse sera calculada teniendo en cuenta donde ha tocado el jugador respecto al personaje
 	void getEntradaRelativaMovil()
 	{
 		if(Input.GetButton("Fire1"))
 		{
-			Vector2 toqueJugadorRelativo = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
+			actualTapPosition = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
 			
-			if(Mathf.Abs(toqueJugadorRelativo.x) > Mathf.Abs(toqueJugadorRelativo.y))
+			if(Mathf.Abs(actualTapPosition.x) > Mathf.Abs(actualTapPosition.y))
 			{
-				if(toqueJugadorRelativo.x > 0)
+				if(actualTapPosition.x > 0)
 				{
 					enumMovimiento = (int)EnumMovimiento.Right;
 				}
@@ -181,7 +120,7 @@ public class LocalInput : MonoBehaviour
 			}
 			else
 			{
-				if(toqueJugadorRelativo.y > 0)
+				if(actualTapPosition.y > 0)
 				{
 					enumMovimiento = (int)EnumMovimiento.Up;
 				}
@@ -194,30 +133,80 @@ public class LocalInput : MonoBehaviour
 	}
 
 
+	// La direccion a moverse sera calculada teniendo en cuenta el gesto de tocar y arrastrar
+	void getEntradaDragMovil()
+	{
+		if(Input.GetButton("Fire1"))
+		{
+			if(dragStarted)
+			{
+				actualTapPosition = Input.mousePosition;
+
+				difTapPosition = actualTapPosition - firstTapPosition;
+
+				if(difTapPosition.magnitude > Screen.height / 10)
+				{
+					if(Mathf.Abs(difTapPosition.x) > Mathf.Abs(difTapPosition.y))
+					{
+						if(difTapPosition.x > 0)
+						{
+							enumMovimiento = (int)EnumMovimiento.Right;
+						}
+						else
+						{
+							enumMovimiento = (int)EnumMovimiento.Left;
+						}
+					}
+					else
+					{
+						if(difTapPosition.y > 0)
+						{
+							enumMovimiento = (int)EnumMovimiento.Up;
+						}
+						else
+						{
+							enumMovimiento = (int)EnumMovimiento.Down;
+						}
+					}
+				}
+			}
+			else
+			{
+				firstTapPosition = Input.mousePosition;
+				dragStarted = true;
+			}
+		}
+		else
+		{
+			dragStarted = false;
+		}
+	}
+
+
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
-	void ir()
+	void r()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}
 	
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
-	void il()
+	void l()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}
 	
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
-	void iu()
+	void u()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}
 	
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
-	void id()
+	void d()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}

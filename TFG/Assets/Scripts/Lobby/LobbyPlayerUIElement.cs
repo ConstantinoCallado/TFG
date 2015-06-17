@@ -14,10 +14,10 @@ public class LobbyPlayerUIElement : MonoBehaviour
 	private bool imageSetted = false;
 
 
-	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, bool isReady)
+	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, string nombrePersonaje, bool isReady)
 	{
 		textPlayerName.text = playerName;
-		textCharacterName.text = enumPersonaje.ToString();
+		textCharacterName.text = nombrePersonaje;
 
 		panelReady.enabled = isReady;
 

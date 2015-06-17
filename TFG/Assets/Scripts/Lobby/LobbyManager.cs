@@ -28,6 +28,7 @@ public class LobbyManager : MonoBehaviour
 			{
 				listaInfoJugadores[i].setPlayerName(NetworkManager.networkManagerRef.listaJugadores[i].playerName,
 				                                    NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje,
+				                                    getPlayerClass(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje),
 				                                    NetworkManager.networkManagerRef.listaJugadores[i].isReady);
 			}
 
@@ -69,5 +70,45 @@ public class LobbyManager : MonoBehaviour
 			--segundos;
 			textoMensaje.text = segundos.ToString();
 		}while(segundos > 0);
+	}
+
+	public string getPlayerClass(EnumPersonaje enumPersonaje)
+	{
+		switch(enumPersonaje)
+		{
+			case EnumPersonaje.Humano:
+				return "Humano";
+			break;
+
+			case EnumPersonaje.RobotAzul:
+				return "Robot azul";
+			break;
+
+			case EnumPersonaje.RobotBlanco:
+				return "Robot blanco";
+			break;
+			
+			case EnumPersonaje.RobotMorado:
+				return "Robot morado";
+			break;
+
+			case EnumPersonaje.RobotNaranja:
+				return "Robot naranja";
+			break;
+
+			case EnumPersonaje.RobotRojo:
+				return "Robot rojo";
+			break;
+
+			case EnumPersonaje.RobotRosa:
+				return "Robot rosa";
+			break;
+
+			case EnumPersonaje.RobotVerde:
+				return "Robot verde";
+			break;
+
+			default: return "";
+		}
 	}
 }

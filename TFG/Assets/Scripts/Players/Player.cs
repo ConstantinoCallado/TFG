@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 	public LocalInput localInput;
 	public NetworkView networkView;
 	public CircleCollider2D colliderJugador;
+	public BasicMovementServer basicMovementServer;
 
 	public void Awake()
 	{
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
 		gameObject.GetComponent<HoveringName>().playerRef = this;
 		networkView = GetComponent<NetworkView>();
 		colliderJugador = GetComponent<CircleCollider2D>();
+		basicMovementServer = GetComponent<BasicMovementServer>();
 	}
 	
 	public virtual void Kill()

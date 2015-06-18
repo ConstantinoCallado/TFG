@@ -18,7 +18,6 @@ public class MovementPredictionOtherClient : BasicMovementClient
 		refTransform = transform;
 	}
 
-	//TODO: Hacer que la prediccion de movimiento funcione cuando el jugador salga por los laterales del mapa
 	// Update is called once per frame
 	void Update () 
 	{

@@ -6,11 +6,11 @@ public enum FaceDirection{None, Right, Down, Left, Up}
 public class BasicMovementServer : MonoBehaviour 
 {
 	FaceDirection faceDirection = FaceDirection.Right;
-	public Vector3 inputDirection = Vector3.zero;
-	private Vector3 oldInputDirection = Vector3.zero;
+	public Vector2 inputDirection = Vector2.zero;
+	private Vector2 oldInputDirection = Vector2.zero;
 	public Vector3 targetPos;
 	public Player player;
-	Vector3 vectorObjetivoTemp;
+	Vector2 vectorObjetivoTemp;
 	public Transform characterTransform;
 
 	void Awake()
@@ -25,16 +25,17 @@ public class BasicMovementServer : MonoBehaviour
 		if(!player.isFreeze)
 		{
 			// Cuando se este en un frame en el que se pueda cambiar de direccion ...
-			if(puedeCambiarDireccion())
+			if(puedeCambiarDireccion() && inputDirection != Vector2.zero)
 			{
 				// Calculamos la posicion a donde quiere moverse el jugador
 
-				vectorObjetivoTemp = redondearPosicion(characterTransform.position + inputDirection);
+				vectorObjetivoTemp = redondearPosicion((Vector2)characterTransform.position + inputDirection);
 
 				// Si la posicion esta libre la ponemos como objetivo
 				if((int)vectorObjetivoTemp.x < 0 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 				{
 					targetPos = vectorObjetivoTemp;
+
 					if(inputDirection != oldInputDirection)
 					{
 						ActualizarRotacion(inputDirection);
@@ -44,7 +45,7 @@ public class BasicMovementServer : MonoBehaviour
 				// Si no, intentamos mover el jugador siguiendo el movimiento anterior
 				else
 				{
-					vectorObjetivoTemp = redondearPosicion(characterTransform.position + oldInputDirection);
+					vectorObjetivoTemp = redondearPosicion((Vector2)characterTransform.position + oldInputDirection);
 				
 					// Si esta libre el movimiento anterior lo ponemos como objetivo
 					if(Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
@@ -91,9 +92,9 @@ public class BasicMovementServer : MonoBehaviour
 	}
 
 
-	Vector3 redondearPosicion(Vector3 position)
+	Vector2 redondearPosicion(Vector2 position)
 	{
-		return new Vector3(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), 0);
+		return new Vector2(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
 	}
 
 	void ActualizarRotacion(Vector3 vectorInput)

@@ -14,7 +14,8 @@ public class Scenario : MonoBehaviour
 	public const int tamanyoMapaX = 20;
 	public const int tamanyoMapaY = 14;
 
-	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] {
+	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] 
+	{
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 3, 1, 2, 1, 1, 0, 2, 2, 2, 2, 0, 1, 1, 2, 1, 3, 0, 0},
 		{0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
@@ -53,19 +54,18 @@ public class Scenario : MonoBehaviour
 		{
 			for(int j=0; j<tamanyoMapaX; j++)
 			{
-				if(arrayNivel[i,j] != 1)
+				if(arrayNivel[i,j] != 0 && arrayNivel[i,j] != 1)
 				{
 					if(arrayNivel[i,j] == 2)
 					{
 						gameObjectInstanciado = GameObject.Instantiate(prefabPiece);
 					}
-					else
+					else 
 					{
 						gameObjectInstanciado = GameObject.Instantiate(prefabWeapon);
 					}
 
-					gameObjectInstanciado.transform.position = new Vector3(j, i, -1);
-					//gameObjectInstanciado.transform.localScale = new Vector3(1, 1, 2f);
+					gameObjectInstanciado.transform.position = new Vector3(j, i, 0);
 					gameObjectInstanciado.transform.parent = transform;
 				}
 			}

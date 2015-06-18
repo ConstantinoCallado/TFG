@@ -73,115 +73,69 @@ public class LocalInput : MonoBehaviour
 	void getUserInput()
 	{
 		#if UNITY_STANDALONE || UNITY_STANDALONE_OSX 
-		getEntradaTecladoEjes();
+			if(Input.GetAxis("Horizontal") > 0)
+			{
+				enumMovimiento = (int)EnumMovimiento.Right;
+			}
+			else if(Input.GetAxis("Horizontal") < 0)
+			{
+				enumMovimiento = (int)EnumMovimiento.Left;
+			}
+			else if(Input.GetAxis("Vertical") > 0)
+			{
+				enumMovimiento = (int)EnumMovimiento.Up;
+			}
+			else if(Input.GetAxis("Vertical") < 0)
+			{
+				enumMovimiento = (int)EnumMovimiento.Down;
+			}
 		#else
-		//getEntradaRelativaMovil();
-		getEntradaDragMovil();
+			if(Input.GetButton("Fire1"))
+			{
+				if(dragStarted)
+				{
+					actualTapPosition = Input.mousePosition;
+					
+					difTapPosition = actualTapPosition - firstTapPosition;
+					
+					if(difTapPosition.magnitude > Screen.height / 10)
+					{
+						if(Mathf.Abs(difTapPosition.x) > Mathf.Abs(difTapPosition.y))
+						{
+							if(difTapPosition.x > 0)
+							{
+								enumMovimiento = (int)EnumMovimiento.Right;
+							}
+							else
+							{
+								enumMovimiento = (int)EnumMovimiento.Left;
+							}
+						}
+						else
+						{
+							if(difTapPosition.y > 0)
+							{
+								enumMovimiento = (int)EnumMovimiento.Up;
+							}
+							else
+							{
+								enumMovimiento = (int)EnumMovimiento.Down;
+							}
+						}
+					}
+				}
+				else
+				{
+					firstTapPosition = Input.mousePosition;
+					dragStarted = true;
+				}
+			}
+			else
+			{
+				dragStarted = false;
+			}
 		#endif
 	}
-
-	void getEntradaTecladoEjes()
-	{
-		if(Input.GetAxis("Horizontal") > 0)
-		{
-			enumMovimiento = (int)EnumMovimiento.Right;
-		}
-		else if(Input.GetAxis("Horizontal") < 0)
-		{
-			enumMovimiento = (int)EnumMovimiento.Left;
-		}
-		else if(Input.GetAxis("Vertical") > 0)
-		{
-			enumMovimiento = (int)EnumMovimiento.Up;
-		}
-		else if(Input.GetAxis("Vertical") < 0)
-		{
-			enumMovimiento = (int)EnumMovimiento.Down;
-		}
-	}
-
-	// La direccion a moverse sera calculada teniendo en cuenta donde ha tocado el jugador respecto al personaje
-	void getEntradaRelativaMovil()
-	{
-		if(Input.GetButton("Fire1"))
-		{
-			actualTapPosition = (Vector2)(Input.mousePosition - cameraRef.WorldToScreenPoint(transform.position));
-			
-			if(Mathf.Abs(actualTapPosition.x) > Mathf.Abs(actualTapPosition.y))
-			{
-				if(actualTapPosition.x > 0)
-				{
-					enumMovimiento = (int)EnumMovimiento.Right;
-				}
-				else
-				{
-					enumMovimiento = (int)EnumMovimiento.Left;
-				}
-			}
-			else
-			{
-				if(actualTapPosition.y > 0)
-				{
-					enumMovimiento = (int)EnumMovimiento.Up;
-				}
-				else
-				{
-					enumMovimiento = (int)EnumMovimiento.Down;
-				}
-			}
-		}
-	}
-
-
-	// La direccion a moverse sera calculada teniendo en cuenta el gesto de tocar y arrastrar
-	void getEntradaDragMovil()
-	{
-		if(Input.GetButton("Fire1"))
-		{
-			if(dragStarted)
-			{
-				actualTapPosition = Input.mousePosition;
-
-				difTapPosition = actualTapPosition - firstTapPosition;
-
-				if(difTapPosition.magnitude > Screen.height / 10)
-				{
-					if(Mathf.Abs(difTapPosition.x) > Mathf.Abs(difTapPosition.y))
-					{
-						if(difTapPosition.x > 0)
-						{
-							enumMovimiento = (int)EnumMovimiento.Right;
-						}
-						else
-						{
-							enumMovimiento = (int)EnumMovimiento.Left;
-						}
-					}
-					else
-					{
-						if(difTapPosition.y > 0)
-						{
-							enumMovimiento = (int)EnumMovimiento.Up;
-						}
-						else
-						{
-							enumMovimiento = (int)EnumMovimiento.Down;
-						}
-					}
-				}
-			}
-			else
-			{
-				firstTapPosition = Input.mousePosition;
-				dragStarted = true;
-			}
-		}
-		else
-		{
-			dragStarted = false;
-		}
-	}
-
 
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]

@@ -1,5 +1,5 @@
 ﻿#define jumpNetworkConnectionCheck
-//#define firstPlayerControlHuman
+#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;

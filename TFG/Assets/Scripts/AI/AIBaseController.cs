@@ -3,50 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class IAController : MonoBehaviour 
+public class AIBaseController : MonoBehaviour 
 {
 	private Dictionary<Vector2, PathfindingNode> diccionarioNodosExplorados = new Dictionary<Vector2, PathfindingNode>();
 	private SortedNodeList listaNodosAExplorar = new SortedNodeList();
 
 	private short indexObjetivo = 0;
-	public List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
-	public Player player;
+	protected List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
+	protected Player player;
 
-	public bool completed = false;
+	protected bool completed = false;
 
+	public bool AIEnabled = true;
 
-	public bool doTest = false;
-	public Vector2 testPosition;
-
-
+	public static Vector2 humanKnownPosition;
+	public static bool humanInSight;
 
 	private void Awake()
 	{
 		player = gameObject.GetComponent<Player>();
 	}
 
-	private void Start()
+	protected void Start()
 	{
 		StartCoroutine(corutinaIrASiguientePosicion());
 	}
-
-	void Update()
-	{
-		if(doTest)
-		{
-			doTest = false;
-			ClearPath();
-			CalculatePathTo(testPosition);
-		}
-	}
-
 
 	//TODO: Comprobar muros u obstaculos por el camino
 	public IEnumerator corutinaIrASiguientePosicion()
 	{
 		while(true)
 		{
-			if(!player.isDead && !player.isFreeze && !completed)
+			if(!player.isDead && !player.isFreeze && !completed && AIEnabled)
 			{
 				if(player.basicMovementServer.targetPos == player.basicMovementServer.characterTransform.position)
 				{
@@ -87,7 +75,7 @@ public class IAController : MonoBehaviour
 		diccionarioNodosExplorados.Clear();
 	}
 
-	private bool CalculatePathTo(Vector2 targetPosition)
+	protected bool CalculatePathTo(Vector2 targetPosition)
 	{
 		ClearPath();
 		completed = false;

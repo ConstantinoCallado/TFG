@@ -42,11 +42,12 @@ public class WarFog : MonoBehaviour
 			{
 				if(actualIsHumanInSight)
 				{
-					Debug.Log("Humano dentro de vista");
+					AIBaseController.humanInSight = true;
+					AIBaseController.humanKnownPosition = Human.humanRef.transform.position;
 				}
 				else
 				{
-					Debug.Log("Humano fuera de vista");
+					AIBaseController.humanInSight = false;
 				}
 
 				oldIsHumanInSight = actualIsHumanInSight;

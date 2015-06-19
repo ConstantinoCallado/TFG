@@ -37,9 +37,15 @@ public class Scenario : MonoBehaviour
 	public List<Vector2> playerSpawnPoints = new List<Vector2>();
 	
 	short contadorRobots = -1;
-	
+
+	public short partitionOfLeft;
+	public short partitionOfRight;
+
 	public void Awake()
 	{
+		partitionOfLeft = tamanyoMapaX/4;
+		partitionOfRight = (tamanyoMapaX/4) * 3;
+
 		contadorRobots = -1;
 		scenarioRef = this;
 		
@@ -96,5 +102,17 @@ public class Scenario : MonoBehaviour
 		return(posicionAExplorar.x >= 0 && posicionAExplorar.x < Scenario.tamanyoMapaX 
 		       && posicionAExplorar.y >= 0 && posicionAExplorar.y < Scenario.tamanyoMapaY
 		       && arrayNivel[(int)posicionAExplorar.y, (int)posicionAExplorar.x] != 0);
+	}
+
+	public bool isWarpPosition(Vector2 position)
+	{
+		bool resultado = false;
+
+		if((position.x == 0 && position.y == 7) || (position.x == 19 && position.y == 7))
+		{
+			resultado = true;
+		}
+
+		return resultado;
 	}
 }

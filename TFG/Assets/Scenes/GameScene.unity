@@ -140,6 +140,8 @@ MonoBehaviour:
   - {x: 17, y: 3}
   - {x: 17, y: 10}
   - {x: 2, y: 10}
+  partitionOfLeft: 0
+  partitionOfRight: 0
 --- !u!1 &501723072
 GameObject:
   m_ObjectHideFlags: 0

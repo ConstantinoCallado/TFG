@@ -19,16 +19,4 @@ public class PlayerInfo
 		activePlayer = false;
 		isReady = true;
 	}
-
-	public void playerDisconnected ()
-	{
-		playerName = "IA";
-		activePlayer = false;
-		isReady = true;
-
-		if(player!= null)
-		{
-			player.EnableIA(true);
-		}
-	}
 }

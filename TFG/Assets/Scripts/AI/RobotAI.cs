@@ -60,7 +60,7 @@ public class RobotAI : AIBaseController
 		}
 		else if(base.pathCompleted)
 		{
-			wlkToRandomPositionAround(player.basicMovementServer.characterTransform.position, 5);
+			wlkToRandomPositionAround(player.basicMovementServer.characterTransform.position, 8);
 		}
 	}
 
@@ -137,6 +137,16 @@ public class RobotAI : AIBaseController
 		do
 		{
 			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
+
+			if(posicionADevolver.x < 0)
+			{
+				posicionADevolver.x = Scenario.tamanyoMapaX + posicionADevolver.x;
+			}
+			else if(posicionADevolver.x > Scenario.tamanyoMapaX)
+			{
+				posicionADevolver.x = posicionADevolver.x - Scenario.tamanyoMapaX;
+			}
+
 		}while(!base.CalculatePathTo(posicionADevolver));
 	}
 }

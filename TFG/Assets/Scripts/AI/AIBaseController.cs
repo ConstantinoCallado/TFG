@@ -15,11 +15,14 @@ public class AIBaseController : MonoBehaviour
 	protected bool pathCompleted = true;
 	protected bool pathCalculated = false;
 
+	private Vector2 movementVector;
+
 	public bool AIEnabled = true;
 
 	public static Vector2 humanKnownPosition;
 	public static bool humanInSight;
 
+	
 	private void Awake()
 	{
 		player = gameObject.GetComponent<Player>();
@@ -44,8 +47,18 @@ public class AIBaseController : MonoBehaviour
 					{
 						--indexObjetivo;
 
-						player.basicMovementServer.inputDirection = (colaPosicionesObjetivo[indexObjetivo] 
-						                                             - (Vector2)player.basicMovementServer.characterTransform.position).normalized;
+						movementVector = colaPosicionesObjetivo[indexObjetivo] - (Vector2)player.basicMovementServer.characterTransform.position;
+
+						// Si la posicion a desplazarse esta cerca la tomamos como buena
+						if(Mathf.Abs(movementVector.x) < 2)
+						{
+							player.basicMovementServer.inputDirection = movementVector.normalized;
+						}
+						// Si esta muy lejos asumimos que esta en la otra punta del mapa... por lo que damos la vuelta
+						else
+						{
+							player.basicMovementServer.inputDirection = -movementVector.normalized;
+						}
 
 						//colaPosicionesObjetivo.RemoveAt(colaPosicionesObjetivo.Count-1);
 					}
@@ -76,6 +89,49 @@ public class AIBaseController : MonoBehaviour
 		listaNodosAExplorar.Clear();
 		diccionarioNodosExplorados.Clear();
 	}
+
+
+	private IEnumerator testPathfinding(Vector2 targetPosition)
+	{
+		ClearPath();
+		pathCalculated = false;
+		
+		PathfindingNode nodoInicial = new PathfindingNode(redondearPosicion(player.basicMovementServer.characterTransform.position), 0, null, redondearPosicion(targetPosition));
+		
+		// Si la posicion a ir esta vacia...
+		if(Scenario.scenarioRef.isWalkable(targetPosition))
+		{
+			// Insertamos el primer nodo en la lista a explorar
+			listaNodosAExplorar.Add(nodoInicial);
+			
+			// Expandimos nodos hasta que no queden mas... o hayamos encntrado el final
+			while(listaNodosAExplorar.Count() > 0 && !pathCalculated)
+			{
+				GameObject gameObjectDebug = (GameObject)Instantiate(Resources.Load("Prefabs/Debug_Node"));
+				gameObjectDebug.GetComponent<DebugIANode>().textoHeu.text = "h " + listaNodosAExplorar.Peek().heuristicaParcial.ToString();
+				gameObjectDebug.GetComponent<DebugIANode>().textoPeso.text = "p " + listaNodosAExplorar.Peek().distance.ToString();
+				gameObjectDebug.transform.position = listaNodosAExplorar.Peek().position;
+
+				pathCalculated = listaNodosAExplorar.First().ExpandAll(listaNodosAExplorar, diccionarioNodosExplorados);
+
+				yield return new WaitForEndOfFrame();
+			}
+			
+			// Si se ha llegado al final reconstruimos y almacenamos el camino
+			if(pathCalculated)
+			{
+				PathfindingNode nodoFinal = listaNodosAExplorar.First();
+				
+				while(nodoFinal.parent != null)
+				{
+					AddNewWaypoint(nodoFinal.position);
+					
+					nodoFinal = nodoFinal.parent;
+				}
+			}
+		}
+	}
+
 
 	protected bool CalculatePathTo(Vector2 targetPosition)
 	{

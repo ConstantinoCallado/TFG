@@ -38,15 +38,35 @@ public class PathfindingNode
 		if(!diccionarioNodos.ContainsKey(position))
 		{
 			diccionarioNodos.Add(position, this);
-			
-			return (ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x + 1, position.y)) ||
-			        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x - 1, position.y)) ||
-			        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x, position.y + 1)) ||
-			        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x, position.y - 1)));
+
+			//Debug.Log("Expandiendo nodo " + position);
+
+			// Si estamos en una posicion normal anyadimos los 4 vecinos al conjunto de nodos a explorar
+			if(!Scenario.scenarioRef.isWarpPosition(position))
+			{
+				return (ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x + 1, position.y)) ||
+				        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x - 1, position.y)) ||
+				        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x, position.y + 1)) ||
+				        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(position.x, position.y - 1)));
+			}
+			// Si nos encontramos en un posible nodo de portal (los 2 de los extremos) recalculamos el nodo resultante por el otro extremo
+			else
+			{
+				if(position.x == 0)
+				{
+					return (ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(Scenario.tamanyoMapaX-1, position.y)) ||
+					       	ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(1, position.y)));
+				}
+				else
+				{
+					return (ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(0, position.y)) ||
+					        ExpandEach(listaNodosAExplorar, diccionarioNodos, new Vector2(Scenario.tamanyoMapaX-2, position.y)));				
+				}
+			}
 		}
 		return false;
 	}
-	
+
 	public bool ExpandEach(SortedNodeList listaNodosAExplorar, Dictionary<Vector2, PathfindingNode> diccionarioNodos, Vector2 posicionAExplorar)
 	{
 		nodoExtraido = null;
@@ -86,12 +106,27 @@ public class PathfindingNode
 		return false;
 	}
 	
-	//TODO: Modificar heuristica para permitir que el pathfinding pueda usar los warps de los extremos del mapa
 	private void calcuarDistanciaManhattan()
-	{
-		heuristicaParcial =  (short)(Mathf.Abs((int)position.x - (int)targetPosition.x) + Mathf.Abs((int)position.y - (int)targetPosition.y));
+	{	
+		heuristicaParcial = (short)Mathf.Abs((int)position.y - (int)targetPosition.y);
+
+		// Si estamos muy a la izquierda del mapa trucamos la heuristica para permitir pasar por el portal de la izquierda
+		if(position.x < Scenario.scenarioRef.partitionOfLeft && targetPosition.x > Scenario.scenarioRef.partitionOfRight)
+		{
+			heuristicaParcial += (short)(position.x + (Scenario.tamanyoMapaX - targetPosition.x));
+		}
+		// Si estamos muy a la derecha del mapa trucamos la heuristica para permitir pasar por el portal de la derecha
+		else if(position.x > Scenario.scenarioRef.partitionOfRight && targetPosition.x < Scenario.scenarioRef.partitionOfLeft)
+		{
+			heuristicaParcial += (short)(targetPosition.x + (Scenario.tamanyoMapaX - position.x));
+		}
+		else
+		{
+			heuristicaParcial += (short)(Mathf.Abs((int)position.x - (int)targetPosition.x));
+		}
 	}
-	
+
+
 	private void actualizarPesos()
 	{
 		heuristicaTotal = (short)(heuristicaParcial + distance);

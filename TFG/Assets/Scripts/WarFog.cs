@@ -43,6 +43,7 @@ public class WarFog : MonoBehaviour
 				if(actualIsHumanInSight)
 				{
 					AIBaseController.humanInSight = true;
+					AIBaseController.humanKnownPositionPrev = AIBaseController.humanKnownPosition;
 					AIBaseController.humanKnownPosition = Human.humanRef.transform.position;
 				}
 				else

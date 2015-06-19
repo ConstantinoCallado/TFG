@@ -19,6 +19,7 @@ public class AIBaseController : MonoBehaviour
 
 	public bool AIEnabled = true;
 
+	public static Vector2 humanKnownPositionPrev;
 	public static Vector2 humanKnownPosition;
 	public static bool humanInSight;
 

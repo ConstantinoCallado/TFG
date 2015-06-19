@@ -72,7 +72,7 @@ public class PathfindingNode
 		nodoExtraido = null;
 		
 		// Primero nos aseguramos de que estemos en una posicion dentro del mapa
-		if(Scenario.scenarioRef.isWalkable(posicionAExplorar))
+		if(Scenario.scenarioRef.isWalkable(posicionAExplorar) && distance < 40)
 		{
 			diccionarioNodos.TryGetValue(posicionAExplorar, out nodoExtraido);
 			

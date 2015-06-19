@@ -7,7 +7,6 @@ public class RobotAI : AIBaseController
 {
 	RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
 	private float escapeCounter;
-	private float searchCounter;
 	private Vector2 targetPosition;
 
 	void Update()
@@ -76,9 +75,6 @@ public class RobotAI : AIBaseController
 
 	void Attack()
 	{
-		//TODO: Attack
-		//base.ClearPath();
-
 		if(AIBaseController.humanInSight)
 		{
 			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 2)
@@ -86,25 +82,24 @@ public class RobotAI : AIBaseController
 				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
 				base.CalculatePathTo(targetPosition);
 			}
-
 		}
 		else
 		{
-			robotAIStatus = RobotAIStatus.Search;
+			Debug.Log("Ultima posicion conocida: " + AIBaseController.humanKnownPosition);
+			Debug.Log("Anterior: " + AIBaseController.humanKnownPositionPrev);
 
-			searchCounter = Time.time + 5;
+			robotAIStatus = RobotAIStatus.Search;
+			wlkToRandomPositionAround(AIBaseController.humanKnownPosition, 8);
 		}
 	}
 
 	void Search()
 	{
-		//TODO: BUSCAR
-
 		if(AIBaseController.humanInSight)
 		{
 			robotAIStatus = RobotAIStatus.Attack;
 		}
-		else if(Time.time > searchCounter)
+		else if(base.pathCompleted)
 		{
 			robotAIStatus = RobotAIStatus.Wander;
 		}
@@ -134,6 +129,7 @@ public class RobotAI : AIBaseController
 	void wlkToRandomPositionAround(Vector2 center, short radius)
 	{
 		Vector2 posicionADevolver;
+		int contador = 0;
 		do
 		{
 			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
@@ -147,6 +143,7 @@ public class RobotAI : AIBaseController
 				posicionADevolver.x = posicionADevolver.x - Scenario.tamanyoMapaX;
 			}
 
-		}while(!base.CalculatePathTo(posicionADevolver));
+			++contador;
+		}while(!base.CalculatePathTo(posicionADevolver) && contador < 5);
 	}
 }

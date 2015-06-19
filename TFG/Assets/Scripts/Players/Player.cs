@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 		{
 			if(AIBase)
 			{
-				AIBase.AIEnabled = !NetworkManager.networkManagerRef.listaJugadores[id].activePlayer;
+				AIBase.enabled = !NetworkManager.networkManagerRef.listaJugadores[id].activePlayer;
 			}
 		}
 	}

@@ -17,7 +17,7 @@ public class AIBaseController : MonoBehaviour
 
 	private Vector2 movementVector;
 
-	public bool AIEnabled = true;
+	public bool AIEnabled = false;
 
 	public static Vector2 humanKnownPositionPrev;
 	public static Vector2 humanKnownPosition;

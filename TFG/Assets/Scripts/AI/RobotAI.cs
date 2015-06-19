@@ -9,6 +9,23 @@ public class RobotAI : AIBaseController
 	private float escapeCounter;
 	private Vector2 targetPosition;
 
+	//TODO: Empezar IA con retraso
+
+	void Start()
+	{
+		base.AIEnabled = false;
+		base.Start ();
+
+		StartCoroutine(startIADelayed());
+	}
+
+
+	IEnumerator startIADelayed()
+	{
+		yield return new WaitForSeconds(Random.Range(0f, 3f));
+		base.AIEnabled = true;
+	}
+
 	void Update()
 	{
 		//Debug.Log(robotAIStatus);
@@ -46,6 +63,7 @@ public class RobotAI : AIBaseController
 	{
 		if(AIBaseController.humanInSight && Human.humanRef.aggressiveMode)
 		{
+			base.ClearPath();
 			robotAIStatus = RobotAIStatus.Escape;
 		}
 	}
@@ -84,8 +102,6 @@ public class RobotAI : AIBaseController
 		}
 		else
 		{
-			// TODO: Posicion de busqueda rotisima 
-
 			robotAIStatus = RobotAIStatus.Search;
 			wlkToRandomPositionAround(AIBaseController.humanKnownPosition +
 			                          (AIBaseController.humanKnownPosition - (Vector2)player.basicMovementServer.characterTransform.position).normalized * 6,
@@ -107,10 +123,12 @@ public class RobotAI : AIBaseController
 
 	void Escape()
 	{
-		wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
-		                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 4,
-		                          	3);
-
+		if(base.pathCompleted)
+		{
+			wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
+			                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 4,
+			                          	3);
+		}
 
 		if(AIBaseController.humanInSight)
 		{	

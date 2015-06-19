@@ -21,7 +21,7 @@ public class Human : Player
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Human");
 		gameObject.tag = "Human";
-		speed = 3.5f;
+		speed = 3f;
 		base.playerGraphics.setHuman();
 		gameObject.name = "Human";
 		Debug.Log("inicializado Humano");

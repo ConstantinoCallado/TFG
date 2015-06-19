@@ -90,4 +90,11 @@ public class Scenario : MonoBehaviour
 			return robotSpawnPoints[0];
 		}
 	}
+
+	public bool isWalkable(Vector2 posicionAExplorar)
+	{
+		return(posicionAExplorar.x >= 0 && posicionAExplorar.x < Scenario.tamanyoMapaX 
+		       && posicionAExplorar.y >= 0 && posicionAExplorar.y < Scenario.tamanyoMapaY
+		       && arrayNivel[(int)posicionAExplorar.y, (int)posicionAExplorar.x] != 0);
+	}
 }

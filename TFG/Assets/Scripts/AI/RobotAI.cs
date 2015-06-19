@@ -9,9 +9,10 @@ public class RobotAI : AIBaseController
 	private float escapeCounter;
 	private float searchCounter;
 
+
 	void Update()
 	{
-		Debug.Log(robotAIStatus);
+		//Debug.Log(robotAIStatus);
 
 		if(AIEnabled)
 		{
@@ -53,10 +54,13 @@ public class RobotAI : AIBaseController
 	void Wander()
 	{
 		// TODO: WANDER
-
 		if(AIBaseController.humanInSight)
 		{
 			robotAIStatus = RobotAIStatus.Attack;
+		}
+		else if(base.pathCompleted)
+		{
+			wlkToRandomPositionAround(player.basicMovementServer.characterTransform.position, 5);
 		}
 	}
 
@@ -73,6 +77,7 @@ public class RobotAI : AIBaseController
 	void Attack()
 	{
 		//TODO: Attack
+		base.ClearPath();
 
 		if(!AIBaseController.humanInSight)
 		{
@@ -115,5 +120,14 @@ public class RobotAI : AIBaseController
 		{
 			robotAIStatus = RobotAIStatus.Search;
 		}
+	}
+
+	void wlkToRandomPositionAround(Vector2 center, short radius)
+	{
+		Vector2 posicionADevolver;
+		do
+		{
+			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
+		}while(!base.CalculatePathTo(posicionADevolver));
 	}
 }

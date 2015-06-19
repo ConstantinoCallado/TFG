@@ -9,10 +9,11 @@ public class AIBaseController : MonoBehaviour
 	private SortedNodeList listaNodosAExplorar = new SortedNodeList();
 
 	private short indexObjetivo = 0;
-	protected List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
+	public List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
 	protected Player player;
 
-	protected bool completed = false;
+	public bool pathCompleted = true;
+	public bool pathCalculated = false;
 
 	public bool AIEnabled = true;
 
@@ -34,7 +35,7 @@ public class AIBaseController : MonoBehaviour
 	{
 		while(true)
 		{
-			if(!player.isDead && !player.isFreeze && !completed && AIEnabled)
+			if(!player.isDead && !player.isFreeze && !pathCompleted && AIEnabled)
 			{
 				if(player.basicMovementServer.targetPos == player.basicMovementServer.characterTransform.position)
 				{
@@ -50,7 +51,7 @@ public class AIBaseController : MonoBehaviour
 					else
 					{
 						player.basicMovementServer.inputDirection = Vector2.zero;
-						completed = true;
+						pathCompleted = true;
 					}
 				}
 			}
@@ -61,7 +62,7 @@ public class AIBaseController : MonoBehaviour
 
 	public void AddNewWaypoint(Vector2 siguiente)
 	{
-		completed = false;
+		pathCompleted = false;
 		colaPosicionesObjetivo.Add(siguiente);
 		++indexObjetivo;
 	}
@@ -69,7 +70,7 @@ public class AIBaseController : MonoBehaviour
 	public void ClearPath()
 	{
 		indexObjetivo = 0;
-		completed = true;
+		pathCompleted = true;
 		colaPosicionesObjetivo.Clear();
 		listaNodosAExplorar.Clear();
 		diccionarioNodosExplorados.Clear();
@@ -78,34 +79,39 @@ public class AIBaseController : MonoBehaviour
 	protected bool CalculatePathTo(Vector2 targetPosition)
 	{
 		ClearPath();
-		completed = false;
-	
+		pathCalculated = false;
+
 		PathfindingNode nodoInicial = new PathfindingNode(redondearPosicion(player.basicMovementServer.characterTransform.position), 0, null, redondearPosicion(targetPosition));
 
-		listaNodosAExplorar.Add(nodoInicial);
-
-		while(listaNodosAExplorar.Count() > 0 && !completed)
+		// Si la posicion a ir esta vacia...
+		if(Scenario.scenarioRef.isWalkable(targetPosition))
 		{
-			completed = listaNodosAExplorar.First().ExpandAll(listaNodosAExplorar, diccionarioNodosExplorados);
-		}
+			// Insertamos el primer nodo en la lista a explorar
+			listaNodosAExplorar.Add(nodoInicial);
 
-		if(completed)
-		{
-			PathfindingNode nodoFinal = listaNodosAExplorar.First();
-
-			while(nodoFinal.parent != null)
+			// Expandimos nodos hasta que no queden mas... o hayamos encntrado el final
+			while(listaNodosAExplorar.Count() > 0 && !pathCalculated)
 			{
-				AddNewWaypoint(nodoFinal.position);
-
-				nodoFinal = nodoFinal.parent;
+				pathCalculated = listaNodosAExplorar.First().ExpandAll(listaNodosAExplorar, diccionarioNodosExplorados);
 			}
 
-			return true;
+			// Si se ha llegado al final reconstruimos y almacenamos el camino
+			if(pathCalculated)
+			{
+				PathfindingNode nodoFinal = listaNodosAExplorar.First();
+
+				while(nodoFinal.parent != null)
+				{
+					AddNewWaypoint(nodoFinal.position);
+
+					nodoFinal = nodoFinal.parent;
+				}
+
+				return true;
+			}
 		}
-		else
-		{
-			return false;
-		}
+
+		return false;
 	}
 
 	private Vector2 redondearPosicion(Vector2 pos)

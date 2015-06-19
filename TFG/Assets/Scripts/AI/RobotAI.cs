@@ -8,7 +8,7 @@ public class RobotAI : AIBaseController
 	RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
 	private float escapeCounter;
 	private float searchCounter;
-
+	private Vector2 targetPosition;
 
 	void Update()
 	{
@@ -77,9 +77,18 @@ public class RobotAI : AIBaseController
 	void Attack()
 	{
 		//TODO: Attack
-		base.ClearPath();
+		//base.ClearPath();
 
-		if(!AIBaseController.humanInSight)
+		if(AIBaseController.humanInSight)
+		{
+			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 2)
+			{
+				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
+				base.CalculatePathTo(targetPosition);
+			}
+
+		}
+		else
 		{
 			robotAIStatus = RobotAIStatus.Search;
 

@@ -52,7 +52,6 @@ public class RobotAI : AIBaseController
 
 	void Wander()
 	{
-		// TODO: WANDER
 		if(AIBaseController.humanInSight)
 		{
 			robotAIStatus = RobotAIStatus.Attack;
@@ -85,11 +84,12 @@ public class RobotAI : AIBaseController
 		}
 		else
 		{
-			Debug.Log("Ultima posicion conocida: " + AIBaseController.humanKnownPosition);
-			Debug.Log("Anterior: " + AIBaseController.humanKnownPositionPrev);
+			// TODO: Posicion de busqueda rotisima 
 
 			robotAIStatus = RobotAIStatus.Search;
-			wlkToRandomPositionAround(AIBaseController.humanKnownPosition, 8);
+			wlkToRandomPositionAround(AIBaseController.humanKnownPosition +
+			                          (AIBaseController.humanKnownPosition - (Vector2)player.basicMovementServer.characterTransform.position).normalized * 6,
+			                          3);
 		}
 	}
 
@@ -107,7 +107,10 @@ public class RobotAI : AIBaseController
 
 	void Escape()
 	{
-		//TODO: ESCAPAR
+		wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
+		                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 4,
+		                          	3);
+
 
 		if(AIBaseController.humanInSight)
 		{	

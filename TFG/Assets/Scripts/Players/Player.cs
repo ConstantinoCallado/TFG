@@ -15,10 +15,23 @@ public class Player : MonoBehaviour
 	public NetworkView networkView;
 	public CircleCollider2D colliderJugador;
 	public BasicMovementServer basicMovementServer;
+	public AIBaseController AIBase;
+
 
 	public void Awake()
 	{
 		playerGraphics = GetComponent<PlayerGraphics>();
+	}
+
+	public void Update()
+	{
+		if(Network.isServer)
+		{
+			if(AIBase)
+			{
+				AIBase.AIEnabled = !NetworkManager.networkManagerRef.listaJugadores[id].activePlayer;
+			}
+		}
 	}
 
 	public virtual void Initialize()
@@ -86,5 +99,10 @@ public class Player : MonoBehaviour
 	{
 		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
 		Debug.Log("QUITANDO NIEBLA");
+	}
+
+	public void EnableIA (bool b)
+	{
+		throw new System.NotImplementedException ();
 	}
 }

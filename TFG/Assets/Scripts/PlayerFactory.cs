@@ -130,6 +130,7 @@ public class PlayerFactory : MonoBehaviour
 		{
 			rigidbodyInstanciado.isKinematic = true;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRRobotSpawnPoint());
+			jugadorInst.gameObject.AddComponent<RobotAI>();
 		}
 
 		jugadorInst.Initialize();

@@ -9,11 +9,11 @@ public class AIBaseController : MonoBehaviour
 	private SortedNodeList listaNodosAExplorar = new SortedNodeList();
 
 	private short indexObjetivo = 0;
-	public List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
+	protected List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
 	protected Player player;
 
-	public bool pathCompleted = true;
-	public bool pathCalculated = false;
+	protected bool pathCompleted = true;
+	protected bool pathCalculated = false;
 
 	public bool AIEnabled = true;
 
@@ -23,6 +23,7 @@ public class AIBaseController : MonoBehaviour
 	private void Awake()
 	{
 		player = gameObject.GetComponent<Player>();
+		player.AIBase = this;
 	}
 
 	protected void Start()

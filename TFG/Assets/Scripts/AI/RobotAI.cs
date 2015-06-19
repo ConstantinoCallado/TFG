@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum RobotAIStatus {Wander, Defend, Attack, Search, Escape, Scatter}
+public enum RobotAIStatus {Wander, Patrol, Attack, Search, Escape, Scatter}
 
 public class RobotAI : AIBaseController 
 {
 	RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
 	RobotAIStatus statusWhenLastPosition = RobotAIStatus.Wander;
+	private float patrolCounter;
+	private Vector2 patrolPosition;
 	private float escapeCounter;
 	private Vector2 targetPosition;
 
-	//TODO: Empezar IA con retraso
 
 	void Start()
 	{
@@ -19,8 +20,7 @@ public class RobotAI : AIBaseController
 
 		StartCoroutine(startIADelayed());
 	}
-
-
+	
 	IEnumerator startIADelayed()
 	{
 		yield return new WaitForSeconds(Random.Range(0f, 3f));
@@ -41,8 +41,8 @@ public class RobotAI : AIBaseController
 					Wander();
 				break;
 
-				case RobotAIStatus.Defend:
-					Defend();
+				case RobotAIStatus.Patrol:
+					Patrol();
 				break;
 
 				case RobotAIStatus.Attack:
@@ -88,9 +88,33 @@ public class RobotAI : AIBaseController
 		}
 	}
 
-	void Defend()
+	void Patrol()
 	{
 		//TODO: Patrullar una posicion
+		//TODO: Definir un tiempo de patrulla: 10s?
+		//TODO: Definir un radio maximo del area a patrullar
+		//TODO: Recorrer waypoints aleatorios dentro del radio durante el tiempo definido
+
+		if(statusWhenLastPosition != RobotAIStatus.Patrol)
+		{
+			statusWhenLastPosition = RobotAIStatus.Patrol;
+
+			patrolCounter = Time.time + 10;
+		}
+		else
+		{
+			if(Time.time < patrolCounter)
+			{
+				if(base.pathCompleted)
+				{
+					wlkToRandomPositionAround(patrolPosition, 3);
+				}
+			}
+			else
+			{
+				robotAIStatus = RobotAIStatus.Wander;
+			}
+		}
 
 		if(AIBaseController.humanInSight)
 		{
@@ -162,12 +186,12 @@ public class RobotAI : AIBaseController
 		}
 	}
 
-	//TODO: Testear esta mierda
 	void Scatter()
 	{
-		int contadorEsquina = 0;
 		if(statusWhenLastPosition != RobotAIStatus.Scatter)
 		{
+			int contadorEsquina = 0;
+	
 			statusWhenLastPosition = RobotAIStatus.Scatter;
 
 			for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length && i != base.player.id; i++)
@@ -177,9 +201,6 @@ public class RobotAI : AIBaseController
 					++contadorEsquina;
 				}
 			}
-
-
-			Debug.Log("VOy a la esquina " + contadorEsquina);
 
 			switch(contadorEsquina)
 			{

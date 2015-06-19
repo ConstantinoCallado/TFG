@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum RobotAIStatus {Wander, Defend, Attack, Search, Escape}
+public enum RobotAIStatus {Wander, Defend, Attack, Search, Escape, Scatter}
 
 public class RobotAI : AIBaseController 
 {
 	RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
+	RobotAIStatus statusWhenLastPosition = RobotAIStatus.Wander;
 	private float escapeCounter;
 	private Vector2 targetPosition;
 
@@ -55,6 +56,11 @@ public class RobotAI : AIBaseController
 				case RobotAIStatus.Escape:
 					Escape();
 				break;
+
+				case RobotAIStatus.Scatter:
+					Scatter();
+				break;
+				
 			}
 		}
 	}
@@ -77,6 +83,8 @@ public class RobotAI : AIBaseController
 		else if(base.pathCompleted)
 		{
 			wlkToRandomPositionAround(player.basicMovementServer.characterTransform.position, 8);
+
+			statusWhenLastPosition = robotAIStatus;
 		}
 	}
 
@@ -98,6 +106,8 @@ public class RobotAI : AIBaseController
 			{
 				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
 				base.CalculatePathTo(targetPosition);
+
+				statusWhenLastPosition = robotAIStatus;
 			}
 		}
 		else
@@ -106,6 +116,8 @@ public class RobotAI : AIBaseController
 			wlkToRandomPositionAround(AIBaseController.humanKnownPosition +
 			                          (AIBaseController.humanKnownPosition - (Vector2)player.basicMovementServer.characterTransform.position).normalized * 6,
 			                          3);
+
+			statusWhenLastPosition = robotAIStatus;
 		}
 	}
 
@@ -117,7 +129,8 @@ public class RobotAI : AIBaseController
 		}
 		else if(base.pathCompleted)
 		{
-			robotAIStatus = RobotAIStatus.Wander;
+
+			robotAIStatus = RobotAIStatus.Scatter;
 		}
 	}
 
@@ -128,6 +141,8 @@ public class RobotAI : AIBaseController
 			wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
 			                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 4,
 			                          	3);
+
+			statusWhenLastPosition = robotAIStatus;
 		}
 
 		if(AIBaseController.humanInSight)
@@ -143,7 +158,54 @@ public class RobotAI : AIBaseController
 		}
 		else if(Time.time > escapeCounter)
 		{
-			robotAIStatus = RobotAIStatus.Search;
+			robotAIStatus = RobotAIStatus.Wander;
+		}
+	}
+
+	//TODO: Testear esta mierda
+	void Scatter()
+	{
+		int contadorEsquina = 0;
+		if(statusWhenLastPosition != RobotAIStatus.Scatter)
+		{
+			statusWhenLastPosition = RobotAIStatus.Scatter;
+
+			for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length && i != base.player.id; i++)
+			{
+				if(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje != EnumPersonaje.Humano)
+				{
+					++contadorEsquina;
+				}
+			}
+
+
+			Debug.Log("VOy a la esquina " + contadorEsquina);
+
+			switch(contadorEsquina)
+			{
+				case 0:
+					wlkToRandomPositionAround(new Vector2(4,10), 0);
+					break;
+				
+				case 1:
+					wlkToRandomPositionAround(new Vector2(4,3), 0);
+					break;
+
+				case 2:
+					wlkToRandomPositionAround(new Vector2(15,10), 0);
+					break;
+				
+				case 3:
+					wlkToRandomPositionAround(new Vector2(15,3), 0);
+					break;
+			}
+		}
+		else
+		{
+			if(base.pathCompleted)
+			{
+				robotAIStatus = RobotAIStatus.Wander;
+			}
 		}
 	}
 

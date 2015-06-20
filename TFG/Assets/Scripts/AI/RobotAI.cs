@@ -90,11 +90,6 @@ public class RobotAI : AIBaseController
 
 	void Patrol()
 	{
-		//TODO: Patrullar una posicion
-		//TODO: Definir un tiempo de patrulla: 10s?
-		//TODO: Definir un radio maximo del area a patrullar
-		//TODO: Recorrer waypoints aleatorios dentro del radio durante el tiempo definido
-
 		if(statusWhenLastPosition != RobotAIStatus.Patrol)
 		{
 			statusWhenLastPosition = RobotAIStatus.Patrol;
@@ -228,26 +223,5 @@ public class RobotAI : AIBaseController
 				robotAIStatus = RobotAIStatus.Wander;
 			}
 		}
-	}
-
-	void wlkToRandomPositionAround(Vector2 center, short radius)
-	{
-		Vector2 posicionADevolver;
-		int contador = 0;
-		do
-		{
-			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
-
-			if(posicionADevolver.x < 0)
-			{
-				posicionADevolver.x = Scenario.tamanyoMapaX + posicionADevolver.x;
-			}
-			else if(posicionADevolver.x > Scenario.tamanyoMapaX)
-			{
-				posicionADevolver.x = posicionADevolver.x - Scenario.tamanyoMapaX;
-			}
-
-			++contador;
-		}while(!base.CalculatePathTo(posicionADevolver) && contador < 5);
 	}
 }

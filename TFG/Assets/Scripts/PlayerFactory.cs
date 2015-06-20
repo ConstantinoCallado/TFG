@@ -125,6 +125,8 @@ public class PlayerFactory : MonoBehaviour
 		{		
 			rigidbodyInstanciado.gravityScale = 0;
 			jugadorInst.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
+
+			jugadorInst.gameObject.AddComponent<HumanAI>();
 		}
 		else
 		{

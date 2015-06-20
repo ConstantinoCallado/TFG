@@ -176,4 +176,27 @@ public class AIBaseController : MonoBehaviour
 	{
 		return new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 	}
+
+	protected Vector2 wlkToRandomPositionAround(Vector2 center, short radius)
+	{
+		Vector2 posicionADevolver;
+		int contador = 0;
+		do
+		{
+			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
+			
+			if(posicionADevolver.x < 0)
+			{
+				posicionADevolver.x = Scenario.tamanyoMapaX + posicionADevolver.x;
+			}
+			else if(posicionADevolver.x > Scenario.tamanyoMapaX)
+			{
+				posicionADevolver.x = posicionADevolver.x - Scenario.tamanyoMapaX;
+			}
+			
+			++contador;
+		}while(!CalculatePathTo(posicionADevolver) && contador < 5);
+		
+		return posicionADevolver;
+	}
 }

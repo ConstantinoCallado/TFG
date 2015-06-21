@@ -23,7 +23,7 @@ public class NetworkManager : MonoBehaviour
 	
 	public static NetworkManager networkManagerRef;
 	
-	private string nombreJugador = "DefaultName";
+	public string nombreJugador = "DefaultName";
 	
 	private const bool dedicatedServer = false;
 	
@@ -37,13 +37,6 @@ public class NetworkManager : MonoBehaviour
 
 	private bool serverLaunched = false;
 
-	//TODO: DESACOPLAR ESTO DE AQUI, PLS
-	// Funcion para meter el nombre a pelo
-	public void entradaLocalNombre(string name)
-	{
-		nombreJugador = name;
-	}
-	
 	public void Awake()
 	{
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;

@@ -17,18 +17,17 @@ public class LobbyPlayerUIElement : MonoBehaviour
 	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, string nombrePersonaje, bool isReady)
 	{
 		textPlayerName.text = playerName;
-		textCharacterName.text = nombrePersonaje;
 
 		panelReady.enabled = isReady;
 
 		if(enumPersonaje != EnumPersonaje.Ninguno && !imageSetted)
 		{
 			imageSetted = true;
-			StartCoroutine(coritinaGirarCarta(enumPersonaje));
+			StartCoroutine(coritinaGirarCarta(enumPersonaje, nombrePersonaje));
 		}
 	}
 
-	public IEnumerator coritinaGirarCarta(EnumPersonaje enumPersonaje)
+	public IEnumerator coritinaGirarCarta(EnumPersonaje enumPersonaje, string nombrePersonaje)
 	{
 		float gradosGirados = 0;
 		float gradosAGirar = 0;
@@ -45,6 +44,7 @@ public class LobbyPlayerUIElement : MonoBehaviour
 		imageCharacter.sprite = AvatarManager.avatarManager.getAvatar(enumPersonaje);
 		imageCharacter.enabled = true;
 		textoInterrogacion.enabled = false;
+		textCharacterName.text = nombrePersonaje;
 
 		while(gradosGirados < 180)
 		{

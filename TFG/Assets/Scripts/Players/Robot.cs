@@ -5,6 +5,11 @@ public class Robot : Player
 {
 	public Sight sightScript;
 
+	public void Start()
+	{
+		base.playerGraphics.setRobot(GetColor());
+	}
+
 	public override void Initialize()
 	{
 		base.Initialize();

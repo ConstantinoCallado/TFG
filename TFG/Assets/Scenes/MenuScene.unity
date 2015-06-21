@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listaTexturasAvatares:
-  - {fileID: 21300000, guid: 1905ed13a140fc04fa2f431fb54a8019, type: 3}
+  - {fileID: 21300000, guid: 517d30636a0cbc7478d8d8b82af607ca, type: 3}
   - {fileID: 21300000, guid: ee1b7ada3696a6444b607dc4a53da54a, type: 3}
   - {fileID: 21300000, guid: f0a73f76e8562364b8ef8dbc525c55e9, type: 3}
   - {fileID: 21300000, guid: f5e586bb22188bf4b9326506c20a4466, type: 3}

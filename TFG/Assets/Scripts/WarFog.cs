@@ -6,7 +6,7 @@ public class WarFog : MonoBehaviour
 {
 	public bool actualIsHumanInSight = false;
 	public bool oldIsHumanInSight = false;
-
+	public static bool warfogEnabled = true;
 	[HideInInspector]
 	//public List<Sight> listaVisiones = new List<Sight>();
 	public static WarFog warFogRef;

@@ -7,8 +7,6 @@ public class HumanGraphics : MonoBehaviour
 
 	public Renderer[] renderersDeColores;
 
-	public bool testKilled = false;
-
 	public void SetAggressive (bool status)
 	{
 		if(status)
@@ -31,13 +29,11 @@ public class HumanGraphics : MonoBehaviour
 
 	public void Kill()
 	{
-		testKilled=true;
 		gameObject.transform.localScale = new Vector3(1.2f, 1.1f, 0.1f);
 	}
 
 	public void UnKill()
 	{
-		testKilled=false;
 		gameObject.transform.localScale = Vector3.one;
 	}
 }

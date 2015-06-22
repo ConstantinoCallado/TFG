@@ -37,6 +37,7 @@
 			//o.Alpha = 0;
 			//o.Albedo = statColor.rgb;			
 			//o.Albedo = _Color.rgb;
+			
 			o.Alpha = (1 - dinColor.g) - statColor.g/5; //green - color of aperture mask
 		}
 		ENDCG

@@ -27,12 +27,10 @@ public class PlayerGraphics : MonoBehaviour
 		if(humanGraphics != null)
 		{
 			humanGraphics.gameObject.SetActive(status);
-			//if(status) humanGraphics.UnKill();
 		}
 		if(robotGraphics != null)
 		{
 			robotGraphics.gameObject.SetActive(status);
-			//if(status) robotGraphics.UnKill();
 		}
 	}
 

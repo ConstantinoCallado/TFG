@@ -6,16 +6,19 @@ public class Sightable : MonoBehaviour
 	public short numberOfSighters = 0;
 	public GameObject gameObjectGraphics;
 
-	public virtual void Awake()
+	public virtual void Start()
 	{
-		gameObjectGraphics.SetActive(false);
+		if(WarFog.warfogEnabled)
+		{
+			gameObjectGraphics.SetActive(false);
+		}
 	}
 
 	public virtual void sightInRange()
 	{
 		++numberOfSighters;
 
-		if(numberOfSighters > 0)
+		if(numberOfSighters > 0 && WarFog.warfogEnabled)
 		{
 			gameObjectGraphics.SetActive(true);
 		}
@@ -25,7 +28,7 @@ public class Sightable : MonoBehaviour
 	{
 		--numberOfSighters;
 
-		if(numberOfSighters == 0)
+		if(numberOfSighters == 0 && WarFog.warfogEnabled)
 		{
 			gameObjectGraphics.SetActive(false);
 		}

@@ -4,23 +4,30 @@ using System.Collections;
 public class SightableHuman : Sightable 
 {
 	public Human humanRef;
-
-	//TODO: Si es el humano el que esta jugando: debe ver todo el mapa
-	public override void Awake()
-	{
-	}
+	private bool isInSight = false;
+	
 
 	void LateUpdate()
 	{
-		if(numberOfSighters > 0)
+		if(WarFog.warfogEnabled)
 		{
-			humanRef.playerGraphics.EnableGraphics(true);
+			if(numberOfSighters > 0)
+			{
+				if(!isInSight)
+				{
+					isInSight = true;
+					humanRef.playerGraphics.EnableGraphics(true);
+				}
+			}
+			else
+			{
+				if(isInSight)
+				{
+					isInSight = false;
+					humanRef.playerGraphics.EnableGraphics(false);
+				}
+			}
 		}
-		else
-		{
-			humanRef.playerGraphics.EnableGraphics(false);
-		}
-
 	}
 
 	public override void sightInRange()

@@ -466,6 +466,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9909b66c8ac91574792d4471c7c8d0c6, type: 2}
+    - target: {fileID: 100000, guid: 9b7e7be8e3b2f954eb896289e27e8495, type: 3}
+      propertyPath: m_Name
+      value: BlackPlane
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 9b7e7be8e3b2f954eb896289e27e8495, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 9b7e7be8e3b2f954eb896289e27e8495, type: 3}

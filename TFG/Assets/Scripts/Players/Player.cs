@@ -6,7 +6,7 @@ public enum EnumPersonaje {Ninguno, Humano, RobotRojo, RobotNaranja, RobotAzul, 
 public class Player : MonoBehaviour 
 {
 	public PlayerGraphics playerGraphics;
-	public float speed = 2f;
+	public float speed = 2.25f;
 	public Vector3 spawnPoint;
 	public bool isFreeze = false;
 	public bool isDead = false;
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 	{
 		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
 		Debug.Log("QUITANDO NIEBLA");
+		WarFog.warfogEnabled = false;
 	}
 
 	public void EnableIA (bool b)

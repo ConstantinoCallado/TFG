@@ -107,4 +107,6 @@ public class Human : Player
 
 		aggressiveMode = false;
 	}
+
+
 }

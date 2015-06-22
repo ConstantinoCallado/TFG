@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 158900, guid: d9fee07b52c155f479ca694f37421a84, type: 2}
   sightPrefab: {fileID: 198086, guid: 5f18c9cbe0db76044a74e9c2fe40b46e, type: 2}
+  sightableHumanPrefab: {fileID: 196724, guid: bb195a87309f1c4459d37f6b18e869c3, type: 2}
 --- !u!4 &1393391643
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actualIsHumanInSight: 0
   oldIsHumanInSight: 0
-  listaVisiones: []
 --- !u!1 &1459370736
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1459370737
 Transform:
   m_ObjectHideFlags: 0

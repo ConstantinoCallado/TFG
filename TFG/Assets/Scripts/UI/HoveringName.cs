@@ -18,12 +18,12 @@ public class HoveringName : MonoBehaviour
 
 	public void LateUpdate()
 	{
-			if(NameManager.nameManagerRef)
-			{
+		if(NameManager.nameManagerRef)
+		{
 			if(playerRef != null)
 			{
 				// Si el personaje lo controla un jugador y no esta muerto, dibujaremos el nombre encima de el
-				if(NetworkManager.networkManagerRef.listaJugadores[playerRef.id].activePlayer && !NetworkManager.networkManagerRef.listaJugadores[playerRef.id].player.isDead)
+				if(active && NetworkManager.networkManagerRef.listaJugadores[playerRef.id].activePlayer && !NetworkManager.networkManagerRef.listaJugadores[playerRef.id].player.isDead)
 				{
 					Vector2 ViewportPosition = mainCamera.WorldToViewportPoint(transformRef.position);
 					Vector2 WorldObject_ScreenPosition = new Vector2(
@@ -38,11 +38,6 @@ public class HoveringName : MonoBehaviour
 					NameManager.nameManagerRef.listaTextos[playerRef.id].text = "";
 				}
 				NameManager.nameManagerRef.listaTextos[playerRef.id].gameObject.SetActive(true);
-			}
-			else
-			{
-				NameManager.nameManagerRef.listaTextos[playerRef.id].text = "";
-				NameManager.nameManagerRef.listaTextos[playerRef.id].gameObject.SetActive(false);
 			}
 		}
 	}

@@ -23,15 +23,16 @@ public class PlayerGraphics : MonoBehaviour
 	public void EnableGraphics(bool status)
 	{
 		hoveringName.active = status;
+
 		if(humanGraphics != null)
 		{
 			humanGraphics.gameObject.SetActive(status);
-			if(status) humanGraphics.UnKill();
+			//if(status) humanGraphics.UnKill();
 		}
 		if(robotGraphics != null)
 		{
 			robotGraphics.gameObject.SetActive(status);
-			if(status) robotGraphics.UnKill();
+			//if(status) robotGraphics.UnKill();
 		}
 	}
 
@@ -39,6 +40,12 @@ public class PlayerGraphics : MonoBehaviour
 	{
 		if(humanGraphics != null) humanGraphics.Kill();
 		if(robotGraphics != null) robotGraphics.Kill();
+	}
+
+	public void Unkill ()
+	{
+		if(humanGraphics != null) humanGraphics.UnKill();
+		if(robotGraphics != null) robotGraphics.UnKill();
 	}
 
 	public void SetAggressive(bool status)

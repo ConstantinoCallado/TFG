@@ -6,6 +6,7 @@ public class Human : Player
 	public bool aggressiveMode = false;
 	float aggressiveTimeEnd = 0;
 	const float aggressiveTime = 8;
+	public SightableHuman sightable;
 
 	public static Human humanRef;
 
@@ -14,6 +15,8 @@ public class Human : Player
 		base.Awake();
 
 		humanRef = this;
+
+
 	}
 
 	public override void Initialize()
@@ -24,6 +27,9 @@ public class Human : Player
 		speed = 3f;
 		base.playerGraphics.setHuman();
 		gameObject.name = "Human";
+		sightable = gameObject.GetComponentInChildren<SightableHuman>();
+		sightable.humanRef = this;
+
 		Debug.Log("inicializado Humano");
 	}
 

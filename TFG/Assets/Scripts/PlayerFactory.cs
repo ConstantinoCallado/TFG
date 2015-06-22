@@ -7,7 +7,7 @@ public class PlayerFactory : MonoBehaviour
 
 	public GameObject playerPrefab;
 	public GameObject sightPrefab;
-
+	public GameObject sightableHumanPrefab;
 
 
 	public void Awake()
@@ -74,6 +74,13 @@ public class PlayerFactory : MonoBehaviour
 
 			sightInstanciado.transform.parent = gameObjectInstanciado.transform;
 			sightInstanciado.transform.position = gameObjectInstanciado.transform.position;
+		}
+		else
+		{
+			GameObject sightableInstanciado = GameObject.Instantiate(sightableHumanPrefab);
+			
+			sightableInstanciado.transform.parent = gameObjectInstanciado.transform;
+			sightableInstanciado.transform.position = gameObjectInstanciado.transform.position;
 		}
 		
 		return jugadorInstanciado;

@@ -8,7 +8,7 @@ public class WarFog : MonoBehaviour
 	public bool oldIsHumanInSight = false;
 
 	[HideInInspector]
-	public List<Sight> listaVisiones = new List<Sight>();
+	//public List<Sight> listaVisiones = new List<Sight>();
 	public static WarFog warFogRef;
 
 	public void Awake()
@@ -28,14 +28,13 @@ public class WarFog : MonoBehaviour
 	{
 		while(true)
 		{
-			actualIsHumanInSight = false;
-
-			for(int i=0; i<listaVisiones.Count && !actualIsHumanInSight; i++)
+			if(Human.humanRef.sightable.numberOfSighters > 0)
 			{
-				if(listaVisiones[i].isPlayerInSight(Human.humanRef.transform.position))
-				{
-					actualIsHumanInSight = true;
-				}
+				actualIsHumanInSight = true;
+			}
+			else
+			{
+				actualIsHumanInSight = false;
 			}
 
 			if(actualIsHumanInSight != oldIsHumanInSight)

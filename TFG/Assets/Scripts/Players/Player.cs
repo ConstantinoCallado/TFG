@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
 		isDead = false;
 		isFreeze = false;
 
-		playerGraphics.EnableGraphics(true);
+		playerGraphics.Unkill();
 
 		if(colliderJugador)
 		{

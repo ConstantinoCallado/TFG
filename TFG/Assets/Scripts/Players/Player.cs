@@ -99,7 +99,8 @@ public class Player : MonoBehaviour
 	{
 		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
 		Debug.Log("QUITANDO NIEBLA");
-		WarFog.warFogRef.warfogEnabled = false;
+
+		WarFog.warfogEnabled = false;
 	}
 
 	public void EnableIA (bool b)

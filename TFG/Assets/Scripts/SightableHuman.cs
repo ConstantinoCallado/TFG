@@ -13,7 +13,7 @@ public class SightableHuman : Sightable
 
 	void LateUpdate()
 	{
-		if(WarFog.warFogRef.warfogEnabled)
+		if(WarFog.warfogEnabled)
 		{
 			if(numberOfSighters > 0)
 			{

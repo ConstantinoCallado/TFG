@@ -113,11 +113,23 @@ public class HumanAI : AIBaseController
 		// Mientras este en modo agresivo se movera hacia los enemigos
 		if(Human.humanRef.aggressiveMode && GameManager.gameManager.robotsAlive > 0)
 		{
-			// Si la posicion objetivo difiere de la anterior recalculamos el camino
-			if((closestEnemyPosition - oldTargetPosition).sqrMagnitude > 0.9f)
+			if(((Vector2)base.player.basicMovementServer.characterTransform.position - closestEnemyPosition).sqrMagnitude > 4)
 			{
-				base.CalculatePathTo(closestEnemyPosition);
-				oldTargetPosition = closestEnemyPosition;
+				// Si la posicion objetivo difiere de la anterior recalculamos el camino
+				if((closestEnemyPosition - oldTargetPosition).sqrMagnitude > 2f)
+				{
+					base.CalculatePathTo(closestEnemyPosition);
+					oldTargetPosition = closestEnemyPosition;
+				}
+			}
+			else
+			{
+				// Si la posicion objetivo difiere de la anterior recalculamos el camino
+				if((closestEnemyPosition - oldTargetPosition).sqrMagnitude > 0.5f)
+				{
+					base.CalculatePathTo(closestEnemyPosition);
+					oldTargetPosition = closestEnemyPosition;
+				}
 			}
 		}
 		else

@@ -302,6 +302,7 @@ MonoBehaviour:
   playerFactory: {fileID: 1393391642}
   roundStarted: 0
   humanTries: 3
+  robotsAlive: 0
 --- !u!114 &1393391642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actualIsHumanInSight: 0
   oldIsHumanInSight: 0
+  warfogEnabled: 1
 --- !u!1 &1459370736
 GameObject:
   m_ObjectHideFlags: 0

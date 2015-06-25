@@ -98,7 +98,7 @@ public class LocalInput : MonoBehaviour
 					
 					difTapPosition = actualTapPosition - firstTapPosition;
 					
-					if(difTapPosition.magnitude > Screen.height / 10)
+					if(difTapPosition.magnitude > Screen.height / 15)
 					{
 						if(Mathf.Abs(difTapPosition.x) > Mathf.Abs(difTapPosition.y))
 						{

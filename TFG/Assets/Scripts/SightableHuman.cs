@@ -5,7 +5,11 @@ public class SightableHuman : Sightable
 {
 	public Human humanRef;
 	private bool isInSight = false;
-	
+
+	public override void Start()
+	{
+
+	}
 
 	void LateUpdate()
 	{

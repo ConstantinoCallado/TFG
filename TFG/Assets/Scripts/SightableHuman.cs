@@ -4,7 +4,7 @@ using System.Collections;
 public class SightableHuman : Sightable 
 {
 	public Human humanRef;
-	private bool isInSight = false;
+	public bool isInSight = true;
 
 	public override void Start()
 	{
@@ -13,7 +13,7 @@ public class SightableHuman : Sightable
 
 	void LateUpdate()
 	{
-		if(WarFog.warfogEnabled)
+		if(WarFog.warFogRef.warfogEnabled)
 		{
 			if(numberOfSighters > 0)
 			{

@@ -25,12 +25,14 @@ public class Robot : Player
 	public override void Kill()
 	{
 		base.Kill();
+		--GameManager.gameManager.robotsAlive;
 		sightScript.EnableSight(false);
 	}
 
 	public override void Respawn()
 	{
 		base.Respawn();
+		++GameManager.gameManager.robotsAlive;
 		sightScript.EnableSight(true);
 	}
 

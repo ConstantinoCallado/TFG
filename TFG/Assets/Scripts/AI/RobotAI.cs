@@ -121,7 +121,7 @@ public class RobotAI : AIBaseController
 	{
 		if(AIBaseController.humanInSight)
 		{
-			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 2)
+			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 0.9f)
 			{
 				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
 				base.CalculatePathTo(targetPosition);

@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
 	public PlayerFactory playerFactory;
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
-	public int humanTries = 3;
-	public const int timeRespawnRobot = 15;
+	public short humanTries = 3;
+	public short robotsAlive = 0;
+	public const short timeRespawnRobot = 15;
 
 	void Awake () 
 	{
@@ -63,6 +64,8 @@ public class GameManager : MonoBehaviour
 			{
 				NetworkManager.networkManagerRef.listaJugadores[i].player.Respawn();
 			}
+
+			robotsAlive = (short)(NetworkManager.networkManagerRef.listaJugadores.Length - 1);
 		}
 		else
 		{

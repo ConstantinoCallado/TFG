@@ -8,7 +8,7 @@ public class Sightable : MonoBehaviour
 
 	public virtual void Start()
 	{
-		if(WarFog.warfogEnabled)
+		if(WarFog.warFogRef.warfogEnabled)
 		{
 			gameObjectGraphics.SetActive(false);
 		}
@@ -18,7 +18,7 @@ public class Sightable : MonoBehaviour
 	{
 		++numberOfSighters;
 
-		if(numberOfSighters > 0 && WarFog.warfogEnabled)
+		if(numberOfSighters > 0 && WarFog.warFogRef.warfogEnabled)
 		{
 			gameObjectGraphics.SetActive(true);
 		}
@@ -28,7 +28,7 @@ public class Sightable : MonoBehaviour
 	{
 		--numberOfSighters;
 
-		if(numberOfSighters == 0 && WarFog.warfogEnabled)
+		if(numberOfSighters == 0 && WarFog.warFogRef.warfogEnabled)
 		{
 			gameObjectGraphics.SetActive(false);
 		}

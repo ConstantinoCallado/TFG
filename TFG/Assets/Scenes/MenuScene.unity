@@ -286,6 +286,7 @@ MonoBehaviour:
   panelNoInternet: {fileID: 1831827806}
   panelInternetRestringido: {fileID: 1744376746}
   panelSpinner: {fileID: 1701935180}
+  humanLifes: 3
 --- !u!4 &65600387
 Transform:
   m_ObjectHideFlags: 0

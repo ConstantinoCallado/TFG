@@ -53,8 +53,10 @@ public class GameManager : MonoBehaviour
 		// Si es el humano el que muere... tras 2 segundos respawneamos a todos
 		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
-			GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
-			--humanTries;
+			//GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
+			--NetworkManager.networkManagerRef.humanLifes;
+			NetworkManager.networkManagerRef.syncHumanLifes();
+
 			yield return new WaitForSeconds(2);
 
 			NetworkManager.networkManagerRef.listaJugadores[index].player.SetSpawnPoint(Scenario.scenarioRef.getRandomHumanSpawnPoint());
@@ -89,8 +91,8 @@ public class GameManager : MonoBehaviour
 		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
 			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
-			GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
-			--humanTries;
+			//GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
+			//--humanTries;
 
 			yield return new WaitForSeconds(2);
 

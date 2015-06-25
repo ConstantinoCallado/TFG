@@ -1,5 +1,5 @@
 ﻿#define jumpNetworkConnectionCheck
-//#define firstPlayerControlHuman
+#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;
@@ -36,6 +36,8 @@ public class NetworkManager : MonoBehaviour
 	public GameObject panelSpinner;
 
 	private bool serverLaunched = false;
+
+	public short humanLifes = 3;
 
 	public void Awake()
 	{
@@ -461,6 +463,8 @@ public class NetworkManager : MonoBehaviour
 				networkView.RPC("ctrl", networkPlayer, i);
 			}
 		}
+
+		syncHumanLifes(networkPlayer);
 	}
 
 	// Funcion que recibe un cliente para spawnear 
@@ -502,5 +506,22 @@ public class NetworkManager : MonoBehaviour
 	void pklld(int index)
 	{
 		GameManager.gameManager.KillPlayerClient(index);
+	}
+
+	public void syncHumanLifes()
+	{
+		networkView.RPC("sthumlif", RPCMode.Others, (int)humanLifes);
+	}
+
+	public void syncHumanLifes(NetworkPlayer networkPlayer)
+	{
+		networkView.RPC("sthumlif", networkPlayer, humanLifes);
+	}
+	
+	//RPC para sincronizar las vidas del humano con todos los clientes
+	[RPC]
+	void sthumlif(int number)
+	{
+		humanLifes = (short)number;
 	}
 }

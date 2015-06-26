@@ -4,18 +4,17 @@ using System.Collections;
 public class GameManager : MonoBehaviour 
 {
 	public static GameManager gameManager;
-	//public NetworkView networkView;
 	public PlayerFactory playerFactory;
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
-	public short humanTries = 3;
 	public short robotsAlive = 0;
 	public const short timeRespawnRobot = 15;
+	public short piezasRestantes = 32;
 
 	void Awake () 
 	{
 		gameManager = this;
-		
+	
 		if(Network.isServer)
 		{
 			SpawnearPersonajesEnServer();
@@ -55,7 +54,14 @@ public class GameManager : MonoBehaviour
 		{
 			//GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
 			--NetworkManager.networkManagerRef.humanLifes;
-			NetworkManager.networkManagerRef.syncHumanLifes();
+
+			if(NetworkManager.networkManagerRef.humanLifes == 0)
+			{
+				NetworkManager.networkManagerRef.TerminarPartida(false);
+			}
+
+			
+		   NetworkManager.networkManagerRef.syncHumanLifes();
 
 			yield return new WaitForSeconds(2);
 
@@ -111,4 +117,8 @@ public class GameManager : MonoBehaviour
 			NetworkManager.networkManagerRef.listaJugadores[index].player.Respawn();
 		}
 	}
+
+
+
+
 }

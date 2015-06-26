@@ -37,6 +37,7 @@ public class NetworkManager : MonoBehaviour
 
 	private bool serverLaunched = false;
 
+	//TODO: Desacoplar esto y moverlo a GameManager
 	public short humanLifes = 3;
 
 	public void Awake()
@@ -464,7 +465,7 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 
-		syncHumanLifes(networkPlayer);
+		networkView.RPC("sthumlif", networkPlayer, (int) humanLifes);
 	}
 
 	// Funcion que recibe un cliente para spawnear 
@@ -512,16 +513,33 @@ public class NetworkManager : MonoBehaviour
 	{
 		networkView.RPC("sthumlif", RPCMode.Others, (int)humanLifes);
 	}
-
-	public void syncHumanLifes(NetworkPlayer networkPlayer)
-	{
-		networkView.RPC("sthumlif", networkPlayer, humanLifes);
-	}
 	
 	//RPC para sincronizar las vidas del humano con todos los clientes
 	[RPC]
 	void sthumlif(int number)
 	{
 		humanLifes = (short)number;
+	}
+
+	// TODO: Enviar mas parametros (numero de muertes, piezas recogidas...)	
+	public void TerminarPartida (bool humanWin)
+	{
+		if(!humanWin)
+		{
+			EndMtch(0);
+			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 0);
+		}
+		else
+		{
+			EndMtch(1);
+			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 1);
+		}
+	}
+	
+	//RPC para terminar la partida
+	[RPC]
+	void EndMtch(int humanWin)
+	{
+		Application.LoadLevel("ScoreScene");
 	}
 }

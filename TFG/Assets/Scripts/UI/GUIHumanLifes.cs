@@ -21,7 +21,7 @@ public class GUIHumanLifes : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		for(int i=0; i < GameManager.gameManager.humanTries; i++)
+		for(int i=0; i < NetworkManager.networkManagerRef.humanLifes; i++)
 		{
 			AddLife();
 			++vidasInstanciadas;
@@ -44,8 +44,10 @@ public class GUIHumanLifes : MonoBehaviour
 				AddLife();
 				++vidasInstanciadas;
 			}
-
-			yield return new WaitForSeconds(0.4f);
+			else
+			{
+				yield return new WaitForSeconds(0.4f);
+			}
 		}
 	}
 

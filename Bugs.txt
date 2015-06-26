@@ -1,0 +1,1 @@
+- Cuando se une un nuevo jugador a veces se desactivan todas las IA

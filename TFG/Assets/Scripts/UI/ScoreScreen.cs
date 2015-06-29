@@ -15,7 +15,14 @@ public class ScoreScreen : MonoBehaviour
 
 
 	public void Start()
-	{
+	{	
+		if(Network.isServer)
+		{
+			MasterServer.UnregisterHost();
+		}
+
+		Network.Disconnect();
+
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 		{
 			listaDetallesJugadores[i].SetDetail(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje, 

@@ -147,21 +147,24 @@ public class NetworkManager : MonoBehaviour
 	// Evento que recibe el servidor al desconectarse un jugador (manualmente o con timeout)
 	void OnPlayerDisconnected(NetworkPlayer player) 
 	{
-		Network.RemoveRPCs(player);
-		Network.DestroyPlayerObjects(player);
-		
-		// Quitamos el jugador de nuestra lista de jugadores
-		for(int i=0; i<listaJugadores.Length; i++)
+		if(Application.loadedLevelName != "ScoreScene")
 		{
-			// Y cuando encontremos el que es lo descoenctamos
-			if(listaJugadores[i].networkPlayer == player)
+			Network.RemoveRPCs(player);
+			Network.DestroyPlayerObjects(player);
+			
+			// Quitamos el jugador de nuestra lista de jugadores
+			for(int i=0; i<listaJugadores.Length; i++)
 			{
-				Debug.Log(listaJugadores[i].playerName + " se ha desconectado"); 
-				listaJugadores[i].resetPlayer();
-				
-				// Notificamos a los clientes su desconexion
-				networkView.RPC("jugDescon", RPCMode.OthersBuffered, player, i);
-				break;
+				// Y cuando encontremos el que es lo descoenctamos
+				if(listaJugadores[i].networkPlayer == player)
+				{
+					Debug.Log(listaJugadores[i].playerName + " se ha desconectado"); 
+					listaJugadores[i].resetPlayer();
+					
+					// Notificamos a los clientes su desconexion
+					networkView.RPC("jugDescon", RPCMode.OthersBuffered, player, i);
+					break;
+				}
 			}
 		}
 	}
@@ -304,7 +307,10 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnDisconnectedFromServer(NetworkDisconnection info) 
 	{
-		Application.LoadLevel("MenuScene");
+		if(Application.loadedLevelName != "ScoreScene")
+		{
+			Application.LoadLevel("MenuScene");
+		}
 	}
 	
 	public void setPlayerReady (NetworkPlayer player)

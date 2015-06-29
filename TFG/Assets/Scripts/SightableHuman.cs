@@ -11,7 +11,7 @@ public class SightableHuman : Sightable
 
 	}
 
-	void LateUpdate()
+	void Update()
 	{
 		if(WarFog.warfogEnabled)
 		{

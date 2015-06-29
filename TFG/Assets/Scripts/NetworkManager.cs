@@ -1,5 +1,5 @@
 ﻿#define jumpNetworkConnectionCheck
-#define firstPlayerControlHuman
+//#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;
@@ -490,6 +490,7 @@ public class NetworkManager : MonoBehaviour
 	{
 		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
 		listaJugadores[playerIndex].player.localInput = listaJugadores[playerIndex].player.gameObject.GetComponent<LocalInput>();
+
 		if(listaJugadores[playerIndex].enumPersonaje == EnumPersonaje.Humano)
 		{
 			listaJugadores[playerIndex].player.RemoveFOW();

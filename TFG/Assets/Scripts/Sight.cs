@@ -8,11 +8,19 @@ public class Sight : MonoBehaviour
 	public float radius = 3;
 	public Transform transformRef;
 	public GameObject apertureFOW;
-
+	public MeshRenderer meshRing;
 	public HashSet<Sightable> sightablesInRange = new HashSet<Sightable>();
 
 	public CircleCollider2D sightCollider;
 
+
+	public void LateUpdate()
+	{
+		if(WarFog.warfogEnabled)
+		{
+			meshRing.gameObject.SetActive(false);
+		}
+	}
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
@@ -28,15 +36,22 @@ public class Sight : MonoBehaviour
 		sightablesInRange.Remove(sightableObject);
 	}
 
-	public void SetSight(float radius)
+	public void SetSight(float radius, Color color)
 	{
 		this.radius = radius;
 		apertureFOW.transform.localScale = new Vector3(radius * 2.4f, radius * 2.4f, 1);
+		meshRing.transform.localScale = new Vector3(radius, radius, 0);
+		meshRing.material.color = color;
+
 		sightCollider.radius = radius;
+
+		EnableSight(true);
 	}	                     
 
 	public void EnableSight(bool param)
 	{
+		meshRing.gameObject.SetActive(param);
+
 		apertureFOW.SetActive(param);
 		isEnabled = param;
 		sightCollider.enabled = param;

@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 	public bool roundStarted = false;
 	public short robotsAlive = 0;
 	public const short timeRespawnRobot = 15;
-	public short piezasRestantes = 32;
+	public short piezasRestantes = 0;
+	public short piezasRecogidas = 0;
+	public float tiempoInicial;
 
 	void Awake () 
 	{
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
 	
 		if(Network.isServer)
 		{
+			tiempoInicial = Time.time;
 			SpawnearPersonajesEnServer();
 		}
 		NotificarPartidaCargada();
@@ -41,14 +44,18 @@ public class GameManager : MonoBehaviour
 		NetworkManager.networkManagerRef.NotificarPartidaCargada();
 	}
 
-	public void KillPlayerServer(int index)
+	public void KillPlayerServer(int killed, int killer)
 	{
-		NetworkManager.networkManagerRef.NotificarJugadorMatado(index);
-		StartCoroutine(coroutineKillPlayerServer(index));
+		++NetworkManager.networkManagerRef.listaJugadores[killed].deaths;
+		++NetworkManager.networkManagerRef.listaJugadores[killer].kills;
+
+		NetworkManager.networkManagerRef.NotificarJugadorMatado(killed, killer);
+		StartCoroutine(coroutineKillPlayerServer(killed));
 	}
 
 	public IEnumerator coroutineKillPlayerServer(int index)
 	{
+
 		// Si es el humano el que muere... tras 2 segundos respawneamos a todos
 		if(NetworkManager.networkManagerRef.listaJugadores[index].enumPersonaje == EnumPersonaje.Humano)
 		{
@@ -57,7 +64,7 @@ public class GameManager : MonoBehaviour
 
 			if(NetworkManager.networkManagerRef.humanLifes == 0)
 			{
-				NetworkManager.networkManagerRef.TerminarPartida(false);
+				NetworkManager.networkManagerRef.TerminarPartida(false, Time.time - 	tiempoInicial, piezasRestantes, piezasRecogidas);
 			}
 
 			
@@ -85,10 +92,13 @@ public class GameManager : MonoBehaviour
 			}
 		}
 	}
-	
-	public void KillPlayerClient(int index)
+
+
+	public void KillPlayerClient(int killed, int killer)
 	{	
-		StartCoroutine(coroutineKillPlayerClient(index));
+		++NetworkManager.networkManagerRef.listaJugadores[killed].deaths;
+		++NetworkManager.networkManagerRef.listaJugadores[killer].kills;
+		StartCoroutine(coroutineKillPlayerClient(killed));
 	}
 
 	public IEnumerator coroutineKillPlayerClient(int index)
@@ -118,7 +128,13 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-
-
-
+	public void RecogerPieza ()
+	{
+		++piezasRecogidas;
+		--piezasRestantes;
+		if(piezasRestantes == 0)
+		{
+			NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, piezasRecogidas);
+		}
+	}
 }

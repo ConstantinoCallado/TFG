@@ -1,5 +1,5 @@
 ﻿#define jumpNetworkConnectionCheck
-//#define firstPlayerControlHuman
+#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;
@@ -39,6 +39,12 @@ public class NetworkManager : MonoBehaviour
 
 	//TODO: Desacoplar esto y moverlo a GameManager
 	public short humanLifes = 3;
+
+
+	public short piezasRecogidas;
+	public short piezasRestantes;
+	public float tiempoPartida;
+	public bool humanWin = false;
 
 	public void Awake()
 	{
@@ -488,6 +494,8 @@ public class NetworkManager : MonoBehaviour
 		{
 			listaJugadores[playerIndex].player.RemoveFOW();
 		}
+
+		listaJugadores[playerIndex].ownByClient = true;
 	}
 
 	// Funcion que envia a los jugadores la informacion del servidor 
@@ -497,16 +505,16 @@ public class NetworkManager : MonoBehaviour
 		this.networkPlayerServer = networkPlayerServer;
 	}
 
-	public void NotificarJugadorMatado (int index)
+	public void NotificarJugadorMatado (int killed, int killer)
 	{
-		networkView.RPC("pklld", RPCMode.Others, index);
+		networkView.RPC("pklld", RPCMode.Others, killed, killer);
 	}
 	
 	// Funcion que envia a los jugadores la informacion del servidor 
 	[RPC]
-	void pklld(int index)
+	void pklld(int killed, int killer)
 	{
-		GameManager.gameManager.KillPlayerClient(index);
+		GameManager.gameManager.KillPlayerClient(killed, killer);
 	}
 
 	public void syncHumanLifes()
@@ -521,25 +529,30 @@ public class NetworkManager : MonoBehaviour
 		humanLifes = (short)number;
 	}
 
-	// TODO: Enviar mas parametros (numero de muertes, piezas recogidas...)	
-	public void TerminarPartida (bool humanWin)
+
+	public void TerminarPartida (bool humanWin, float time, int piezasRestantes, int piezasRecogidas)
 	{
 		if(!humanWin)
 		{
-			EndMtch(0);
-			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 0);
+			EndMtch(0, time, piezasRestantes, piezasRecogidas);
+			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 0, time, piezasRestantes, piezasRecogidas);
 		}
 		else
 		{
-			EndMtch(1);
-			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 1);
+			EndMtch(1, time, piezasRestantes, piezasRecogidas);
+			networkView.RPC("EndMtch", RPCMode.OthersBuffered, 1, time, piezasRestantes, piezasRecogidas);
 		}
 	}
 	
 	//RPC para terminar la partida
 	[RPC]
-	void EndMtch(int humanWin)
+	void EndMtch(int humanWin, float time, int piezasRestantes, int piezasRecogidas)
 	{
+		if(humanWin != 0) this.humanWin = true;
+
+		this.piezasRecogidas = (short)piezasRecogidas;
+		this.piezasRestantes = (short)piezasRestantes;
+		tiempoPartida = time;
 		Application.LoadLevel("ScoreScene");
 	}
 }

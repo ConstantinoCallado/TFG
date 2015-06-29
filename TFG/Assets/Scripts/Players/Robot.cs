@@ -53,7 +53,7 @@ public class Robot : Player
 
 		if(other.gameObject.GetComponent<Human>().aggressiveMode)
 		{
-			GameManager.gameManager.KillPlayerServer(base.id);
+			GameManager.gameManager.KillPlayerServer(base.id, Human.humanRef.id);
 			Kill();
 		}
 	}

@@ -250,36 +250,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listaJugadores:
-  - playerName: IA
+  - playerName: Bot
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
     index: 0
-  - playerName: IA
+    kills: 0
+    deaths: 0
+    ownByClient: 0
+  - playerName: Bot
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
     index: 0
-  - playerName: IA
+    kills: 0
+    deaths: 0
+    ownByClient: 0
+  - playerName: Bot
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
     index: 0
-  - playerName: IA
+    kills: 0
+    deaths: 0
+    ownByClient: 0
+  - playerName: Bot
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
     index: 0
-  - playerName: IA
+    kills: 0
+    deaths: 0
+    ownByClient: 0
+  - playerName: Bot
     activePlayer: 0
     isReady: 1
     player: {fileID: 0}
     enumPersonaje: 0
     index: 0
+    kills: 0
+    deaths: 0
+    ownByClient: 0
   networkView: {fileID: 65600388}
   nombreJugador: DefaultName
   panelNoPartidasEncontradas: {fileID: 1159511058}
@@ -287,6 +302,10 @@ MonoBehaviour:
   panelInternetRestringido: {fileID: 1744376746}
   panelSpinner: {fileID: 1701935180}
   humanLifes: 3
+  piezasRecogidas: 0
+  piezasRestantes: 0
+  tiempoPartida: 0
+  humanWin: 0
 --- !u!4 &65600387
 Transform:
   m_ObjectHideFlags: 0

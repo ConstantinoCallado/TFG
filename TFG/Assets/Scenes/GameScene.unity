@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabWeapon: {fileID: 170798, guid: 159ca48260f8b9a40a708d323f88523c, type: 2}
   prefabPiece: {fileID: 104322, guid: 8f301eb8cf6785749bd981b8658ea34b, type: 2}
+  gameManager: {fileID: 1393391641}
   robotSpawnPoints:
   - {x: 9, y: 7}
   - {x: 9, y: 6}
@@ -302,7 +303,9 @@ MonoBehaviour:
   playerFactory: {fileID: 1393391642}
   roundStarted: 0
   robotsAlive: 0
-  piezasRestantes: 32
+  piezasRestantes: 0
+  piezasRecogidas: 0
+  tiempoInicial: 0
 --- !u!114 &1393391642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1459370737
 Transform:
   m_ObjectHideFlags: 0

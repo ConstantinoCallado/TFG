@@ -41,6 +41,7 @@ public class Human : Player
 			//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
 			//TODO: Hacer un objeto que cada 5 segundos envie de Servidor a cliente el estado de todas las bolitas
 				// SI hay 32 bolitas o menos se pueden serializar en un solo entero de 32 bits
+			GameManager.gameManager.RecogerPieza();
 			Destroy(other.gameObject);
 		}
 		// Si estamos en el servidor comprobamos la colision con los robots y las armas
@@ -56,14 +57,15 @@ public class Human : Player
 					{
 						base.Kill();
 						
-						GameManager.gameManager.KillPlayerServer(base.id);
+						GameManager.gameManager.KillPlayerServer(base.id, other.GetComponent<Player>().id);
 					}
 				}
 			}
 			else if(other.tag == "Weapon")
 			{
 				pickUpAggressive();
-				
+				GameManager.gameManager.RecogerPieza();
+
 				//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
 				Destroy(other.gameObject);
 			}
@@ -72,7 +74,8 @@ public class Human : Player
 		{
 			if(other.tag == "Weapon")
 			{
-				
+				//GameManager.gameManager.RecogerPieza();
+
 				//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
 				Destroy(other.gameObject);
 			}

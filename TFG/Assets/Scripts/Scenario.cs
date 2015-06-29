@@ -13,6 +13,7 @@ public class Scenario : MonoBehaviour
 	public GameObject prefabPiece;
 	public const int tamanyoMapaX = 20;
 	public const int tamanyoMapaY = 14;
+	public GameManager gameManager;
 
 	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] 
 	{
@@ -70,6 +71,8 @@ public class Scenario : MonoBehaviour
 					{
 						gameObjectInstanciado = GameObject.Instantiate(prefabWeapon);
 					}
+
+					++gameManager.piezasRestantes;
 
 					gameObjectInstanciado.transform.position = new Vector3(j, i, 0);
 					gameObjectInstanciado.transform.parent = transform;

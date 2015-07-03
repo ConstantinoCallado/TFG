@@ -1,4 +1,4 @@
-﻿#define jumpNetworkConnectionCheck
+#define jumpNetworkConnectionCheck
 //#define firstPlayerControlHuman
 
 using UnityEngine;

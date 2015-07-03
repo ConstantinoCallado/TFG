@@ -27,8 +27,9 @@ GameObject:
   - 224: {fileID: 22415388}
   - 222: {fileID: 22272658}
   - 114: {fileID: 11434378}
+  - 111: {fileID: 11135800}
   m_Layer: 5
-  m_Name: PanelAvatar
+  m_Name: PanelCarta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +45,7 @@ GameObject:
   - 224: {fileID: 22402830}
   - 222: {fileID: 22213848}
   - 114: {fileID: 11409484}
+  - 95: {fileID: 9570760}
   m_Layer: 5
   m_Name: Interrogacion
   m_TagString: Untagged
@@ -138,6 +140,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &9570760
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98801c785f4be5b4c87c393f99ee4248, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!111 &11135800
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111794}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 257db0e092681104fb2393881c40279a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 257db0e092681104fb2393881c40279a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11400294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +370,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: 180
-  m_PreferredHeight: -1
+  m_PreferredHeight: 290
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
 --- !u!114 &11495760
@@ -356,6 +390,7 @@ MonoBehaviour:
   textoInterrogacion: {fileID: 11409484}
   panelReady: {fileID: 11466720}
   panelAvatar: {fileID: 111794}
+  animationCard: {fileID: 11135800}
 --- !u!222 &22204504
 CanvasRenderer:
   m_ObjectHideFlags: 1

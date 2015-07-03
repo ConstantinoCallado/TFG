@@ -32,7 +32,7 @@ public class LobbyManager : MonoBehaviour
 				                                    NetworkManager.networkManagerRef.listaJugadores[i].isReady);
 			}
 
-			yield return new WaitForSeconds(.2f);
+			yield return new WaitForSeconds(.1f);
 		}
 	}
 

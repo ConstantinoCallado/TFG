@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define vidasInfinitas
+
+using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour 
@@ -8,7 +10,7 @@ public class GameManager : MonoBehaviour
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
 	public short robotsAlive = 0;
-	public const short timeRespawnRobot = 15;
+	public const short timeRespawnRobot = 10;
 	public short piezasRestantes = 0;
 	public short piezasRecogidas = 0;
 	public float tiempoInicial;
@@ -62,11 +64,12 @@ public class GameManager : MonoBehaviour
 			//GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
 			--NetworkManager.networkManagerRef.humanLifes;
 
+			#if !vidasInfinitas
 			if(NetworkManager.networkManagerRef.humanLifes == 0)
 			{
 				NetworkManager.networkManagerRef.TerminarPartida(false, Time.time - 	tiempoInicial, piezasRestantes, piezasRecogidas);
 			}
-
+			#endif
 			
 		   NetworkManager.networkManagerRef.syncHumanLifes();
 

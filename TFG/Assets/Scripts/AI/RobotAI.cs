@@ -5,12 +5,12 @@ public enum RobotAIStatus {Wander, Patrol, Attack, Search, Escape, Scatter}
 
 public class RobotAI : AIBaseController 
 {
-	RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
+	public RobotAIStatus robotAIStatus = RobotAIStatus.Wander;
 	RobotAIStatus statusWhenLastPosition = RobotAIStatus.Wander;
 	private float patrolCounter;
 	private Vector2 patrolPosition;
 	private float escapeCounter;
-	private Vector2 targetPosition;
+	public Vector2 targetPosition;
 
 
 	void Start()
@@ -59,9 +59,18 @@ public class RobotAI : AIBaseController
 
 				case RobotAIStatus.Scatter:
 					Scatter();
-				break;
-				
+				break;	
 			}
+
+			PostAI();
+		}
+	}
+
+	void PostAI()
+	{
+		if(robotAIStatus != RobotAIStatus.Attack)
+		{
+			targetPosition = new Vector2(999,999);
 		}
 	}
 
@@ -121,7 +130,7 @@ public class RobotAI : AIBaseController
 	{
 		if(AIBaseController.humanInSight)
 		{
-			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 0.9f)
+			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 0.2f)
 			{
 				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
 				base.CalculatePathTo(targetPosition);
@@ -132,9 +141,7 @@ public class RobotAI : AIBaseController
 		else
 		{
 			robotAIStatus = RobotAIStatus.Search;
-			wlkToRandomPositionAround(AIBaseController.humanKnownPosition +
-			                          (AIBaseController.humanKnownPosition - (Vector2)player.basicMovementServer.characterTransform.position).normalized * 6,
-			                          3);
+			wlkToRandomPositionAround(AIBaseController.humanKnownPosition, 4);
 
 			statusWhenLastPosition = robotAIStatus;
 		}
@@ -155,6 +162,7 @@ public class RobotAI : AIBaseController
 
 	void Escape()
 	{
+		//TODO: Recalcula el camino con demasiada frecuencia, subir el umbral (o algo asi)
 		if(base.pathCompleted)
 		{
 			wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +

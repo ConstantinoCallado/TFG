@@ -94,7 +94,7 @@ public class HumanAI : AIBaseController
 
 				if(base.pathCompleted || repulsionVector.sqrMagnitude > 1f)
 				{
-					evadeTarget = base.wlkToRandomPositionAround((Vector2)base.player.basicMovementServer.characterTransform.position + (repulsionVector * 4), (short)(3/repulsionVector.magnitude));
+					evadeTarget = base.wlkToRandomPositionAround((Vector2)base.player.basicMovementServer.characterTransform.position + (repulsionVector.normalized * 6), 3);
 				}
 			}
 			else
@@ -153,6 +153,7 @@ public class HumanAI : AIBaseController
 			else
 			{
 				humanAIStatus = HumanAIStatus.Evade;
+				base.ClearPath();
 			}
 		}
 		else if(GameManager.gameManager.robotsAlive > 0)

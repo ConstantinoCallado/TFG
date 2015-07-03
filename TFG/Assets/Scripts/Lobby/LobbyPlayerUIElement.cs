@@ -13,46 +13,35 @@ public class LobbyPlayerUIElement : MonoBehaviour
 
 	private bool imageSetted = false;
 
+	public Animation animationCard;
+	public static float lastTimeFlipped;
 
 	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, string nombrePersonaje, bool isReady)
 	{
 		textPlayerName.text = playerName;
 
-		panelReady.enabled = isReady;
-
-		if(enumPersonaje != EnumPersonaje.Ninguno && !imageSetted)
+		if(panelReady.enabled != isReady)
 		{
+			panelReady.enabled = isReady;
+		}
+
+		if(!imageSetted && enumPersonaje != EnumPersonaje.Ninguno && Time.time >= lastTimeFlipped)
+		{
+			lastTimeFlipped = Time.time + 0.25f;
 			imageSetted = true;
-			StartCoroutine(coritinaGirarCarta(enumPersonaje, nombrePersonaje));
+			animationCard.Play();
+			StartCoroutine(corutinaPonerImagen(enumPersonaje, nombrePersonaje));
+			//StartCoroutine(coritinaGirarCarta(enumPersonaje, nombrePersonaje));
 		}
 	}
 
-	public IEnumerator coritinaGirarCarta(EnumPersonaje enumPersonaje, string nombrePersonaje)
+	public IEnumerator corutinaPonerImagen(EnumPersonaje enumPersonaje, string nombrePersonaje)
 	{
-		float gradosGirados = 0;
-		float gradosAGirar = 0;
-
-		while(gradosGirados < 90)
-		{
-			gradosAGirar = Mathf.Min((90 - gradosGirados), 250 * Time.deltaTime);
-			panelAvatar.transform.Rotate(new Vector3(0, gradosAGirar, 0));
-			gradosGirados += gradosAGirar;
-
-			yield return new WaitForEndOfFrame();
-		}
+		yield return new WaitForSeconds(animationCard.clip.length/2);
 
 		imageCharacter.sprite = AvatarManager.avatarManager.getAvatar(enumPersonaje);
 		imageCharacter.enabled = true;
 		textoInterrogacion.enabled = false;
 		textCharacterName.text = nombrePersonaje;
-
-		while(gradosGirados < 180)
-		{
-			gradosAGirar = Mathf.Min((180 - gradosGirados), 250 * Time.deltaTime);
-			panelAvatar.transform.Rotate(new Vector3(0, gradosAGirar, 0));
-			gradosGirados += gradosAGirar;
-
-			yield return new WaitForEndOfFrame();
-		}
 	}
 }

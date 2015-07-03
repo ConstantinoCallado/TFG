@@ -38,7 +38,7 @@ public class NetworkManager : MonoBehaviour
 	private bool serverLaunched = false;
 
 	//TODO: Desacoplar esto y moverlo a GameManager
-	public short humanLifes = 3;
+	public short humanLifes = 5;
 
 
 	public short piezasRecogidas;
@@ -402,7 +402,7 @@ public class NetworkManager : MonoBehaviour
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
 				listaPersonajes.RemoveAt(randomCharacterIndex);
-				yield return new WaitForSeconds(0.25f);
+				yield return new WaitForSeconds(0.1f);
 			}
 		}
 		

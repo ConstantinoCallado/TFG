@@ -9,11 +9,11 @@ public class AIBaseController : MonoBehaviour
 	private SortedNodeList listaNodosAExplorar = new SortedNodeList();
 
 	private short indexObjetivo = 0;
-	protected List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
+	public List<Vector2> colaPosicionesObjetivo = new List<Vector2>();
 	protected Player player;
 
-	protected bool pathCompleted = true;
-	protected bool pathCalculated = false;
+	public bool pathCompleted = true;
+	public bool pathCalculated = false;
 
 	private Vector2 movementVector;
 
@@ -139,6 +139,25 @@ public class AIBaseController : MonoBehaviour
 		ClearPath();
 		pathCalculated = false;
 
+		
+		if(targetPosition.x < 0)
+		{
+			targetPosition.x = Scenario.tamanyoMapaX + targetPosition.x;
+		}
+		else if(targetPosition.x > Scenario.tamanyoMapaX)
+		{
+			targetPosition.x = targetPosition.x - Scenario.tamanyoMapaX;
+		}
+		
+		if(targetPosition.y < 2)
+		{
+			targetPosition.y = 2;
+		}
+		else if(targetPosition.y > Scenario.tamanyoMapaY -2)
+		{
+			targetPosition.y = Scenario.tamanyoMapaY - 2;
+		}
+
 		PathfindingNode nodoInicial = new PathfindingNode(redondearPosicion(player.basicMovementServer.characterTransform.position), 0, null, redondearPosicion(targetPosition));
 
 		// Si la posicion a ir esta vacia...
@@ -165,10 +184,13 @@ public class AIBaseController : MonoBehaviour
 					nodoFinal = nodoFinal.parent;
 				}
 
+//				Debug.Log(transform.gameObject.name + " ha calculado camino hasta " + targetPosition);
 				return true;
 			}
 		}
 
+
+//		Debug.Log(transform.gameObject.name + " ha fallado el camino hasta " + targetPosition);
 		return false;
 	}
 
@@ -184,18 +206,10 @@ public class AIBaseController : MonoBehaviour
 		do
 		{
 			posicionADevolver = new Vector2((int)(center.x + Random.Range(-radius, radius)), (int)(center.y + Random.Range(-radius, radius)));
-			
-			if(posicionADevolver.x < 0)
-			{
-				posicionADevolver.x = Scenario.tamanyoMapaX + posicionADevolver.x;
-			}
-			else if(posicionADevolver.x > Scenario.tamanyoMapaX)
-			{
-				posicionADevolver.x = posicionADevolver.x - Scenario.tamanyoMapaX;
-			}
-			
+
 			++contador;
-		}while(!CalculatePathTo(posicionADevolver) && contador < 5);
+
+		}while(!CalculatePathTo(posicionADevolver) && contador < 10);
 		
 		return posicionADevolver;
 	}

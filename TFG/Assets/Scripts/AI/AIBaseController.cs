@@ -38,9 +38,10 @@ public class AIBaseController : MonoBehaviour
 
 	public IEnumerator corutinaRandomSkill()
 	{
+		yield return new WaitForSeconds(1);
 		while(true)
 		{
-			if(Random.Range(0, 100) > 70)
+			if(this.enabled && Random.Range(0, 100) > 80)
 			{
 				player.skll();
 			}

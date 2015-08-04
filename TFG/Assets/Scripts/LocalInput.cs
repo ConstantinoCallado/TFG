@@ -112,6 +112,11 @@ public class LocalInput : MonoBehaviour
 			{
 				enumMovimiento = (int)EnumMovimiento.Down;
 			}
+
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				ClickPower();
+			}
 		#else
 			if(Input.GetButton("Fire1"))
 			{

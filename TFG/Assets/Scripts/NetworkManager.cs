@@ -400,7 +400,7 @@ public class NetworkManager : MonoBehaviour
 				
 				//listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 
-				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotRojo;
+				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotNaranja;
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
 				listaPersonajes.RemoveAt(randomCharacterIndex);

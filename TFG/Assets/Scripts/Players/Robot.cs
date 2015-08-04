@@ -57,4 +57,14 @@ public class Robot : Player
 			Kill();
 		}
 	}
+
+	public override float GetCoolDownTime()
+	{
+		return 30;
+	}
+	
+	public override void ActivatePower()
+	{
+		Debug.Log("ROBOT ACTIVANDO HABILIDAD");
+	}
 }

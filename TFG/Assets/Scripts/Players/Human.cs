@@ -7,7 +7,7 @@ public class Human : Player
 	float aggressiveTimeEnd = 0;
 	const float aggressiveTime = 8;
 	public SightableHuman sightable;
-
+	
 	public static Human humanRef;
 
 	public void Awake()
@@ -15,8 +15,6 @@ public class Human : Player
 		base.Awake();
 
 		humanRef = this;
-
-
 	}
 
 	public override void Initialize()
@@ -110,6 +108,14 @@ public class Human : Player
 
 		aggressiveMode = false;
 	}
+	
+	public override float GetCoolDownTime()
+	{
+		return 40;
+	}
 
-
+	public override void ActivatePower()
+	{
+		Debug.Log("HUMANO ACTIVANDO HABILIDAD");
+	}
 }

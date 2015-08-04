@@ -5,7 +5,7 @@ public class RobotGraphics : MonoBehaviour
 {
 	public Renderer[] renderersDeColores;
 	public Animator animator;
-
+	public Material materialTrail;
 	public GameObject particulasMuerto;
 
 	public void setColor(Color color)
@@ -15,6 +15,8 @@ public class RobotGraphics : MonoBehaviour
 		{
 			renderersDeColores[i].material.color = color;
 		}
+
+		materialTrail.color = color;
 	}
 
 	public void Kill()

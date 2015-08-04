@@ -12,6 +12,7 @@ public class LocalInput : MonoBehaviour
 	BasicMovementServer movementRef;
 	private string methodName = "";
 
+	public static LocalInput localInputRef;
 
 	#if !UNITY_STANDALONE && !UNITY_STANDALONE_OSX 
 	Vector2 firstTapPosition;
@@ -24,10 +25,32 @@ public class LocalInput : MonoBehaviour
 	{
 		networkView = GetComponent<NetworkView>();
 		cameraRef = Camera.main;
+		localInputRef = this;
 
 		if(Network.isServer)
 		{
 			movementRef = gameObject.GetComponent<BasicMovementServer>();
+		}
+	}
+
+	public void ClickPower()
+	{
+		if(Time.time >= movementRef.player.skillCoolDown)
+		{
+			if(!movementRef)
+			{
+				networkView.RPC("skll", RPCMode.Server);
+			}
+			else
+			{
+				movementRef.player.skll();
+			}
+
+			SkillButton.skillButtonRef.SetCoolDown(movementRef.player.GetCoolDownTime());
+		}
+		else
+		{
+			Debug.Log("AUN NO HA PASADO EL COOLDOWN");
 		}
 	}
 
@@ -161,6 +184,13 @@ public class LocalInput : MonoBehaviour
 	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PAR ACTUALIZAR MOVIMIENTO
 	[RPC]
 	void d()
+	{
+		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
+	}
+
+	// PLANTILLA DE FUNCION QUE SE ENVIARA AL SERVIDOR PARA ACTIVAR UNA SKILL
+	[RPC]
+	void skll()
 	{
 		Debug.Log("LA FUNCION SE IMPLEMENTA EN EL SERVIDOR");
 	}

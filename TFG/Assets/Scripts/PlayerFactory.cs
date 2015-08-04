@@ -9,7 +9,6 @@ public class PlayerFactory : MonoBehaviour
 	public GameObject sightPrefab;
 	public GameObject sightableHumanPrefab;
 
-
 	public void Awake()
 	{
 		playerFactoryRef = this;

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	public BasicMovementServer basicMovementServer;
 	public AIBaseController AIBase;
 
+	public float skillCoolDown;
 
 	public void Awake()
 	{
@@ -90,6 +91,11 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	public virtual float GetCoolDownTime()
+	{
+		return 30;
+	}
+
 	public virtual void ActivatePower()
 	{
 		Debug.Log("La clase hija deberia sobreescribir este metodo");
@@ -106,5 +112,23 @@ public class Player : MonoBehaviour
 	public void EnableIA (bool b)
 	{
 		throw new System.NotImplementedException ();
+	}
+	
+	[RPC]
+	public void skll()
+	{
+		if(Time.time >= skillCoolDown)
+		{
+			skillCoolDown = Time.time + GetCoolDownTime();
+			// Activamos la habilidad en el servidor
+			ActivatePower();
+
+			// La "broadcasteamos" a todos los clientes
+			NetworkManager.networkManagerRef.BroadcastSkill(id);
+		}
+		else
+		{
+			Debug.Log("AUN NO HA PASADO EL COOLDOWN");
+		}
 	}
 }

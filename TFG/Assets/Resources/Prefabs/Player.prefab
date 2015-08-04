@@ -390,7 +390,6 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 2395742}
-  testKilled: 0
 --- !u!114 &11421750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,6 +431,7 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 2363234}
   animator: {fileID: 9537198}
+  materialTrail: {fileID: 2100000, guid: 619418ae0c21d4d4f93b04a716b64a8c, type: 2}
   particulasMuerto: {fileID: 156548}
 --- !u!198 &19887216
 ParticleSystem:

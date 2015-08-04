@@ -33,6 +33,20 @@ public class AIBaseController : MonoBehaviour
 	protected void Start()
 	{
 		StartCoroutine(corutinaIrASiguientePosicion());
+		StartCoroutine(corutinaRandomSkill());
+	}
+
+	public IEnumerator corutinaRandomSkill()
+	{
+		while(true)
+		{
+			if(Random.Range(0, 100) > 70)
+			{
+				player.skll();
+			}
+
+			yield return new WaitForSeconds(2);
+		}
 	}
 
 	//TODO: Comprobar muros u obstaculos por el camino

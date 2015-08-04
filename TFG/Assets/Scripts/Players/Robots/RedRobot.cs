@@ -19,7 +19,7 @@ public class RedRobot : Robot
 		trailRenderer.startWidth = 0.4f;
 		trailRenderer.endWidth = 0;
 		trailRenderer.material = playerGraphics.robotGraphics.materialTrail;
-
+		trailRenderer.material.color = playerGraphics.robotGraphics.renderersDeColores[0].material.color;
 		//trailRenderer.material.color = playerGraphics.robotGraphics.renderersDeColores[0].material.color;
 		Debug.Log("Inicializando robot rojo");
 	}

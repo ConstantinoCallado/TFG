@@ -60,7 +60,7 @@ public class Robot : Player
 
 	public override float GetCoolDownTime()
 	{
-		return 30;
+		return 10;
 	}
 	
 	public override void ActivatePower()

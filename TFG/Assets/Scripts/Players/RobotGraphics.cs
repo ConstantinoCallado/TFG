@@ -8,6 +8,7 @@ public class RobotGraphics : MonoBehaviour
 	public Material materialTrail;
 	public GameObject particulasMuerto;
 	public ParticleSystem particulasFlash;
+	public GameObject prefabBarrier;
 
 	public void setColor(Color color)
 	{
@@ -17,8 +18,6 @@ public class RobotGraphics : MonoBehaviour
 			renderersDeColores[i].material.color = color;
 			particulasFlash.startColor = color;
 		}
-
-		materialTrail.color = color;
 	}
 
 	public void Kill()

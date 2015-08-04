@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.6530905, y: .695680618, z: 3.76870298}
+  m_LocalPosition: {x: -4.1120491, y: 1.99671078, z: .742799759}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432884}
@@ -464,6 +464,7 @@ MonoBehaviour:
   materialTrail: {fileID: 2100000, guid: 619418ae0c21d4d4f93b04a716b64a8c, type: 2}
   particulasMuerto: {fileID: 100630}
   particulasFlash: {fileID: 19898392}
+  prefabBarrier: {fileID: 182438, guid: f1b97a8658f645943a59ec1375bfbfb7, type: 2}
 --- !u!198 &19887216
 ParticleSystem:
   m_ObjectHideFlags: 1

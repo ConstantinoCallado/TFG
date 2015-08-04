@@ -9,6 +9,7 @@ public class RobotGraphics : MonoBehaviour
 	public GameObject particulasMuerto;
 	public ParticleSystem particulasFlash;
 	public GameObject prefabBarrier;
+	public GameObject prefabWard;
 
 	public void setColor(Color color)
 	{

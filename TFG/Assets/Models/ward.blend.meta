@@ -13,6 +13,8 @@ ModelImporter:
     100010: IK-Head
     100012: Sphere
     100014: //RootNode
+    100016: Body_0
+    100018: Iris
     400000: Armature
     400002: Base
     400004: Body
@@ -21,13 +23,19 @@ ModelImporter:
     400010: IK-Head
     400012: Sphere
     400014: //RootNode
+    400016: Body_0
+    400018: Iris
     2300000: Cube
     3300000: Cube
     4300000: Sphere
     4300002: Cube
+    4300004: Iris
+    4300006: Body
     7400000: Default Take
     9500000: //RootNode
     13700000: Sphere
+    13700002: Body
+    13700004: Iris
   materials:
     importMaterials: 1
     materialName: 0

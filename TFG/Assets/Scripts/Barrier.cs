@@ -10,10 +10,22 @@ public class Barrier : MonoBehaviour
 	{
 		position = pos;
 		transform.position = position;
+		if(Network.isServer)
+		{
+			BlockPosition();
+		}
+		else
+		{
+			Invoke("BlockPosition", 0.2f);
+		}
+
+		Invoke("TurnOff", time);
+	}
+
+	public void BlockPosition()
+	{
 		oldItemInPos = Scenario.scenarioRef.arrayNivel[(int)position.y, (int)position.x];
 		Scenario.scenarioRef.arrayNivel[(int)position.y, (int)position.x] = 0;
-	
-		Invoke("TurnOff", time);
 	}
 
 	public void TurnOff()

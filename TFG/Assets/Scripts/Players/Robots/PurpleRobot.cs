@@ -23,7 +23,7 @@ public class PurpleRobot : Robot
 		
 		continuar = true;
 		
-		transform.position = BasicMovementServer.redondearPosicion(transform.position);
+		transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), 0);
 		
 		// Buscamos una posicion que este libre
 		for(int i=teleportDistance; i>0 && continuar; i--)

@@ -213,4 +213,11 @@ public class BasicMovementServer : MonoBehaviour
 
 		stream.Serialize (ref positionPackage);
 	}
+
+	
+	[RPC]
+	public void skll()
+	{
+		player.skll();
+	}
 }

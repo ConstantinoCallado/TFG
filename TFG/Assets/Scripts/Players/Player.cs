@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
 	public virtual float GetCoolDownTime()
 	{
-		return 30;
+		return 20;
 	}
 
 	public virtual void ActivatePower()
@@ -114,15 +114,14 @@ public class Player : MonoBehaviour
 		throw new System.NotImplementedException ();
 	}
 	
-	[RPC]
 	public void skll()
 	{
-		if(Time.time >= skillCoolDown)
+		if(Time.time >= skillCoolDown && !isDead)
 		{
 			skillCoolDown = Time.time + GetCoolDownTime();
 			// Activamos la habilidad en el servidor
 			ActivatePower();
-
+			
 			// La "broadcasteamos" a todos los clientes
 			NetworkManager.networkManagerRef.BroadcastSkill(id);
 		}

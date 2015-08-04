@@ -18,7 +18,7 @@ public class BlueRobot : Robot
 	public override void ActivatePower()
 	{
 		GameObject barreraInstanciada = (GameObject)GameObject.Instantiate(playerGraphics.robotGraphics.prefabBarrier);
-		barreraInstanciada.GetComponent<Barrier>().TurnOn(skillDuration, new Vector3((int)transform.position.x, (int)transform.position.y, 0));
+		barreraInstanciada.GetComponent<Barrier>().TurnOn(skillDuration, new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), 0));
 	}
 
 	public override Color GetColor()

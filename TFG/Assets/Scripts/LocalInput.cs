@@ -11,7 +11,7 @@ public class LocalInput : MonoBehaviour
 	NetworkView networkView;
 	BasicMovementServer movementRef;
 	private string methodName = "";
-
+	Player playerRef;
 	public static LocalInput localInputRef;
 
 	#if !UNITY_STANDALONE && !UNITY_STANDALONE_OSX 
@@ -26,6 +26,7 @@ public class LocalInput : MonoBehaviour
 		networkView = GetComponent<NetworkView>();
 		cameraRef = Camera.main;
 		localInputRef = this;
+		playerRef = gameObject.GetComponent<Player>();
 
 		if(Network.isServer)
 		{
@@ -35,18 +36,11 @@ public class LocalInput : MonoBehaviour
 
 	public void ClickPower()
 	{
-		if(Time.time >= movementRef.player.skillCoolDown)
+		if(Time.time >= playerRef.skillCoolDown && !playerRef.isDead)
 		{
-			if(!movementRef)
-			{
-				networkView.RPC("skll", RPCMode.Server);
-			}
-			else
-			{
-				movementRef.player.skll();
-			}
-
-			SkillButton.skillButtonRef.SetCoolDown(movementRef.player.GetCoolDownTime());
+			playerRef.skll();
+		
+			SkillButton.skillButtonRef.SetCoolDown(playerRef.GetCoolDownTime());
 		}
 		else
 		{

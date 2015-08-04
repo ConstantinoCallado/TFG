@@ -58,11 +58,6 @@ public class Robot : Player
 		}
 	}
 
-	public override float GetCoolDownTime()
-	{
-		return 10;
-	}
-	
 	public override void ActivatePower()
 	{
 		Debug.Log("ROBOT ACTIVANDO HABILIDAD");

@@ -32,7 +32,7 @@ public class BasicMovementServer : MonoBehaviour
 				vectorObjetivoTemp = redondearPosicion((Vector2)characterTransform.position + inputDirection);
 
 				// Si la posicion esta libre la ponemos como objetivo
-				if((int)vectorObjetivoTemp.x < 0 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
+				if((int)vectorObjetivoTemp.x < 0 || (int)vectorObjetivoTemp.x > 18|| Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 				{
 					targetPos = vectorObjetivoTemp;
 
@@ -92,7 +92,7 @@ public class BasicMovementServer : MonoBehaviour
 	}
 
 
-	Vector2 redondearPosicion(Vector2 position)
+	public static Vector2 redondearPosicion(Vector2 position)
 	{
 		return new Vector2(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
 	}

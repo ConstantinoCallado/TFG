@@ -7,6 +7,7 @@ public class RobotGraphics : MonoBehaviour
 	public Animator animator;
 	public Material materialTrail;
 	public GameObject particulasMuerto;
+	public ParticleSystem particulasFlash;
 
 	public void setColor(Color color)
 	{
@@ -14,6 +15,7 @@ public class RobotGraphics : MonoBehaviour
 		for(int i=0; i< renderersDeColores.Length; i++)
 		{
 			renderersDeColores[i].material.color = color;
+			particulasFlash.startColor = color;
 		}
 
 		materialTrail.color = color;

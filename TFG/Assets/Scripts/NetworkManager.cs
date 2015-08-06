@@ -398,8 +398,8 @@ public class NetworkManager : MonoBehaviour
 			{
 				int randomCharacterIndex = UnityEngine.Random.Range(0, listaPersonajes.Count);
 
-				//listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
-				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotBlanco;
+				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
+				//listaJugadores[i].enumPersonaje = EnumPersonaje.RobotBlanco;
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
 				listaPersonajes.RemoveAt(randomCharacterIndex);

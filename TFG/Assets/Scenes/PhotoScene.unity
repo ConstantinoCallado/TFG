@@ -228,7 +228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &88086728
 Transform:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ Transform:
   m_Children:
   - {fileID: 787116235}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &88086729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +264,7 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
 --- !u!114 &88086730
 MonoBehaviour:
@@ -1429,7 +1430,7 @@ Transform:
   m_Children:
   - {fileID: 1039950385}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &124118157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,7 +1453,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  teleportDistance: 3
 --- !u!114 &124118158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,7 +1544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &198123418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,7 +2800,7 @@ Transform:
   m_Children:
   - {fileID: 1107315515}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!114 &341995628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2820,7 +2823,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!114 &341995629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2850,6 +2855,132 @@ MonoBehaviour:
   humanGraphics: {fileID: 459371343}
   robotGraphics: {fileID: 1369557126}
   hoveringName: {fileID: 341995629}
+--- !u!1001 &422128033
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5.15999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 1.00864446e-08
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 4.67386116e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 5.06639424e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 474020, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: .374052882
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -.0240907911
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: .80477351
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .460264951
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.167269841
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.0387289785
+      objectReference: {fileID: 0}
+    - target: {fileID: 430940, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.0338443965
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.268585533
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.78327274e-06
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.0587275e-05
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0432242639
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .863563657
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.0316095799
+      objectReference: {fileID: 0}
+    - target: {fileID: 432366, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .50138849
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: .0911548063
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .259304434
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: .123285875
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .953547418
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.0472906977
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.83704833e-06
+      objectReference: {fileID: 0}
+    - target: {fileID: 475328, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.14554961e-07
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3c95c398914b2954eb1ae4e71c54772c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &435767863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,6 +4160,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 1543023253}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!114 &459371344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4051,7 +4185,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!1 &466708388
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,7 +4218,7 @@ Transform:
   m_Children:
   - {fileID: 1583706305}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &466708390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4105,7 +4241,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  hiding: 0
 --- !u!114 &466708391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4165,7 +4303,7 @@ Transform:
   m_Children:
   - {fileID: 1369431602}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &485508300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4188,6 +4326,7 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
 --- !u!114 &485508301
 MonoBehaviour:
@@ -5428,7 +5567,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 198123420}
   animator: {fileID: 598144732}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 258977157}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &598144732
 Animator:
   serializedVersion: 3
@@ -6592,6 +6736,7 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
 --- !u!114 &648241503
 MonoBehaviour:
@@ -6634,7 +6779,7 @@ Transform:
   m_Children:
   - {fileID: 1505185065}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &649847140
 GameObject:
   m_ObjectHideFlags: 0
@@ -6744,7 +6889,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 1731439374}
   animator: {fileID: 683823737}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1697281762}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &683823737
 Animator:
   serializedVersion: 3
@@ -7089,7 +7239,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: .296551704, b: 1, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 1, b: .0482759476, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -7123,7 +7273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &824491383
 GameObject:
   m_ObjectHideFlags: 0
@@ -8405,7 +8555,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!114 &944071190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8421,6 +8573,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 36047493}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!1 &976862509
 GameObject:
   m_ObjectHideFlags: 0
@@ -9555,7 +9710,7 @@ Transform:
   m_Children:
   - {fileID: 1619532573}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!114 &986966777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9661,7 +9816,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 1555586573}
   animator: {fileID: 1094567602}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1260597678}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &1094567602
 Animator:
   serializedVersion: 3
@@ -9754,6 +9914,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 2074324808}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!114 &1111525714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9776,7 +9939,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!1 &1131826760
 GameObject:
   m_ObjectHideFlags: 0
@@ -10992,7 +11157,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!114 &1164079325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11008,6 +11175,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 1280694109}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!1 &1176325314
 GameObject:
   m_ObjectHideFlags: 0
@@ -11053,6 +11223,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 824491385}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!114 &1176325317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11075,7 +11248,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!1 &1260597678
 GameObject:
   m_ObjectHideFlags: 0
@@ -12333,6 +12508,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 717554058}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!4 &1302582503
 Transform:
   m_ObjectHideFlags: 0
@@ -12368,7 +12546,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!1 &1369431601
 GameObject:
   m_ObjectHideFlags: 0
@@ -12430,7 +12610,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 1155590534}
   animator: {fileID: 1369557127}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 490360312}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &1369557127
 Animator:
   serializedVersion: 3
@@ -12496,7 +12681,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 692664441}
   animator: {fileID: 1385785464}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1845612884}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &1385785464
 Animator:
   serializedVersion: 3
@@ -12582,7 +12772,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!114 &1393070156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12598,6 +12790,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 649847142}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!1 &1425421026
 GameObject:
   m_ObjectHideFlags: 0
@@ -15068,6 +15263,9 @@ MonoBehaviour:
   colorAgresivo: {r: .720588207, g: 0, b: 0, a: 1}
   renderersDeColores:
   - {fileID: 336745095}
+  humanAnimator: {fileID: 0}
+  oldPosition: {x: 0, y: 0}
+  newPosition: {x: 0, y: 0}
 --- !u!114 &1561547658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15090,7 +15288,9 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
+  trailRenderer: {fileID: 0}
 --- !u!1 &1583706304
 GameObject:
   m_ObjectHideFlags: 0
@@ -15167,7 +15367,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 1951087135}
   animator: {fileID: 1613772976}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1999463994}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &1613772976
 Animator:
   serializedVersion: 3
@@ -17650,7 +17855,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 84159672}
   animator: {fileID: 1812722905}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1131826760}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &1812722905
 Animator:
   serializedVersion: 3
@@ -20042,7 +20252,12 @@ MonoBehaviour:
   renderersDeColores:
   - {fileID: 1296208823}
   animator: {fileID: 2082414286}
+  materialTrail: {fileID: 0}
   particulasMuerto: {fileID: 1701613931}
+  particulasFlash: {fileID: 0}
+  prefabBarrier: {fileID: 0}
+  prefabWard: {fileID: 0}
+  rendererCuerpo: {fileID: 0}
 --- !u!95 &2082414286
 Animator:
   serializedVersion: 3
@@ -20153,7 +20368,7 @@ Transform:
   m_Children:
   - {fileID: 435767864}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!114 &2118048766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20176,6 +20391,7 @@ MonoBehaviour:
   colliderJugador: {fileID: 0}
   basicMovementServer: {fileID: 0}
   AIBase: {fileID: 0}
+  skillCoolDown: 0
   sightScript: {fileID: 0}
 --- !u!114 &2118048767
 MonoBehaviour:

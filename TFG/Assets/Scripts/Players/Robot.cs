@@ -19,7 +19,7 @@ public class Robot : Player
 		gameObject.name = "Robot " + getColorString();
 		sightScript = gameObject.GetComponentInChildren<Sight>();
 
-		sightScript.SetSight(2.5f, GetColor());
+		sightScript.SetSight(2.75f, GetColor());
 	}
 
 	public override void Kill()
@@ -55,6 +55,15 @@ public class Robot : Player
 		{
 			GameManager.gameManager.KillPlayerServer(base.id, Human.humanRef.id);
 			Kill();
+		}
+		else
+		{
+			if(!Human.humanRef.isDead)
+			{
+				Human.humanRef.Kill();
+				
+				GameManager.gameManager.KillPlayerServer(Human.humanRef.id, base.id);
+			}
 		}
 	}
 

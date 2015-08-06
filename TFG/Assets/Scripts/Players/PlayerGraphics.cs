@@ -19,6 +19,14 @@ public class PlayerGraphics : MonoBehaviour
 		robotGraphics.gameObject.SetActive(true);
 		robotGraphics.setColor(color);
 	}
+
+	public void SetTransparent (float param)
+	{
+		if(robotGraphics != null)
+		{
+			robotGraphics.SetTransparent(param);
+		}
+	}
 	
 	public void EnableGraphics(bool status)
 	{

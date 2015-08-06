@@ -11,7 +11,7 @@ public class LocalInput : MonoBehaviour
 	NetworkView networkView;
 	BasicMovementServer movementRef;
 	private string methodName = "";
-	Player playerRef;
+	public Player playerRef;
 	public static LocalInput localInputRef;
 
 	#if !UNITY_STANDALONE && !UNITY_STANDALONE_OSX 

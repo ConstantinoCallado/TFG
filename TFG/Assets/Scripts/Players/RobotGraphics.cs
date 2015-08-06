@@ -10,6 +10,7 @@ public class RobotGraphics : MonoBehaviour
 	public ParticleSystem particulasFlash;
 	public GameObject prefabBarrier;
 	public GameObject prefabWard;
+	public Renderer rendererCuerpo;
 
 	public void setColor(Color color)
 	{
@@ -34,5 +35,15 @@ public class RobotGraphics : MonoBehaviour
 		animator.enabled = true;
 		gameObject.transform.localScale = Vector3.one;
 		particulasMuerto.SetActive(false);
+	}
+
+	public void SetTransparent (float alpha)
+	{
+		rendererCuerpo.material.color = new Color(rendererCuerpo.material.color.r, rendererCuerpo.material.color.g, rendererCuerpo.material.color.b, alpha);
+
+		for(int i=0; i< renderersDeColores.Length; i++)
+		{
+			renderersDeColores[i].material.color = rendererCuerpo.material.color;
+		}
 	}
 }

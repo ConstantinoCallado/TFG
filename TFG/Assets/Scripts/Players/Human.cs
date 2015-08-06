@@ -45,21 +45,7 @@ public class Human : Player
 		// Si estamos en el servidor comprobamos la colision con los robots y las armas
 		else if(Network.isServer)
 		{
-			if(other.tag == "Robot")
-			{
-				Debug.Log("He tocado un robot");
-				
-				if(!aggressiveMode)
-				{
-					if(!isDead)
-					{
-						base.Kill();
-						
-						GameManager.gameManager.KillPlayerServer(base.id, other.GetComponent<Player>().id);
-					}
-				}
-			}
-			else if(other.tag == "Weapon")
+			if(other.tag == "Weapon")
 			{
 				pickUpAggressive();
 				GameManager.gameManager.RecogerPieza();

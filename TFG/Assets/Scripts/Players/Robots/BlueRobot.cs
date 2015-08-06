@@ -4,7 +4,7 @@ using System.Collections;
 public class BlueRobot : Robot
 {
 	Color colorRobot = new Color(0.16f, 0.58f, 1f);
-	const float skillDuration = 6;
+	const float skillDuration = 7;
 
 
 	public override void Initialize()

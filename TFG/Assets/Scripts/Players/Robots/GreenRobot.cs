@@ -4,8 +4,8 @@ using System.Collections;
 public class GreenRobot : Robot
 {
 	Color colorRobot = new Color(0.29f, 0.97f, 0.41f);
-	const float skillDuration = 5;
-	const float wardRadius = 1.75f;
+	const float skillDuration = 10;
+	const float wardRadius = 2f;
 
 	public override void Initialize()
 	{

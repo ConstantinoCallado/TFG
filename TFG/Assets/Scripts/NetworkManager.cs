@@ -1,5 +1,4 @@
 #define jumpNetworkConnectionCheck
-#define firstPlayerControlHuman
 
 using UnityEngine;
 using System;
@@ -367,16 +366,21 @@ public class NetworkManager : MonoBehaviour
 		personajesGenerados = true;
 		
 		yield return new WaitForSeconds(.5f);
-		
-		// Asignamos el humano a un jugador y lo comunicamos al resto de clientes
 
+		int indiceHumano = -1;
 
-		#if !firstPlayerControlHuman
-		int indiceHumano = (int)UnityEngine.Random.Range(0, listaJugadores.Length); 
-		#else
-		int indiceHumano = 0;
-		#endif
-
+		while(indiceHumano == -1)
+		{
+			// Asignamos el humano a un jugador aleatorio y lo comunicamos al resto de clientes
+			for(int i=0; i<listaJugadores.Length; i++)
+			{
+				if(listaJugadores[i].activePlayer && UnityEngine.Random.Range(0, 100) > 95)
+				{
+					indiceHumano = i;
+					break;
+				}
+			}
+		}
 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
@@ -399,7 +403,6 @@ public class NetworkManager : MonoBehaviour
 				int randomCharacterIndex = UnityEngine.Random.Range(0, listaPersonajes.Count);
 
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
-				//listaJugadores[i].enumPersonaje = EnumPersonaje.RobotBlanco;
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
 				listaPersonajes.RemoveAt(randomCharacterIndex);

@@ -368,19 +368,18 @@ public class NetworkManager : MonoBehaviour
 		yield return new WaitForSeconds(.5f);
 
 		int indiceHumano = -1;
+		List<int> listaJugadoresActivos = new List<int>();
 
-		while(indiceHumano == -1)
+		// Asignamos el humano a un jugador aleatorio y lo comunicamos al resto de clientes
+		for(int i=0; i<listaJugadores.Length; i++)
 		{
-			// Asignamos el humano a un jugador aleatorio y lo comunicamos al resto de clientes
-			for(int i=0; i<listaJugadores.Length; i++)
+			if(listaJugadores[i].activePlayer)
 			{
-				if(listaJugadores[i].activePlayer && UnityEngine.Random.Range(0, 100) > 95)
-				{
-					indiceHumano = i;
-					break;
-				}
+				listaJugadoresActivos.Add(i);
 			}
 		}
+	
+		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();

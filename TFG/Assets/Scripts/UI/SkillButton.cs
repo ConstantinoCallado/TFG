@@ -10,6 +10,7 @@ public class SkillButton : MonoBehaviour
 	public float tiempoDeCD;
 	public float tiempoFinalCD;
 	public Image icon;
+	public Text nombreHabilidad;
 
 	public void Awake()
 	{

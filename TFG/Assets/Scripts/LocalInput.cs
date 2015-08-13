@@ -41,26 +41,32 @@ public class LocalInput : MonoBehaviour
 		if(playerRef.GetType() == typeof(RedRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotRojo;
+			SkillButton.skillButtonRef.nombreHabilidad.text = "Sprint";
 		}
 		else if(playerRef.GetType() == typeof(BlueRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotAzul;
+			SkillButton.skillButtonRef.nombreHabilidad.text = "Barrera";
 		}
 		else if(playerRef.GetType() == typeof(PurpleRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotMorado;
+			SkillButton.skillButtonRef.nombreHabilidad.text = "Salto";
 		}
 		else if(playerRef.GetType() == typeof(WhiteRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotBlanco;
+			SkillButton.skillButtonRef.nombreHabilidad.text = "Fantasma";
 		}
 		else if(playerRef.GetType() == typeof(OrangeRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotNaranja;
+			//SkillButton.skillButtonRef.nombreHabilidad.text = "Vision";
 		}
 		else if(playerRef.GetType() == typeof(GreenRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotVerde;
+			SkillButton.skillButtonRef.nombreHabilidad.text = "Vigilante";
 		}
 		else
 		{

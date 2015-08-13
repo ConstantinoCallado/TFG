@@ -451,17 +451,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		else
 		{
-			//TODO: BUSCAR DINAMICAMENTE EL JUGADOR QUE HAGA DE SERVER
 			ctrl (0);
-			/*// Recorremos todos los jugadores y asignamos el control al jugador que controle el server
-			for(int i=0; i<listaJugadores.Length; i++)
-			{
-				// Si el personaje pertenece al jugador se le notificara para que le anyada control local
-				if(Network.player == listaJugadores[i].networkPlayer)
-				{
-					ctrl(i);
-				}
-			}*/
 		}
 	}
 

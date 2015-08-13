@@ -44,11 +44,7 @@ public class AvatarManager : MonoBehaviour
 		case EnumPersonaje.RobotRojo:
 			return "Robot rojo";
 			break;
-			
-		case EnumPersonaje.RobotRosa:
-			return "Robot rosa";
-			break;
-			
+
 		case EnumPersonaje.RobotVerde:
 			return "Robot verde";
 			break;

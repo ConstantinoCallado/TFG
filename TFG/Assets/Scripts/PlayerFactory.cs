@@ -35,11 +35,7 @@ public class PlayerFactory : MonoBehaviour
 			case EnumPersonaje.RobotAzul:
 				gameObjectInstanciado.AddComponent<BlueRobot>();
 				break;
-				
-			case EnumPersonaje.RobotRosa:
-				gameObjectInstanciado.AddComponent<PinkRobot>();
-				break;
-				
+								
 			case EnumPersonaje.RobotVerde:
 				gameObjectInstanciado.AddComponent<GreenRobot>();
 				break;

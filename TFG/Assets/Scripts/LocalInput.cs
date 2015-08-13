@@ -34,6 +34,45 @@ public class LocalInput : MonoBehaviour
 		}
 	}
 
+	public void Start()
+	{
+		int iconIndex = 0;
+
+		if(playerRef.GetType() == typeof(RedRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotRojo;
+		}
+		else if(playerRef.GetType() == typeof(BlueRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotAzul;
+		}
+		else if(playerRef.GetType() == typeof(PurpleRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotMorado;
+		}
+		else if(playerRef.GetType() == typeof(WhiteRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotBlanco;
+		}
+		else if(playerRef.GetType() == typeof(OrangeRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotNaranja;
+		}
+		else if(playerRef.GetType() == typeof(GreenRobot))
+		{
+			iconIndex = (int)EnumPersonaje.RobotVerde;
+		}
+		else
+		{
+			SkillButton.skillButtonRef.gameObject.SetActive(false);
+		}
+
+		if(iconIndex != 0)
+		{
+			SkillButton.skillButtonRef.icon.sprite = playerRef.playerGraphics.listaIconos[iconIndex];
+		}
+	}
+
 	public void ClickPower()
 	{
 		if(Time.time >= playerRef.skillCoolDown && !playerRef.isDead)

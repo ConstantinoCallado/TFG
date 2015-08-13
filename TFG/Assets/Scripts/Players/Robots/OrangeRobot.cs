@@ -15,6 +15,7 @@ public class OrangeRobot : Robot
 		Debug.Log("Inicializando robot naranja");
 	}
 
+
 	public override void ActivatePower()
 	{
 		Debug.Log("Activando poder naranja");

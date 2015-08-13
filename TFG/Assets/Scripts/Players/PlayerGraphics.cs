@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerGraphics : MonoBehaviour 
 {
 	public HumanGraphics humanGraphics;
 	public RobotGraphics robotGraphics;
 	public HoveringName hoveringName;
+
+	public List<Sprite> listaIconos = new List<Sprite>();
 
 	public void setHuman()
 	{

@@ -14,7 +14,7 @@ public class WhiteRobot : Robot
 
 		Debug.Log("Inicializando robot blanco");
 	}
-
+	
 	public override void ActivatePower()
 	{
 		hiding = true;

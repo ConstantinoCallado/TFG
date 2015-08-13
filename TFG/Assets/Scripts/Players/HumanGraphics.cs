@@ -48,12 +48,12 @@ public class HumanGraphics : MonoBehaviour
 		newPosition = transform.position;
 		if(newPosition != oldPosition)
 		{
-			Debug.Log("CORRER");
+			//Debug.Log("CORRER");
 			humanAnimator.SetBool("run", true);
 		}
 		else
 		{
-			Debug.Log("QUIETO");
+			//Debug.Log("QUIETO");
 			humanAnimator.SetBool("run", false);
 		}
 

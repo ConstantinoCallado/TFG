@@ -2226,6 +2226,15 @@ MonoBehaviour:
   humanGraphics: {fileID: 11462714}
   robotGraphics: {fileID: 11478788}
   hoveringName: {fileID: 11466632}
+  listaIconos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: c7dd90d9e8d0c4d46b46ce78bc13a23a, type: 3}
+  - {fileID: 21300000, guid: 0c2d3ec2e49112945a3297fca4cbb83a, type: 3}
+  - {fileID: 21300000, guid: a7b29629c4288744ba07f03d69b84438, type: 3}
+  - {fileID: 21300000, guid: 71e9daed7a286234196bb391ec0280f7, type: 3}
+  - {fileID: 21300000, guid: 62aab6f421574aa40858fe11696db180, type: 3}
+  - {fileID: 21300000, guid: 8133ae42929db1c40bc3fe61eed91af1, type: 3}
 --- !u!114 &11462714
 MonoBehaviour:
   m_ObjectHideFlags: 1

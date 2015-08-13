@@ -31,7 +31,7 @@ public class RedRobot : Robot
 		trailRenderer.enabled = true;
 		Invoke("DesactivatePower", skillDuration);
 	}
-
+	
 	public void DesactivatePower()
 	{
 		Debug.Log("Desactivando poder rojo");

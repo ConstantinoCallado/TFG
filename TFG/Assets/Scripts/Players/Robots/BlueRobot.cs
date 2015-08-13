@@ -13,8 +13,8 @@ public class BlueRobot : Robot
 
 		Debug.Log("Inicializando robot azul");
 	}
-
 	
+
 	public override void ActivatePower()
 	{
 		GameObject barreraInstanciada = (GameObject)GameObject.Instantiate(playerGraphics.robotGraphics.prefabBarrier);

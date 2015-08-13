@@ -31,6 +31,7 @@ public class Human : Player
 		Debug.Log("inicializado Humano");
 	}
 
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		// Comprobamos si ha cogido una pieza en todos los juegos

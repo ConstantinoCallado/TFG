@@ -378,9 +378,10 @@ public class NetworkManager : MonoBehaviour
 				listaJugadoresActivos.Add(i);
 			}
 		}
-	
 		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
 
+		//indiceHumano = 1;
+		
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
 		networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje, listaJugadores[indiceHumano].viewID);

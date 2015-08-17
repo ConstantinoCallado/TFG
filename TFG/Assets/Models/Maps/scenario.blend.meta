@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cube_024
+    100004: Mapa
     400000: //RootNode
+    400002: Cube_024
+    400004: Mapa
     2300000: //RootNode
+    2300002: Cube_024
+    2300004: Mapa
     3300000: //RootNode
+    3300002: Cube_024
+    3300004: Mapa
     4300000: Cube_024
+    4300002: Mapa
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -21,6 +30,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5

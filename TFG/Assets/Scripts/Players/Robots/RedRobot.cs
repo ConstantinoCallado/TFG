@@ -4,7 +4,7 @@ using System.Collections;
 public class RedRobot : Robot
 {
 	Color colorRobot = new Color(1, 0.3f, 0.3f);
-	const float increaseSpeed = 1f;
+	const float increaseSpeed = 1.25f;
 	const float skillDuration = 5;
 
 	public TrailRenderer trailRenderer;

@@ -32,7 +32,7 @@ public class BasicMovementServer : MonoBehaviour
 				vectorObjetivoTemp = redondearPosicion((Vector2)characterTransform.position + inputDirection);
 
 				// Si la posicion esta libre la ponemos como objetivo
-				if((int)vectorObjetivoTemp.x < 0 || (int)vectorObjetivoTemp.x > 18|| Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
+				if((int)vectorObjetivoTemp.x < 0 || (int)vectorObjetivoTemp.x > Scenario.tamanyoMapaX -2 || Scenario.scenarioRef.arrayNivel[(int)vectorObjetivoTemp.y, (int)vectorObjetivoTemp.x] != 0)
 				{
 					targetPos = vectorObjetivoTemp;
 

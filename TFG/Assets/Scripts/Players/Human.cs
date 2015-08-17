@@ -22,7 +22,7 @@ public class Human : Player
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Human");
 		gameObject.tag = "Human";
-		speed = 3f;
+		speed = 4.25f;
 		base.playerGraphics.setHuman();
 		gameObject.name = "Human";
 		sightable = gameObject.GetComponentInChildren<SightableHuman>();
@@ -49,7 +49,7 @@ public class Human : Player
 			if(other.tag == "Weapon")
 			{
 				pickUpAggressive();
-				GameManager.gameManager.RecogerPieza();
+				//GameManager.gameManager.RecogerPieza();
 
 				//TODO: No destruir sin mas... hay que notificarlo antes a los clientes
 				Destroy(other.gameObject);

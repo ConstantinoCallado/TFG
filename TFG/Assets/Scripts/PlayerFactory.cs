@@ -93,7 +93,7 @@ public class PlayerFactory : MonoBehaviour
 		{		
 			jugadorInst.gameObject.AddComponent<CircleCollider2D>();
 			jugadorInst.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-			jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.3f;
+			jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.6f;
 			
 			jugadorInst.gameObject.AddComponent<Rigidbody2D>();
 			Rigidbody2D rigidbodyInstanciado = jugadorInst.gameObject.GetComponent<Rigidbody2D>();
@@ -117,7 +117,7 @@ public class PlayerFactory : MonoBehaviour
 
 		jugadorInst.gameObject.AddComponent<CircleCollider2D>();
 		jugadorInst.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-		jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.3f;
+		jugadorInst.gameObject.GetComponent<CircleCollider2D>().radius = 0.6f;
 
 		jugadorInst.gameObject.AddComponent<Rigidbody2D>();
 		Rigidbody2D rigidbodyInstanciado = jugadorInst.gameObject.GetComponent<Rigidbody2D>();

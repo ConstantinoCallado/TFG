@@ -401,7 +401,7 @@ public class NetworkManager : MonoBehaviour
 			if(i != indiceHumano)
 			{
 				int randomCharacterIndex = UnityEngine.Random.Range(0, listaPersonajes.Count);
-
+				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotAzul;
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);

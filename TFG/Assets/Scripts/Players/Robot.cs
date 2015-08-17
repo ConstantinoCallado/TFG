@@ -19,7 +19,7 @@ public class Robot : Player
 		gameObject.name = "Robot " + getColorString();
 		sightScript = gameObject.GetComponentInChildren<Sight>();
 
-		sightScript.SetSight(5f, GetColor());
+		sightScript.SetSight(6f, GetColor());
 	}
 
 	public override void Kill()

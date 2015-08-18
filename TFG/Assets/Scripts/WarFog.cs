@@ -14,6 +14,22 @@ public class WarFog : MonoBehaviour
 	public void Awake()
 	{
 		warFogRef = this;
+	
+		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
+		{
+			if(NetworkManager.networkManagerRef.listaJugadores[i].ownByClient && NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje == EnumPersonaje.Humano)
+			{
+				RemoveFOW();
+				break;
+			}
+		}
+	}
+	
+	public void RemoveFOW ()
+	{
+		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
+
+		WarFog.warfogEnabled = false;
 	}
 
 	public void Start()

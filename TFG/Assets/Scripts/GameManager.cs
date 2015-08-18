@@ -99,9 +99,13 @@ public class GameManager : MonoBehaviour
 
 	public void KillPlayerClient(int killed, int killer)
 	{	
+		StartCoroutine(coroutineKillPlayerClient(killed));
+	}
+
+	public void IncreaseScoreOnKill(int killed, int killer)
+	{
 		++NetworkManager.networkManagerRef.listaJugadores[killed].deaths;
 		++NetworkManager.networkManagerRef.listaJugadores[killer].kills;
-		StartCoroutine(coroutineKillPlayerClient(killed));
 	}
 
 	public IEnumerator coroutineKillPlayerClient(int index)

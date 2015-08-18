@@ -86,8 +86,22 @@ public class Human : Player
 	{
 		base.playerGraphics.SetAggressive(true);
 
+		while(Time.time < aggressiveTimeEnd - 3)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
+		while(Time.time < aggressiveTimeEnd - 1.5)
+		{
+			base.playerGraphics.SetAggressive(false);
+			yield return new WaitForSeconds(0.2f);
+			base.playerGraphics.SetAggressive(true);
+			yield return new WaitForSeconds(0.2f);
+		}
 		while(Time.time < aggressiveTimeEnd)
 		{
+			base.playerGraphics.SetAggressive(false);
+			yield return new WaitForSeconds(0.1f);
+			base.playerGraphics.SetAggressive(true);
 			yield return new WaitForSeconds(0.1f);
 		}
 

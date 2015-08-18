@@ -200,6 +200,12 @@ public class NetworkManager : MonoBehaviour
 				listaJugadores[i].playerName = name;
 				listaJugadores[i].isReady = false;
 				Debug.Log(listaJugadores[i].playerName + " se ha conectado");
+
+				if(listaJugadores[i].networkPlayer == Network.player)
+				{
+					listaJugadores[i].ownByClient = true;
+				}
+				
 				break;
 			}
 		}
@@ -380,7 +386,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
 
-		indiceHumano = 1;
+		//indiceHumano = 1;
 		
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
@@ -491,12 +497,12 @@ public class NetworkManager : MonoBehaviour
 		listaJugadores[playerIndex].player.gameObject.AddComponent<LocalInput>();
 		listaJugadores[playerIndex].player.localInput = listaJugadores[playerIndex].player.gameObject.GetComponent<LocalInput>();
 
-		if(listaJugadores[playerIndex].enumPersonaje == EnumPersonaje.Humano)
+		/*if(listaJugadores[playerIndex].enumPersonaje == EnumPersonaje.Humano)
 		{
 			listaJugadores[playerIndex].player.RemoveFOW();
 		}
 
-		listaJugadores[playerIndex].ownByClient = true;
+		listaJugadores[playerIndex].ownByClient = true;*/
 	}
 
 	// Funcion que envia a los jugadores la informacion del servidor 
@@ -509,8 +515,18 @@ public class NetworkManager : MonoBehaviour
 	public void NotificarJugadorMatado (int killed, int killer)
 	{
 		networkView.RPC("pklld", RPCMode.Others, killed, killer);
+		networkView.RPC("incrScore", RPCMode.OthersBuffered, killed, killer);
+
 	}
-	
+
+	// Funcion que envia a los jugadores la informacion del servidor 
+	[RPC]
+	void incrScore(int killed, int killer)
+	{
+		++NetworkManager.networkManagerRef.listaJugadores[killed].deaths;
+		++NetworkManager.networkManagerRef.listaJugadores[killer].kills;
+	}
+
 	// Funcion que envia a los jugadores la informacion del servidor 
 	[RPC]
 	void pklld(int killed, int killer)

@@ -19,7 +19,6 @@ public class AIBaseController : MonoBehaviour
 
 	public bool AIEnabled = false;
 
-	protected Vector2 selfPosition;
 
 	public static Vector2 humanKnownPositionPrev;
 	public static Vector2 humanKnownPosition;
@@ -151,11 +150,11 @@ public class AIBaseController : MonoBehaviour
 		
 		if(targetPosition.y < 1)
 		{
-			targetPosition.y += Scenario.tamanyoMapaY;
+			targetPosition.y = 1;
 		}
-		else if(targetPosition.y > Scenario.tamanyoMapaY -1)
+		else if(targetPosition.y > Scenario.tamanyoMapaY -2)
 		{
-			targetPosition.y -= Scenario.tamanyoMapaY;
+			targetPosition.y = Scenario.tamanyoMapaY -2;
 		}
 
 		PathfindingNode nodoInicial = new PathfindingNode(redondearPosicion(player.basicMovementServer.characterTransform.position), 0, null, redondearPosicion(targetPosition));

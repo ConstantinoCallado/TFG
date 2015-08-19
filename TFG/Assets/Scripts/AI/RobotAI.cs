@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum RobotAIStatus {Wander, Patrol, Attack, Search, Escape, Scatter}
 
@@ -12,6 +13,13 @@ public class RobotAI : AIBaseController
 	private float escapeCounter;
 	public Vector2 targetPosition;
 	private Vector2 selfPosition;
+	private Vector2 escapePosition;
+	private List<Vector2> listaPosicionesHuida= new List<Vector2>();
+
+	float distanciaAHumanoMaxima;
+	float distanciaCalculada;
+	int posicionEscogida;
+
 
 	void Start()
 	{
@@ -216,19 +224,32 @@ public class RobotAI : AIBaseController
 
 	void Escape()
 	{
-		//TODO: Recalcula el camino con demasiada frecuencia, subir el umbral (o algo asi)
+		//TODO: Buscar 10 puntos aleatorios alrededor del robot, y elegir el mas "seguro"
 		if(base.pathCompleted)
 		{
-			if(((Vector2)player.basicMovementServer.characterTransform.position - (Vector2)Human.humanRef.transform.position).magnitude < 18)
+			distanciaAHumanoMaxima = 0;
+			listaPosicionesHuida.Clear();
+		
+			for(int i=0; listaPosicionesHuida.Count < 10; i++)
 			{
-				wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
-				                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 6,
-				                          	4);
+				escapePosition = new Vector2((int)(transform.position.x + Random.Range(-8, 8)), (int)(transform.position.y + Random.Range(-8, 8)));
+
+				if(Scenario.scenarioRef.isWalkable(escapePosition))
+				{
+					listaPosicionesHuida.Add(escapePosition);
+
+					distanciaCalculada = (escapePosition - (Vector2)Human.humanRef.transform.position).magnitude;
+
+					if(distanciaCalculada > distanciaAHumanoMaxima)
+					{
+						distanciaAHumanoMaxima = distanciaCalculada;
+						posicionEscogida = listaPosicionesHuida.Count-1;
+					}
+				}
 			}
-			else
-			{
-				wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position, 4);
-			}
+
+			CalculatePathTo(listaPosicionesHuida[posicionEscogida]);
+
 
 			statusWhenLastPosition = robotAIStatus;
 		}

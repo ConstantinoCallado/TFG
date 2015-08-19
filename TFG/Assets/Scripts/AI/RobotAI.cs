@@ -20,11 +20,50 @@ public class RobotAI : AIBaseController
 
 		StartCoroutine(startIADelayed());
 	}
-	
+
+	public IEnumerator corutinaRandomSkill()
+	{
+		yield return new WaitForSeconds(1);
+		while(true)
+		{
+			if(this.enabled && robotAIStatus != RobotAIStatus.Wander && Random.Range(0, 100) > 75)
+			{
+				player.skll();
+			}
+			
+			yield return new WaitForSeconds(1.5f);
+		}
+	}
+
+	public IEnumerator corutinaRandomSkillSpammer()
+	{
+		yield return new WaitForSeconds(1);
+		while(true)
+		{
+			if(this.enabled && Random.Range(0, 100) > 85)
+			{
+				player.skll();
+			}
+			
+			yield return new WaitForSeconds(1.5f);
+		}
+	}
+
+
 	IEnumerator startIADelayed()
 	{
 		yield return new WaitForSeconds(Random.Range(0f, 3f));
 		base.AIEnabled = true;
+
+		if(NetworkManager.networkManagerRef.listaJugadores[base.player.id].enumPersonaje == EnumPersonaje.RobotNaranja ||
+		   NetworkManager.networkManagerRef.listaJugadores[base.player.id].enumPersonaje == EnumPersonaje.RobotVerde)
+		{
+			StartCoroutine(corutinaRandomSkillSpammer());
+		}
+		else
+		{
+			StartCoroutine(corutinaRandomSkill());
+		}
 	}
 
 	void LateUpdate()

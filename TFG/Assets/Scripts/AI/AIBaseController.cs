@@ -32,32 +32,11 @@ public class AIBaseController : MonoBehaviour
 		player.AIBase = this;
 	}
 
-	void Update()
-	{
-		selfPosition = transform.position;
-	}
-
 	protected void Start()
 	{
 		StartCoroutine(corutinaIrASiguientePosicion());
-		StartCoroutine(corutinaRandomSkill());
 	}
 
-	public IEnumerator corutinaRandomSkill()
-	{
-		yield return new WaitForSeconds(1);
-		while(true)
-		{
-			if(this.enabled && Random.Range(0, 100) > 80)
-			{
-				player.skll();
-			}
-
-			yield return new WaitForSeconds(2);
-		}
-	}
-
-	//TODO: Comprobar muros u obstaculos por el camino
 	public IEnumerator corutinaIrASiguientePosicion()
 	{
 		while(true)

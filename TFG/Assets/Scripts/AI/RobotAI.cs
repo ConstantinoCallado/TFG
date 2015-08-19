@@ -11,7 +11,7 @@ public class RobotAI : AIBaseController
 	private Vector2 patrolPosition;
 	private float escapeCounter;
 	public Vector2 targetPosition;
-
+	private Vector2 selfPosition;
 
 	void Start()
 	{
@@ -27,12 +27,21 @@ public class RobotAI : AIBaseController
 		base.AIEnabled = true;
 	}
 
+	void LateUpdate()
+	{
+		if(Mathf.Abs(selfPosition.x - transform.position.x) > 3)
+		{
+			base.ClearPath();
+			targetPosition = new Vector2(999,999);
+		}
+	}
+	
 	void Update()
 	{
-		//Debug.Log(robotAIStatus);
-
 		if(AIEnabled)
 		{
+			selfPosition = transform.position;
+
 			GlobalStatus();
 
 			switch(robotAIStatus)
@@ -130,10 +139,15 @@ public class RobotAI : AIBaseController
 	{
 		if(AIBaseController.humanInSight)
 		{
-			if((targetPosition - (Vector2)Human.humanRef.basicMovementServer.characterTransform.position).sqrMagnitude > 0.2f)
+			if((targetPosition - (Vector2)Human.humanRef.transform.position).magnitude > 0.75f)
 			{
-				targetPosition = Human.humanRef.basicMovementServer.characterTransform.position;
-				base.CalculatePathTo(targetPosition);
+				//Debug.Log("Recalculando posicion");
+				targetPosition = BasicMovementServer.redondearPosicion(Human.humanRef.transform.position);
+
+				if(!base.CalculatePathTo(targetPosition))
+				{
+					targetPosition = new Vector2(999,999);
+				}
 
 				statusWhenLastPosition = robotAIStatus;
 			}
@@ -141,7 +155,8 @@ public class RobotAI : AIBaseController
 		else
 		{
 			robotAIStatus = RobotAIStatus.Search;
-			wlkToRandomPositionAround(AIBaseController.humanKnownPosition, 4);
+			//base.CalculatePathTo(AIBaseController.humanKnownPosition);
+			wlkToRandomPositionAround(AIBaseController.humanKnownPosition, 8);
 
 			statusWhenLastPosition = robotAIStatus;
 		}
@@ -165,9 +180,16 @@ public class RobotAI : AIBaseController
 		//TODO: Recalcula el camino con demasiada frecuencia, subir el umbral (o algo asi)
 		if(base.pathCompleted)
 		{
-			wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
-			                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 4,
-			                          	3);
+			if(((Vector2)player.basicMovementServer.characterTransform.position - (Vector2)Human.humanRef.transform.position).magnitude < 18)
+			{
+				wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position +
+				                          ((Vector2)player.basicMovementServer.characterTransform.position - AIBaseController.humanKnownPosition).normalized * 6,
+				                          	4);
+			}
+			else
+			{
+				wlkToRandomPositionAround((Vector2)player.basicMovementServer.characterTransform.position, 4);
+			}
 
 			statusWhenLastPosition = robotAIStatus;
 		}

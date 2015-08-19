@@ -67,12 +67,12 @@ public class BasicMovementServer : MonoBehaviour
 			// Si ha salido por los margenes del mapa, lo reintroducimos por el otro lado
 			if(characterTransform.position.x < 0.1f)
 			{
-				characterTransform.position = new Vector2(Scenario.tamanyoMapaX-1.2f , characterTransform.position.y); 
+				characterTransform.position = new Vector2(Scenario.tamanyoMapaX-2f , characterTransform.position.y); 
 				targetPos = characterTransform.position;
 			}
 			else if(characterTransform.position.x > Scenario.tamanyoMapaX - 1.1f)
 			{
-				characterTransform.position = new Vector2(0.1f , characterTransform.position.y); 
+				characterTransform.position = new Vector2(1f , characterTransform.position.y); 
 				targetPos = characterTransform.position;
 			}
 		}
@@ -97,6 +97,11 @@ public class BasicMovementServer : MonoBehaviour
 		return new Vector2(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
 	}
 
+	public static Vector2 redondearPosicionMasProxima(Vector2 position)
+	{
+		return new Vector2(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
+	}
+	
 	void ActualizarRotacion(Vector3 vectorInput)
 	{
 		if(vectorInput ==  Vector3.right)

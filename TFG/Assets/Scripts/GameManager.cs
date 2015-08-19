@@ -102,12 +102,6 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(coroutineKillPlayerClient(killed));
 	}
 
-	public void IncreaseScoreOnKill(int killed, int killer)
-	{
-		++NetworkManager.networkManagerRef.listaJugadores[killed].deaths;
-		++NetworkManager.networkManagerRef.listaJugadores[killer].kills;
-	}
-
 	public IEnumerator coroutineKillPlayerClient(int index)
 	{
 		// Si es el humano el que muere... tras 2 segundos respawneamos a todos

@@ -19,6 +19,8 @@ public class AIBaseController : MonoBehaviour
 
 	public bool AIEnabled = false;
 
+	protected Vector2 selfPosition;
+
 	public static Vector2 humanKnownPositionPrev;
 	public static Vector2 humanKnownPosition;
 	public static bool humanInSight;
@@ -28,6 +30,11 @@ public class AIBaseController : MonoBehaviour
 	{
 		player = gameObject.GetComponent<Player>();
 		player.AIBase = this;
+	}
+
+	void Update()
+	{
+		selfPosition = transform.position;
 	}
 
 	protected void Start()
@@ -153,24 +160,23 @@ public class AIBaseController : MonoBehaviour
 	{
 		ClearPath();
 		pathCalculated = false;
-
 		
 		if(targetPosition.x < 0)
 		{
-			targetPosition.x = Scenario.tamanyoMapaX + targetPosition.x;
+			targetPosition.x += Scenario.tamanyoMapaX;
 		}
-		else if(targetPosition.x > Scenario.tamanyoMapaX)
+		else if(targetPosition.x > Scenario.tamanyoMapaX -1)
 		{
-			targetPosition.x = targetPosition.x - Scenario.tamanyoMapaX;
+			targetPosition.x -=Scenario.tamanyoMapaX;
 		}
 		
-		if(targetPosition.y < 2)
+		if(targetPosition.y < 1)
 		{
-			targetPosition.y = 2;
+			targetPosition.y += Scenario.tamanyoMapaY;
 		}
-		else if(targetPosition.y > Scenario.tamanyoMapaY -2)
+		else if(targetPosition.y > Scenario.tamanyoMapaY -1)
 		{
-			targetPosition.y = Scenario.tamanyoMapaY - 2;
+			targetPosition.y -= Scenario.tamanyoMapaY;
 		}
 
 		PathfindingNode nodoInicial = new PathfindingNode(redondearPosicion(player.basicMovementServer.characterTransform.position), 0, null, redondearPosicion(targetPosition));
@@ -190,6 +196,7 @@ public class AIBaseController : MonoBehaviour
 			// Si se ha llegado al final reconstruimos y almacenamos el camino
 			if(pathCalculated)
 			{
+				pathCompleted = false;
 				PathfindingNode nodoFinal = listaNodosAExplorar.First();
 
 				while(nodoFinal.parent != null)
@@ -199,13 +206,13 @@ public class AIBaseController : MonoBehaviour
 					nodoFinal = nodoFinal.parent;
 				}
 
-//				Debug.Log(transform.gameObject.name + " ha calculado camino hasta " + targetPosition);
+				//Debug.Log(transform.gameObject.name + " ha calculado camino hasta " + targetPosition);
 				return true;
 			}
 		}
 
 
-//		Debug.Log(transform.gameObject.name + " ha fallado el camino hasta " + targetPosition);
+		//Debug.Log(transform.gameObject.name + " ha fallado el camino hasta " + targetPosition);
 		return false;
 	}
 

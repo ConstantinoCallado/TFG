@@ -328,7 +328,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349503356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1794046226}
@@ -351,15 +351,15 @@ MonoBehaviour:
   prefabPiece: {fileID: 104322, guid: 8f301eb8cf6785749bd981b8658ea34b, type: 2}
   gameManager: {fileID: 1393391641}
   robotSpawnPoints:
-  - {x: 18, y: 13}
-  - {x: 21, y: 13}
-  - {x: 18, y: 11}
-  - {x: 21, y: 11}
+  - {x: 19, y: 13}
+  - {x: 22, y: 13}
+  - {x: 19, y: 11}
+  - {x: 22, y: 11}
   playerSpawnPoints:
-  - {x: 5, y: 4}
-  - {x: 5, y: 19}
-  - {x: 34, y: 19}
-  - {x: 34, y: 4}
+  - {x: 6, y: 4}
+  - {x: 6, y: 19}
+  - {x: 35, y: 19}
+  - {x: 35, y: 4}
   partitionOfLeft: 0
   partitionOfRight: 0
 --- !u!1 &397782268
@@ -792,7 +792,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1459370736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.5, y: 9.5, z: -29.5900002}
+  m_LocalPosition: {x: 20.5, y: 9.5, z: -29.5900002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1787898504}
@@ -1300,7 +1300,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1787665037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.5, y: 9.5, z: -54.5}
+  m_LocalPosition: {x: 20.5, y: 9.5, z: -54.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

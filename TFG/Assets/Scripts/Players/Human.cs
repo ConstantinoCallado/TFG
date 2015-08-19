@@ -5,7 +5,8 @@ public class Human : Player
 {
 	public bool aggressiveMode = false;
 	float aggressiveTimeEnd = 0;
-	const float aggressiveTime = 8;
+	//const float aggressiveTime = 8;
+	const float aggressiveTime = 20;
 	public SightableHuman sightable;
 	
 	public static Human humanRef;

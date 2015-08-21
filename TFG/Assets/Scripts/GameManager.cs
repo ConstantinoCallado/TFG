@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	public float tiempoInicial;
 
 	public float ultimaVezRecogidoAlgo;
-
+	
 	public Tuerca[] listaDeTuercas = new Tuerca[28];
 
 	void Awake () 
@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
 		--piezasRestantes;
 
 		// Cada 10 segundos actualizamos los recogibles en todoos los dispositivos
-		if(ultimaVezRecogidoAlgo + 10 > Time.time)
+		if(Time.time > ultimaVezRecogidoAlgo + 10)
 		{
 			ultimaVezRecogidoAlgo = Time.time;
 

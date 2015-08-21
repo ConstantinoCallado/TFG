@@ -470,6 +470,12 @@ public class NetworkManager : MonoBehaviour
 		{
 			networkView.RPC("spwn", networkPlayer, i, listaJugadores[i].viewID, (int)listaJugadores[i].enumPersonaje);
 
+			// Si los objetos recogibles no son los iniciales los actualizamos...
+			if(GameManager.gameManager.piezasRestantes != GameManager.gameManager.listaDeTuercas.Length-1)
+			{
+				networkView.RPC("updtRcg", networkPlayer, GameManager.gameManager.getTuercasEmpaquetadas());
+			}
+
 			// Si el personaje pertenece al jugador se le notificara para que le anyada control local
 			if(networkPlayer == listaJugadores[i].networkPlayer)
 			{
@@ -584,5 +590,21 @@ public class NetworkManager : MonoBehaviour
 	{
 		Debug.Log("Recibida activacion de skill del servidor");
 		listaJugadores[id].player.ActivatePower();
+	}
+	
+	[RPC]
+	void updtRcg(int paqueteRecogibles)
+	{
+		if(GameManager.gameManager)
+		{
+			GameManager.gameManager.actualizarTuercasDesdePaquete(paqueteRecogibles);
+		}
+	}
+
+	public void SpamearRecogibles()
+	{
+		int recogiblesEmpaquetados = GameManager.gameManager.getTuercasEmpaquetadas();
+
+		networkView.RPC ("updtRcg", RPCMode.Others, recogiblesEmpaquetados); 
 	}
 }

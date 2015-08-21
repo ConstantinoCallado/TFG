@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 	public short piezasRestantes = 0;
 	public float tiempoInicial;
 
+	public float ultimaVezRecogidoAlgo;
+
 	public Tuerca[] listaDeTuercas = new Tuerca[28];
 
 	void Awake () 
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 			tiempoInicial = Time.time;
 			SpawnearPersonajesEnServer();
 		}
+
 		NotificarPartidaCargada();
 	}
 
@@ -61,7 +64,8 @@ public class GameManager : MonoBehaviour
 
 		for(int i = listaDeTuercas.Length-1; i>= 0; i--)
 		{
-			if(paquete & 1 == 1)
+			// Comprobamos el ultimo bit del paquete para comprobar si la tuerca esta cogida o no...
+			if((paquete & 1) == 1)
 			{
 				if(listaDeTuercas[i].recogida)
 				{
@@ -187,6 +191,14 @@ public class GameManager : MonoBehaviour
 		listaDeTuercas[index].SetCogida(true);
 
 		--piezasRestantes;
+
+		// Cada 10 segundos actualizamos los recogibles en todoos los dispositivos
+		if(ultimaVezRecogidoAlgo + 10 > Time.time)
+		{
+			ultimaVezRecogidoAlgo = Time.time;
+
+			NetworkManager.networkManagerRef.SpamearRecogibles();
+		}
 
 		if(piezasRestantes == 0)
 		{

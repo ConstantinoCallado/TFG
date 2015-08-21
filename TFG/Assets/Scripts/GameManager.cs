@@ -12,13 +12,16 @@ public class GameManager : MonoBehaviour
 	public short robotsAlive = 0;
 	public const short timeRespawnRobot = 10;
 	public short piezasRestantes = 0;
-	public short piezasRecogidas = 0;
 	public float tiempoInicial;
+
+	public Tuerca[] listaDeTuercas = new Tuerca[28];
 
 	void Awake () 
 	{
 		gameManager = this;
-	
+		Tuerca.cantidadInstanciada = 0;
+		piezasRestantes = (short)listaDeTuercas.Length;
+
 		if(Network.isServer)
 		{
 			tiempoInicial = Time.time;
@@ -26,7 +29,58 @@ public class GameManager : MonoBehaviour
 		}
 		NotificarPartidaCargada();
 	}
-	
+
+	public void Start()
+	{
+		Debug.Log("Empezando con " + getTuercasEmpaquetadas());
+	}
+
+	public int getTuercasEmpaquetadas()
+	{
+		int resultado = 0;
+
+		for(int i=0; i<listaDeTuercas.Length; i++)
+		{
+			if(!listaDeTuercas[i].recogida)
+			{
+				resultado++;
+			}
+
+			if(i < listaDeTuercas.Length-1)
+			{
+				resultado = resultado << 1;
+			}
+		}
+
+		return resultado;
+	}
+
+	public void actualizarTuercasDesdePaquete(int paquete)
+	{
+		piezasRestantes = (short)listaDeTuercas.Length;
+
+		for(int i = listaDeTuercas.Length-1; i>= 0; i--)
+		{
+			if(paquete & 1 == 1)
+			{
+				if(listaDeTuercas[i].recogida)
+				{
+					listaDeTuercas[i].SetCogida(false);
+				}
+			}
+			else
+			{
+				--piezasRestantes;
+				if(!listaDeTuercas[i].recogida)
+				{
+					listaDeTuercas[i].SetCogida(true);
+				}
+			}
+
+			paquete = paquete >> 1;
+		}
+	}
+
 	public void SpawnearPersonajesEnServer()
 	{
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
@@ -67,7 +121,7 @@ public class GameManager : MonoBehaviour
 			#if !vidasInfinitas
 			if(NetworkManager.networkManagerRef.humanLifes == 0)
 			{
-				NetworkManager.networkManagerRef.TerminarPartida(false, Time.time - 	tiempoInicial, piezasRestantes, piezasRecogidas);
+				NetworkManager.networkManagerRef.TerminarPartida(false, Time.time - tiempoInicial, piezasRestantes, listaDeTuercas.Length - piezasRestantes);
 			}
 			#endif
 			
@@ -95,7 +149,6 @@ public class GameManager : MonoBehaviour
 			}
 		}
 	}
-
 
 	public void KillPlayerClient(int killed, int killer)
 	{	
@@ -129,13 +182,25 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void RecogerTuerca(short index)
+	{
+		listaDeTuercas[index].SetCogida(true);
+
+		--piezasRestantes;
+
+		if(piezasRestantes == 0)
+		{
+			NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, listaDeTuercas.Length - piezasRestantes);
+		}
+	}
+
+
 	public void RecogerPieza ()
 	{
-		++piezasRecogidas;
 		--piezasRestantes;
 		if(piezasRestantes == 0)
 		{
-			NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, piezasRecogidas);
+			NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, listaDeTuercas.Length - piezasRestantes);
 		}
 	}
 }

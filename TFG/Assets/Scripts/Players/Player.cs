@@ -6,7 +6,7 @@ public enum EnumPersonaje {Ninguno, Humano, RobotRojo, RobotNaranja, RobotAzul, 
 public class Player : MonoBehaviour 
 {
 	public PlayerGraphics playerGraphics;
-	public float speed = 3.25f;
+	public float speed = 3.5f;
 	public Vector3 spawnPoint;
 	public bool isFreeze = false;
 	public bool isDead = false;

@@ -76,7 +76,6 @@ public class Scenario : MonoBehaviour
 					if(arrayNivel[i,j] == 2)
 					{
 						gameObjectInstanciado = GameObject.Instantiate(prefabPiece);
-						++gameManager.piezasRestantes;
 						gameObjectInstanciado.transform.position = new Vector3(j, i, 0);
 						gameObjectInstanciado.transform.parent = transform;
 					}

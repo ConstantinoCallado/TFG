@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 428172}
   - 58: {fileID: 5871864}
   - 114: {fileID: 11444270}
+  - 114: {fileID: 11496004}
   m_Layer: 10
   m_Name: Weapon
   m_TagString: Weapon
@@ -116,6 +117,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSighters: 0
   gameObjectGraphics: {fileID: 185136}
+--- !u!114 &11496004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3783576a1977f4daa7c901aa73a8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

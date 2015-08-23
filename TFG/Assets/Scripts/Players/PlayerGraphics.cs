@@ -7,8 +7,10 @@ public class PlayerGraphics : MonoBehaviour
 	public HumanGraphics humanGraphics;
 	public RobotGraphics robotGraphics;
 	public HoveringName hoveringName;
-
 	public List<Sprite> listaIconos = new List<Sprite>();
+
+	public GameObject prefabIndicador;
+
 
 	public void setHuman()
 	{

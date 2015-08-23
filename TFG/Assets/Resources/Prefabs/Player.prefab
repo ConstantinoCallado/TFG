@@ -2235,6 +2235,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 71e9daed7a286234196bb391ec0280f7, type: 3}
   - {fileID: 21300000, guid: 62aab6f421574aa40858fe11696db180, type: 3}
   - {fileID: 21300000, guid: 8133ae42929db1c40bc3fe61eed91af1, type: 3}
+  prefabIndicador: {fileID: 120846, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
 --- !u!114 &11462714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5601,7 +5602,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: prefabIndicador
+      value: 
+      objectReference: {fileID: 120846, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158900}

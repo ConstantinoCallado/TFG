@@ -386,7 +386,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
 
-		//indiceHumano = 1;
+		//indiceHumano = 2;
 		
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();
@@ -588,7 +588,6 @@ public class NetworkManager : MonoBehaviour
 	[RPC]
 	void bcstSkll(int id)
 	{
-		Debug.Log("Recibida activacion de skill del servidor");
 		listaJugadores[id].player.ActivatePower();
 	}
 	
@@ -606,5 +605,19 @@ public class NetworkManager : MonoBehaviour
 		int recogiblesEmpaquetados = GameManager.gameManager.getTuercasEmpaquetadas();
 
 		networkView.RPC ("updtRcg", RPCMode.Others, recogiblesEmpaquetados); 
+	}
+
+	public void BroadcastIndicador (Vector3 posicion, EnumTipoInidcador indicadorAPoner, int indiceJugador)
+	{
+		networkView.RPC ("bcstInd", RPCMode.Others, Mathf.RoundToInt(posicion.x), Mathf.RoundToInt(posicion.y), (int)indicadorAPoner, indiceJugador); 
+	}
+
+	[RPC]
+	void bcstInd(int posicionX, int posicionY, int indicadorAPoner, int indiceJugador)
+	{
+		if(WarFog.warfogEnabled)
+		{
+			listaJugadores[indiceJugador].player.ponerIndicadorEn(new Vector2(posicionX, posicionY), (EnumTipoInidcador)indicadorAPoner);
+		}
 	}
 }

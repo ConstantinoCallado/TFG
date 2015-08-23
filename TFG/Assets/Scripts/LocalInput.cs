@@ -14,6 +14,11 @@ public class LocalInput : MonoBehaviour
 	public Player playerRef;
 	public static LocalInput localInputRef;
 
+	private bool ponerIndicador;
+	private EnumTipoInidcador indicadorAPoner;
+
+	const float distanciaAlTablero = -54.5f;
+
 	#if !UNITY_STANDALONE && !UNITY_STANDALONE_OSX 
 	Vector2 firstTapPosition;
 	Vector2 actualTapPosition;
@@ -71,6 +76,7 @@ public class LocalInput : MonoBehaviour
 		else
 		{
 			SkillButton.skillButtonRef.gameObject.SetActive(false);
+			BotonIndicador.activados = false;
 		}
 
 		if(iconIndex != 0)
@@ -92,6 +98,14 @@ public class LocalInput : MonoBehaviour
 			Debug.Log("AUN NO HA PASADO EL COOLDOWN");
 		}
 	}
+
+	public void ClickBotonIndicador(EnumTipoInidcador tipoIndicador)
+	{
+		ponerIndicador = true;
+		indicadorAPoner = tipoIndicador;
+	}
+
+
 
 	// Actualizamos la entrada y la enviamos al servidor... si ya estamos en el propio servidor invocamos la funcion directamente
 	void Update () 
@@ -129,6 +143,26 @@ public class LocalInput : MonoBehaviour
 			}
 
 			oldEnumMovimiento = enumMovimiento;
+		}
+
+		if(ponerIndicador)
+		{
+			if(Input.GetMouseButton(0))
+			{
+				Vector2 posicionIndicador = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - Input.mousePosition.x, 
+				                                                                       Screen.height - Input.mousePosition.y, 
+				                                                                       distanciaAlTablero));
+
+				NetworkManager.networkManagerRef.BroadcastIndicador(posicionIndicador, 
+				                                                    indicadorAPoner,
+				                                                    playerRef.id);
+
+
+				playerRef.ponerIndicadorEn(posicionIndicador, indicadorAPoner);
+
+				//playerRef.ponerIndicadorEn(
+				ponerIndicador = false;
+			}
 		}
 	}
 

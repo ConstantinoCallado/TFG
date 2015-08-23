@@ -6,7 +6,7 @@ public enum EnumPersonaje {Ninguno, Humano, RobotRojo, RobotNaranja, RobotAzul, 
 public class Player : MonoBehaviour 
 {
 	public PlayerGraphics playerGraphics;
-	public float speed = 3.5f;
+	public float speed = 3.25f;
 	public Vector3 spawnPoint;
 	public bool isFreeze = false;
 	public bool isDead = false;
@@ -121,5 +121,17 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("AUN NO HA PASADO EL COOLDOWN");
 		}
+	}
+
+	public void ponerIndicadorEn(Vector2 posicion, EnumTipoInidcador tipoIndicador)
+	{
+		GameObject indicadorInstanciado = (GameObject)GameObject.Instantiate(playerGraphics.prefabIndicador);
+		indicadorInstanciado.GetComponent<IndicadorMapa>().Inicializar(posicion, GetColor(), tipoIndicador);
+	}
+
+	public virtual Color GetColor()
+	{
+		Debug.Log("La clase hija deberia sobreescribir este metodo");
+		return Color.green;
 	}
 }

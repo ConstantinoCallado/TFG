@@ -36,12 +36,6 @@ public class Robot : Player
 		sightScript.EnableSight(true);
 	}
 
-	public virtual Color GetColor()
-	{
-		Debug.Log("La clase hija deberia sobreescribir este metodo");
-		return Color.black;
-	}
-
 	public virtual string getColorString()
 	{
 		return "";

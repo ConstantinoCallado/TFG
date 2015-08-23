@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GreenRobot : Robot
 {
-	Color colorRobot = new Color(0.29f, 0.97f, 0.41f);
+	public static Color colorRobot = new Color(0.29f, 0.97f, 0.41f);
 	const float skillDuration = 10;
 	const float wardRadius = 3.5f;
 

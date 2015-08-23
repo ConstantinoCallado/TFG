@@ -4,7 +4,7 @@ using System.Collections;
 public class WhiteRobot : Robot
 {
 	const float skillDuration = 5;
-	Color colorRobot = new Color(0.9f, 0.9f, 0.9f);
+	public static Color colorRobot = new Color(0.9f, 0.9f, 0.9f);
 
 	public bool hiding = false;
 

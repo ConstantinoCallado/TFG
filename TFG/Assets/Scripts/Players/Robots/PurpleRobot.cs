@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PurpleRobot : Robot
 {
-	Color colorRobot = new Color(0.91f, 0.19f, 1f);
+	public static Color colorRobot = new Color(0.91f, 0.19f, 1f);
 	public int teleportDistance = 5;
 	private Vector2 targetPosition;
 	private bool continuar = true;

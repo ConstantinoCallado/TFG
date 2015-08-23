@@ -47,30 +47,36 @@ public class LocalInput : MonoBehaviour
 		{
 			iconIndex = (int)EnumPersonaje.RobotRojo;
 			SkillButton.skillButtonRef.nombreHabilidad.text = "Sprint";
+			BotonIndicador.colorDeIconos = RedRobot.colorRobot;
 		}
 		else if(playerRef.GetType() == typeof(BlueRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotAzul;
+			BotonIndicador.colorDeIconos = BlueRobot.colorRobot;
 			SkillButton.skillButtonRef.nombreHabilidad.text = "Barrera";
 		}
 		else if(playerRef.GetType() == typeof(PurpleRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotMorado;
+			BotonIndicador.colorDeIconos = PurpleRobot.colorRobot;
 			SkillButton.skillButtonRef.nombreHabilidad.text = "Salto";
 		}
 		else if(playerRef.GetType() == typeof(WhiteRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotBlanco;
+			BotonIndicador.colorDeIconos = WhiteRobot.colorRobot;
 			SkillButton.skillButtonRef.nombreHabilidad.text = "Fantasma";
 		}
 		else if(playerRef.GetType() == typeof(OrangeRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotNaranja;
+			BotonIndicador.colorDeIconos = OrangeRobot.colorRobot;
 			//SkillButton.skillButtonRef.nombreHabilidad.text = "Vision";
 		}
 		else if(playerRef.GetType() == typeof(GreenRobot))
 		{
 			iconIndex = (int)EnumPersonaje.RobotVerde;
+			BotonIndicador.colorDeIconos = GreenRobot.colorRobot;
 			SkillButton.skillButtonRef.nombreHabilidad.text = "Vigilante";
 		}
 		else

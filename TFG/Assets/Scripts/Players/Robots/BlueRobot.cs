@@ -3,17 +3,15 @@ using System.Collections;
 
 public class BlueRobot : Robot
 {
-	Color colorRobot = new Color(0.16f, 0.58f, 1f);
+	public static Color colorRobot = new Color(0.16f, 0.58f, 1f);
 	const float skillDuration = 7;
-
-
+	
 	public override void Initialize()
 	{
 		base.Initialize();
 
 		Debug.Log("Inicializando robot azul");
-	}
-	
+	}	
 
 	public override void ActivatePower()
 	{

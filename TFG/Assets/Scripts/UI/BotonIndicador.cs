@@ -1,17 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BotonIndicador : MonoBehaviour 
 {
 	public static bool activados = true;
+	public bool inicializado = false;
 	static float coolDownReset = 0;
 	static short touchCount = 0;
+	public Image imagen; 
+
+	public static Color colorDeIconos = Color.magenta;
 
 	void Update()
 	{
-		if(!activados)
+		if(!inicializado)
 		{
-			gameObject.SetActive(false);
+			if(activados)
+			{
+				if(colorDeIconos != Color.magenta)
+				{
+					imagen.color = colorDeIconos;
+					inicializado = true;
+				}
+			}
+			else
+			{
+				inicializado = true;
+				gameObject.SetActive(false);
+			}
 		}
 	}
 

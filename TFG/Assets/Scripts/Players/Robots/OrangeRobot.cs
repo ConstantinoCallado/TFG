@@ -3,7 +3,7 @@ using System.Collections;
 
 public class OrangeRobot : Robot
 {
-	Color colorRobot = new Color(0.97f, 0.61f, 0f);
+	public static Color colorRobot = new Color(0.97f, 0.61f, 0f);
 
 	const float increaseRadius = 1.33f;
 	const float skillDuration = 7;

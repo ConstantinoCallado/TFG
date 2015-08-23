@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PinkRobot : Robot
 {
-	Color colorRobot = new Color(1, 0.6f, 0.6f);
+	public static Color colorRobot = new Color(1, 0.6f, 0.6f);
 
 	public override void Initialize()
 	{

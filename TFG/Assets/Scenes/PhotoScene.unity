@@ -296,6 +296,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 1094567601}
   hoveringName: {fileID: 88086730}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &96574591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1488,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 598144731}
   hoveringName: {fileID: 124118158}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &126029596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,7 +2791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &341995627
 Transform:
   m_ObjectHideFlags: 0
@@ -2858,6 +2860,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 1369557126}
   hoveringName: {fileID: 341995629}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1001 &422128033
 Prefab:
   m_ObjectHideFlags: 0
@@ -4281,6 +4284,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 683823736}
   hoveringName: {fileID: 466708391}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &485508298
 GameObject:
   m_ObjectHideFlags: 0
@@ -4366,6 +4370,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 1812722904}
   hoveringName: {fileID: 485508301}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &490360312
 GameObject:
   m_ObjectHideFlags: 0
@@ -6777,6 +6782,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 1385785463}
   hoveringName: {fileID: 648241503}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!4 &648241505
 Transform:
   m_ObjectHideFlags: 0
@@ -9752,6 +9758,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 2082414285}
   hoveringName: {fileID: 986966777}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &1039950384
 GameObject:
   m_ObjectHideFlags: 0
@@ -20155,6 +20162,60 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!1001 &2047058372
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.349999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 432608, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 115076, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11190486, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140810, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e7c907e8e0242184c99c23559c38c436, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2074324807
 GameObject:
   m_ObjectHideFlags: 0
@@ -20435,6 +20496,7 @@ MonoBehaviour:
   robotGraphics: {fileID: 1613772975}
   hoveringName: {fileID: 2118048767}
   listaIconos: []
+  prefabIndicador: {fileID: 0}
 --- !u!1 &2135204376
 GameObject:
   m_ObjectHideFlags: 0

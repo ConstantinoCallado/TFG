@@ -14,7 +14,6 @@ public class Human : Player
 	public void Awake()
 	{
 		base.Awake();
-
 		humanRef = this;
 	}
 
@@ -69,36 +68,40 @@ public class Human : Player
 	[RPC]
 	void aggr()
 	{
-		aggressiveMode = true;
 		aggressiveTimeEnd = Time.time + aggressiveTime;
+		base.playerGraphics.SetAggressive(true);
+
+		aggressiveMode = true;
 		StartCoroutine(coroutineAggressive());
 	}
 
 	IEnumerator coroutineAggressive()
 	{
-		base.playerGraphics.SetAggressive(true);
-
-		while(Time.time < aggressiveTimeEnd - 3)
-		{
-			yield return new WaitForSeconds(0.1f);
-		}
-		while(Time.time < aggressiveTimeEnd - 1.5)
-		{
-			base.playerGraphics.SetAggressive(false);
-			yield return new WaitForSeconds(0.2f);
-			base.playerGraphics.SetAggressive(true);
-			yield return new WaitForSeconds(0.2f);
-		}
 		while(Time.time < aggressiveTimeEnd)
 		{
-			base.playerGraphics.SetAggressive(false);
-			yield return new WaitForSeconds(0.1f);
-			base.playerGraphics.SetAggressive(true);
-			yield return new WaitForSeconds(0.1f);
+			Debug.Log("COMPROBANDO");
+			if(Time.time < aggressiveTimeEnd - 3)
+			{
+				yield return new WaitForSeconds(0.1f);
+			}
+			else if(Time.time < aggressiveTimeEnd - 1.5)
+			{
+				base.playerGraphics.SetAggressive(false);
+				yield return new WaitForSeconds(0.2f);
+				base.playerGraphics.SetAggressive(true);
+				yield return new WaitForSeconds(0.2f);
+			}
+			else
+			{
+				base.playerGraphics.SetAggressive(false);
+				yield return new WaitForSeconds(0.1f);
+				base.playerGraphics.SetAggressive(true);
+				yield return new WaitForSeconds(0.1f);
+			}		
 		}
 
 		base.playerGraphics.SetAggressive(false);
-
+		
 		aggressiveMode = false;
 	}
 	

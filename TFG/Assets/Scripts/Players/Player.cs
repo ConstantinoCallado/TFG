@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
 	public virtual void Initialize()
 	{
-		Debug.Log("inicializado Player");
+		//Debug.Log("inicializado Player");
 		transform.position = spawnPoint;
 		gameObject.GetComponent<HoveringName>().playerRef = this;
 		networkView = GetComponent<NetworkView>();

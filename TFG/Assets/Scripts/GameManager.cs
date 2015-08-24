@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
 	public void Start()
 	{
-		Debug.Log("Empezando con " + getTuercasEmpaquetadas());
+		//Debug.Log("Empezando con " + getTuercasEmpaquetadas());
 	}
 
 	public int getTuercasEmpaquetadas()

@@ -22,7 +22,7 @@ public class Human : Player
 		base.Initialize();
 		gameObject.layer = LayerMask.NameToLayer("Human");
 		gameObject.tag = "Human";
-		speed = 4.25f;
+		speed = 3.75f;
 		base.playerGraphics.setHuman();
 		gameObject.name = "Human";
 		sightable = gameObject.GetComponentInChildren<SightableHuman>();

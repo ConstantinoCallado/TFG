@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2dfd681f72cce489c9603ac7dc4185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inicializado: 0
   imagen: {fileID: 1101972107}
 --- !u!114 &598009956
 MonoBehaviour:
@@ -2256,6 +2257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2dfd681f72cce489c9603ac7dc4185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inicializado: 0
   imagen: {fileID: 962405269}
 --- !u!114 &1805531743
 MonoBehaviour:

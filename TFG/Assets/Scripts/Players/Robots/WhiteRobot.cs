@@ -12,7 +12,7 @@ public class WhiteRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot blanco");
+		//Debug.Log("Inicializando robot blanco");
 	}
 	
 	public override void ActivatePower()
@@ -29,7 +29,7 @@ public class WhiteRobot : Robot
 		}
 
 		Invoke ("DesactivatePower", skillDuration);
-		Debug.Log("Activando poder blanco");
+		//Debug.Log("Activando poder blanco");
 
 		playerGraphics.robotGraphics.particulasFlash.Emit(20);
 	}

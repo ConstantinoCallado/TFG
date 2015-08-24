@@ -9,7 +9,7 @@ public class PinkRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot rosa");
+		//Debug.Log("Inicializando robot rosa");
 	}
 
 	public override void ActivatePower()

@@ -21,12 +21,12 @@ public class RedRobot : Robot
 		trailRenderer.material = playerGraphics.robotGraphics.materialTrail;
 		trailRenderer.material.color = playerGraphics.robotGraphics.renderersDeColores[0].material.color;
 		//trailRenderer.material.color = playerGraphics.robotGraphics.renderersDeColores[0].material.color;
-		Debug.Log("Inicializando robot rojo");
+		//Debug.Log("Inicializando robot rojo");
 	}
 
 	public override void ActivatePower()
 	{
-		Debug.Log("Activando poder rojo");
+		//Debug.Log("Activando poder rojo");
 		base.speed += increaseSpeed;
 		trailRenderer.enabled = true;
 		Invoke("DesactivatePower", skillDuration);
@@ -34,7 +34,7 @@ public class RedRobot : Robot
 	
 	public void DesactivatePower()
 	{
-		Debug.Log("Desactivando poder rojo");
+		//Debug.Log("Desactivando poder rojo");
 		trailRenderer.enabled = false;
 		base.speed -= increaseSpeed;
 	}

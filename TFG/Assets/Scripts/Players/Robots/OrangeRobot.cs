@@ -12,7 +12,7 @@ public class OrangeRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot naranja");
+		//Debug.Log("Inicializando robot naranja");
 	}
 
 

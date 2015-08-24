@@ -43,7 +43,7 @@ public class Robot : Player
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("He tocado al humano");
+		//Debug.Log("He tocado al humano");
 
 		if(other.gameObject.GetComponent<Human>().aggressiveMode)
 		{
@@ -63,6 +63,6 @@ public class Robot : Player
 
 	public override void ActivatePower()
 	{
-		Debug.Log("ROBOT ACTIVANDO HABILIDAD");
+		//Debug.Log("ROBOT ACTIVANDO HABILIDAD");
 	}
 }

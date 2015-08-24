@@ -10,7 +10,7 @@ public class BlueRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot azul");
+		//Debug.Log("Inicializando robot azul");
 	}	
 
 	public override void ActivatePower()

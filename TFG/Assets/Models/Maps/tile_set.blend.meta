@@ -12,6 +12,7 @@ ModelImporter:
     100008: //RootNode
     100010: Relleno_001
     100012: Mapa
+    100014: Muro_001
     400000: Esquina
     400002: Muro
     400004: Relleno
@@ -19,24 +20,28 @@ ModelImporter:
     400008: //RootNode
     400010: Relleno_001
     400012: Mapa
+    400014: Muro_001
     2300000: Esquina
     2300002: Muro
     2300004: Relleno
     2300006: Rincon
     2300008: Relleno_001
     2300010: Mapa
+    2300012: Muro_001
     3300000: Esquina
     3300002: Muro
     3300004: Relleno
     3300006: Rincon
     3300008: Relleno_001
     3300010: Mapa
+    3300012: Muro_001
     4300000: Relleno
     4300002: Rincon
     4300004: Esquina
     4300006: Muro
     4300008: Relleno_001
     4300010: Mapa
+    4300012: Muro_001
     7400000: Default Take
     9500000: //RootNode
   materials:

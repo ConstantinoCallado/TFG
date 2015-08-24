@@ -11,7 +11,7 @@ public class GreenRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot verde");
+		//Debug.Log("Inicializando robot verde");
 	}
 
 	public override void ActivatePower()

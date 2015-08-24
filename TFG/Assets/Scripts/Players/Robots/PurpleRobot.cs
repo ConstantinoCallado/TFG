@@ -12,12 +12,12 @@ public class PurpleRobot : Robot
 	{
 		base.Initialize();
 
-		Debug.Log("Inicializando robot morado");
+		//Debug.Log("Inicializando robot morado");
 	}
 
 	public override void ActivatePower()
 	{
-		Debug.Log("Activando poder azul");
+		//Debug.Log("Activando poder azul");
 		
 		playerGraphics.robotGraphics.particulasFlash.Emit(20);
 		
@@ -29,11 +29,11 @@ public class PurpleRobot : Robot
 		for(int i=teleportDistance; i>0 && continuar; i--)
 		{
 			targetPosition = (Vector2)transform.position + (Vector2)(-transform.right.normalized * i);
-			Debug.Log("intentando teletransportarse " + targetPosition);
+			//Debug.Log("intentando teletransportarse " + targetPosition);
 			
 			if(Scenario.scenarioRef.isWalkable(targetPosition))
 			{
-				Debug.Log("teleport a " + targetPosition);
+				//Debug.Log("teleport a " + targetPosition);
 				transform.position = targetPosition;
 				
 				if(basicMovementServer)

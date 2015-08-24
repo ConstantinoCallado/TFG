@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("AUN NO HA PASADO EL COOLDOWN");
+			//Debug.Log("AUN NO HA PASADO EL COOLDOWN");
 		}
 	}
 

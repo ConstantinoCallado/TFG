@@ -1,4 +1,4 @@
-#define jumpNetworkConnectionCheck
+//#define jumpNetworkConnectionCheck
 
 using UnityEngine;
 using System;
@@ -386,7 +386,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
 
-		indiceHumano = 1;
+		//indiceHumano = 1;
 		
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();

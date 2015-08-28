@@ -28,7 +28,7 @@ public class Human : Player
 		sightable = gameObject.GetComponentInChildren<SightableHuman>();
 		sightable.humanRef = this;
 
-		Debug.Log("inicializado Humano");
+		//Debug.Log("inicializado Humano");
 	}
 
 
@@ -79,7 +79,7 @@ public class Human : Player
 	{
 		while(Time.time < aggressiveTimeEnd)
 		{
-			Debug.Log("COMPROBANDO");
+			//Debug.Log("COMPROBANDO");
 			if(Time.time < aggressiveTimeEnd - 3)
 			{
 				yield return new WaitForSeconds(0.1f);

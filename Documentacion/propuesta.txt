@@ -1,0 +1,47 @@
+Curso académico 2014-15
+
+Plan de estudios GRADO EN INGENIERÍA INFORMÁTICA
+
+Asignatura TRABAJO FIN DE GRADO
+
+Datos del Trabajo Final de estudios
+Título del trabajo * Desarrollo de un videojuego multiplataforma para dispositivos móviles
+
+Resumen *
+
+Los dispositivos móviles se han convertido en una de las principales plataformas para videojuegos. Una de las principales problemáticas al desarrollar aplicaciones para estos dispositivos es la alta fragmentación que existe en cuanto a sistemas operativos y características de la interfaz. Existen determinadas librerías y herramientas dirigidas a resolver este problema, permitiendo desarrollar videojuegos que puedan ser portados a las principales plataformas móviles existentes.
+Objetivos concretos
+
+Desarrollo de un videojuego para dispositivos móviles. El videojuego se desarrollará utilizando un motor que permita su portabilidad a las diferentes plataformas móviles existentes.
+
+Metodología a emplear
+
+* Selección del motor más adecuado para la realización del proyecto
+* Diseño del videojuego
+* Implementación y pruebas del videojuego
+* Portabilidad del juego a diferentes plataformas
+
+Relación con asignaturas cursadas y/o itinerario relacionado
+
+El proyecto está relacionado con las asignaturas del itinerario de COMPUTACIÓN, especialmente con:
+
+34031 - RAZONAMIENTO AUTOMÁTICO
+34033 - SISTEMAS GRÁFICOS INTERACTIVOS
+
+Bibliografía o fuentes de información
+
+LibGDX: http://code.google.com/p/libgdx/
+Cocos2D-X: http://www.cocos2d-x.org
+Unity 3D: http://unity3d.com
+
+COORDINADOR de esta propuesta
+Nombre MIGUEL ANGEL LOZANO ORTEGA
+
+Dpto B161 CIENCIA DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL
+
+E-mail malozano@ua.es
+
+TUTORES de esta propuesta
+Cuestiones sobre los estudiantes
+Recomendación :
+

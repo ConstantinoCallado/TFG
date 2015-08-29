@@ -194,7 +194,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: .5}
   m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 0, y: 201}
+  m_AnchoredPosition: {x: 0, y: 211}
   m_SizeDelta: {x: -60, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &45634334
@@ -582,7 +582,7 @@ GameObject:
   - 224: {fileID: 120928050}
   - 222: {fileID: 120928051}
   m_Layer: 5
-  m_Name: Tuto7
+  m_Name: Tuto1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,8 +910,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 37}
-  m_SizeDelta: {x: 325, y: 325}
+  m_AnchoredPosition: {x: 0, y: 39}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &209816047
 MonoBehaviour:
@@ -1254,7 +1254,7 @@ GameObject:
   - 224: {fileID: 325775923}
   - 222: {fileID: 325775924}
   m_Layer: 5
-  m_Name: Tuto9
+  m_Name: Tuto10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1411,7 +1411,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Para moverte arrastra el dedo hacia donde quieras ir, tu personaje avanzar\xE1
-    en esa direcci\xF3n hasta que pulses y arrastres en otra direcci\xF3n. "
+    en esa direcci\xF3n hasta que pulses y arrastres otra vez."
 --- !u!222 &337564784
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ GameObject:
   - 224: {fileID: 354467006}
   - 222: {fileID: 354467008}
   m_Layer: 5
-  m_Name: Tuto1
+  m_Name: Tuto3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +1634,7 @@ GameObject:
   - 224: {fileID: 464542434}
   - 222: {fileID: 464542435}
   m_Layer: 5
-  m_Name: Tuto10
+  m_Name: Tuto5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1656,7 +1656,7 @@ RectTransform:
   m_RootOrder: 11
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -80.9999695}
+  m_AnchoredPosition: {x: 0, y: -69}
   m_SizeDelta: {x: 600, y: 350}
   m_Pivot: {x: .5, y: .5}
 --- !u!222 &464542435
@@ -2235,7 +2235,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 10}
-  m_SizeDelta: {x: 300, y: 375}
+  m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &647320183
 MonoBehaviour:
@@ -2373,7 +2373,7 @@ GameObject:
   - 224: {fileID: 665905954}
   - 222: {fileID: 665905955}
   m_Layer: 5
-  m_Name: Tuto5
+  m_Name: Tuto8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2644,7 +2644,7 @@ GameObject:
   - 224: {fileID: 834009867}
   - 222: {fileID: 834009868}
   m_Layer: 5
-  m_Name: Tuto8
+  m_Name: Tuto2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2708,7 +2708,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -5, y: 5}
-  m_SizeDelta: {x: 140, y: 45}
+  m_SizeDelta: {x: 180, y: 60}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &848454535
 MonoBehaviour:
@@ -3292,9 +3292,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tu objetivo como humano es recoger todas las tuercas que hay por el mapa,
-    puedes ver las tuercas que te quedan por recoger en la esquina inferior izquierda
-    de la pantalla.
+  m_Text: Tu objetivo como humano es recoger todas las tuercas que hay por el mapa.
+    Puedes ver las que te quedan por recoger en la esquina inferior izquierda de la
+    pantalla.
 --- !u!222 &1064636817
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3622,7 +3622,7 @@ GameObject:
   - 224: {fileID: 1144354162}
   - 222: {fileID: 1144354163}
   m_Layer: 5
-  m_Name: Tuto4
+  m_Name: Tuto7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3745,7 +3745,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1.47326209e-05, y: -80}
+  m_AnchoredPosition: {x: 1.47326209e-05, y: -75}
   m_SizeDelta: {x: 325, y: 325}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1159880391
@@ -3785,7 +3785,7 @@ GameObject:
   - 224: {fileID: 1181480521}
   - 222: {fileID: 1181480522}
   m_Layer: 5
-  m_Name: Tuto3
+  m_Name: Tuto6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3982,16 +3982,16 @@ MonoBehaviour:
   botonAnterior: {fileID: 1453943354}
   listaPanelesTutorial:
   - {fileID: 223068390}
+  - {fileID: 120928049}
+  - {fileID: 834009866}
   - {fileID: 354467005}
   - {fileID: 1739352564}
+  - {fileID: 464542433}
   - {fileID: 1181480520}
   - {fileID: 1144354161}
   - {fileID: 665905953}
   - {fileID: 1271534088}
-  - {fileID: 120928049}
-  - {fileID: 834009866}
   - {fileID: 325775922}
-  - {fileID: 464542433}
 --- !u!114 &1211415356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4029,7 +4029,7 @@ GameObject:
   - 224: {fileID: 1271534089}
   - 222: {fileID: 1271534090}
   m_Layer: 5
-  m_Name: Tuto6
+  m_Name: Tuto9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4319,8 +4319,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Si juegas desde el ordenador podr\xE1s moverte con WASD, tambi\xE9n podr\xE1s
-    activar la habilidad especial usando la barra espaciadora."
+  m_Text: "Si juegas desde el ordenador podr\xE1s moverte con WASD, usando la barra
+    espaciadora activar\xE1s la habilidad especial."
 --- !u!222 &1324758868
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4453,7 +4453,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\xA1Lleva cuidado! Si un robot te alcanza perder\xE1s una vida, y solo
-    tienes tres, puedes ver las que tienes en la esquina inferior izquierda de la
+    tienes tres. Puedes ver las que tienes en la esquina inferior izquierda de la
     pantalla."
 --- !u!222 &1338136520
 CanvasRenderer:
@@ -4556,7 +4556,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: .5}
   m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 0, y: 206}
+  m_AnchoredPosition: {x: 0, y: 213}
   m_SizeDelta: {x: -60, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1399772010
@@ -4584,8 +4584,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Cuando el humano coja una poci\xF3n del escenario se volver\xE1 de color
-    rojo durante un tiempo \xA1Huye o te matar\xE1! "
+  m_Text: "Cuando el humano coja una poci\xF3n se volver\xE1 de color rojo durante
+    un tiempo \xA1Huye o te matar\xE1! "
 --- !u!222 &1399772011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5404,8 +5404,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 270, y: 270}
+  m_AnchoredPosition: {x: 0, y: 42}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1628219268
 MonoBehaviour:
@@ -6143,7 +6143,7 @@ GameObject:
   - 224: {fileID: 1739352565}
   - 222: {fileID: 1739352567}
   m_Layer: 5
-  m_Name: Tuto2
+  m_Name: Tuto4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7090,7 +7090,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -7100,7 +7100,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Creditos
+  m_Text: "Cr\xE9ditos"
 --- !u!222 &2002497436
 CanvasRenderer:
   m_ObjectHideFlags: 0

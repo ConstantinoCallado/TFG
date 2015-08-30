@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 	public const int timeForStartRound = 3;
 	public bool roundStarted = false;
 	public short robotsAlive = 0;
-	public const short timeRespawnRobot = 10;
+	public const short timeRespawnRobot = 15;
 	public short piezasRestantes = 0;
 	public float tiempoInicial;
 

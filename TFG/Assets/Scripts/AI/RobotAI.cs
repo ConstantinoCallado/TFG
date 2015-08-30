@@ -289,6 +289,7 @@ public class RobotAI : AIBaseController
 
 			switch(contadorEsquina)
 			{
+				//TODO: ARREGLAR INDICESSSSSSS
 				case 0:
 					wlkToRandomPositionAround(new Vector2(4,10), 0);
 					break;

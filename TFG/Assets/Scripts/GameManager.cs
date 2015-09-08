@@ -167,6 +167,7 @@ public class GameManager : MonoBehaviour
 			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
 			//GUIHumanLifes.GUIHumanLifesRef.RemoveLife();
 			//--humanTries;
+			AudioManager.audioManagerRef.PlayMuerteHumano();
 
 			yield return new WaitForSeconds(2);
 
@@ -179,6 +180,7 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			NetworkManager.networkManagerRef.listaJugadores[index].player.Kill();
+			AudioManager.audioManagerRef.PlayMuerteRobot();
 
 			yield return new WaitForSeconds(timeRespawnRobot);
 

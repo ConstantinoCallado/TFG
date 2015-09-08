@@ -27,6 +27,7 @@ public class Robot : Player
 		base.Kill();
 		--GameManager.gameManager.robotsAlive;
 		sightScript.EnableSight(false);
+		AudioManager.audioManagerRef.PlayMuerteRobot();
 	}
 
 	public override void Respawn()
@@ -47,8 +48,8 @@ public class Robot : Player
 
 		if(Human.humanRef.aggressiveMode)
 		{
-			GameManager.gameManager.KillPlayerServer(base.id, Human.humanRef.id);
 			AudioManager.audioManagerRef.PlayMuerteRobot();
+			GameManager.gameManager.KillPlayerServer(base.id, Human.humanRef.id);
 			Kill();
 		}
 		else

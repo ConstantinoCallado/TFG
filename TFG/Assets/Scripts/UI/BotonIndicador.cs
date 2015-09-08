@@ -22,6 +22,7 @@ public class BotonIndicador : MonoBehaviour
 				{
 					imagen.color = colorDeIconos;
 					inicializado = true;
+					gameObject.SetActive(true);
 				}
 			}
 			else

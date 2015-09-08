@@ -7,21 +7,29 @@ public class WarFog : MonoBehaviour
 	public bool actualIsHumanInSight = false;
 	public bool oldIsHumanInSight = false;
 	public static bool warfogEnabled = true;
-	[HideInInspector]
 	//public List<Sight> listaVisiones = new List<Sight>();
 	public static WarFog warFogRef;
+	public static bool inicializado = false;
 
 	public void Awake()
 	{
 		warFogRef = this;
-	
+
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 		{
-			if(NetworkManager.networkManagerRef.listaJugadores[i].ownByClient && NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje == EnumPersonaje.Humano)
+			if(NetworkManager.networkManagerRef.listaJugadores[i].ownByClient)
 			{
-				RemoveFOW();
-				break;
+				if(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje == EnumPersonaje.Humano)
+				{
+					RemoveFOW();
+					break;
+				}
 			}
+		}
+		
+		if(Network.isServer)
+		{
+			StartCoroutine(coroutineCheckSight());
 		}
 	}
 	
@@ -30,14 +38,6 @@ public class WarFog : MonoBehaviour
 		GameObject.Destroy(GameObject.FindWithTag("FogOfWar"));
 
 		WarFog.warfogEnabled = false;
-	}
-
-	public void Start()
-	{
-		if(Network.isServer)
-		{
-			StartCoroutine(coroutineCheckSight());
-		}
 	}
 
 	public IEnumerator coroutineCheckSight()

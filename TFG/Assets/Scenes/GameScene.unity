@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actualIsHumanInSight: 0
   oldIsHumanInSight: 0
+  inicializado: 0
 --- !u!114 &1393391647
 MonoBehaviour:
   m_ObjectHideFlags: 0

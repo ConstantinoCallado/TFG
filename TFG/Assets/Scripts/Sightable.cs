@@ -13,7 +13,7 @@ public class Sightable : MonoBehaviour
 			gameObjectGraphics.SetActive(false);
 		}
 	}
-
+	
 	public virtual void sightInRange()
 	{
 		++numberOfSighters;

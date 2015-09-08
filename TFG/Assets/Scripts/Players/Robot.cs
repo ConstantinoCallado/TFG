@@ -45,9 +45,10 @@ public class Robot : Player
 	{
 		//Debug.Log("He tocado al humano");
 
-		if(other.gameObject.GetComponent<Human>().aggressiveMode)
+		if(Human.humanRef.aggressiveMode)
 		{
 			GameManager.gameManager.KillPlayerServer(base.id, Human.humanRef.id);
+			AudioManager.audioManagerRef.PlayMuerteRobot();
 			Kill();
 		}
 		else
@@ -55,7 +56,7 @@ public class Robot : Player
 			if(!Human.humanRef.isDead)
 			{
 				Human.humanRef.Kill();
-				
+				AudioManager.audioManagerRef.PlayMuerteHumano();
 				GameManager.gameManager.KillPlayerServer(Human.humanRef.id, base.id);
 			}
 		}

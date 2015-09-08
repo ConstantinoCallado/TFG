@@ -38,11 +38,13 @@ public class ScoreScreen : MonoBehaviour
 				{
 					textoVictoria.SetActive(true);
 					textoDerrota.SetActive(false);
+					AudioManager.audioManagerRef.PlayVictoria();
 				}
 				else
 				{
 					textoVictoria.SetActive(false);
 					textoDerrota.SetActive(true);
+					AudioManager.audioManagerRef.PlayDerrota();
 				}
 			}
 		}

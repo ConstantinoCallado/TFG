@@ -132,6 +132,7 @@ MonoBehaviour:
   recogida: 0
   colliderTuerca: {fileID: 5898882}
   graphics: {fileID: 2318482}
+  audioTuerca: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

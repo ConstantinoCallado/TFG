@@ -10,10 +10,12 @@ public class Tuerca : MonoBehaviour
 	public CircleCollider2D colliderTuerca;
 	public Renderer graphics;
 
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Human")
 		{
+			AudioManager.audioManagerRef.PlayTuerca();
 			GameManager.gameManager.RecogerTuerca(id);
 		}
 	}

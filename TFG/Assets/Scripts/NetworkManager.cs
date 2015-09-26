@@ -90,7 +90,7 @@ public class NetworkManager : MonoBehaviour
 		try
 		{
 			WebRequest webResquest = WebRequest.Create("http://www.google.com/");
-			webResquest.Timeout = 3000;
+			webResquest.Timeout = 2000;
 
 			response = webResquest.GetResponse();
 
@@ -214,10 +214,18 @@ public class NetworkManager : MonoBehaviour
 	public void RequestRefreshHost()
 	{
 		panelSpinner.SetActive(true);
+
+
+		#if !jumpNetworkConnectionCheck
 		if(checkInternet())
 		{
 			RefreshHostList();
 		}
+		#else
+		RefreshHostList();
+		#endif
+
+		
 	}
 	
 	public void RefreshHostList()
@@ -384,6 +392,8 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 		indiceHumano = listaJugadoresActivos[UnityEngine.Random.Range(0, listaJugadoresActivos.Count)];
+
+		//indiceHumano = 1;
 
 		listaJugadores[indiceHumano].enumPersonaje = EnumPersonaje.Humano;
 		listaJugadores[indiceHumano].viewID = Network.AllocateViewID();

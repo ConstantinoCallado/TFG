@@ -13,6 +13,7 @@ public class WarFog : MonoBehaviour
 
 	public void Awake()
 	{
+		warfogEnabled = true;
 		warFogRef = this;
 
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
@@ -44,7 +45,7 @@ public class WarFog : MonoBehaviour
 	{
 		while(true)
 		{
-			if(Human.humanRef.sightable.numberOfSighters > 0)
+			if(Human.humanRef && Human.humanRef.sightable.numberOfSighters > 0)
 			{
 				actualIsHumanInSight = true;
 			}

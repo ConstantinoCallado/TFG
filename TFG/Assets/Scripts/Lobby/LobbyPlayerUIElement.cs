@@ -8,21 +8,36 @@ public class LobbyPlayerUIElement : MonoBehaviour
 	public Text textCharacterName;
 	public Image imageCharacter;
 	public Text textoInterrogacion;
-	public Image panelReady;
-	public GameObject panelAvatar;
+	public Image panelNombre;
+	public Image panelAvatar;
+	//public GameObject panelAvatar;
 
 	private bool imageSetted = false;
 
 	public Animation animationCard;
 	public static float lastTimeFlipped;
 
+	private bool readySet = true;
+
 	public void setPlayerName(string playerName, EnumPersonaje enumPersonaje, string nombrePersonaje, bool isReady)
 	{
 		textPlayerName.text = playerName;
 
-		if(panelReady.enabled != isReady)
+		if(readySet != isReady)
 		{
-			panelReady.enabled = isReady;
+			readySet = isReady;
+
+			if(isReady)
+			{
+				panelNombre.color = Color.white;
+				panelAvatar.color = Color.white;
+			}
+			else
+			{
+				Debug.Log("ASD");
+				panelNombre.color = new Color(0.3f, 0.3f, 0.3f, 1);
+				panelAvatar.color = panelNombre.color;
+			}
 		}
 
 		if(!imageSetted && enumPersonaje != EnumPersonaje.Ninguno && Time.time >= lastTimeFlipped)

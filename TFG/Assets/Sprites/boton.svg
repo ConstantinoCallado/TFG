@@ -126,10 +126,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4251553"
-     inkscape:cx="113.85173"
-     inkscape:cy="148.76224"
+     inkscape:cx="10.635669"
+     inkscape:cy="128.31"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:window-width="1852"
      inkscape:window-height="1057"
@@ -169,11 +169,13 @@
      inkscape:label="Base"
      style="display:inline">
     <path
-       style="fill:#007995;fill-opacity:0.55319148;stroke:#00dcdc;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.6755319;stroke-dasharray:none;stroke-dashoffset:0;display:inline;filter:url(#filter3776)"
+       style="fill:#0086a0;fill-opacity:0.88235295;stroke:#00dcdc;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.67553189999999996;stroke-dasharray:none;stroke-dashoffset:0;display:inline;filter:url(#filter3776)"
        d="m 10.288465,4.8662149 235.423065,0 5.4222,5.4222101 0,235.423095 -5.4222,5.4222 -235.423065,0 -5.4222045,-5.4222 0,-235.423095 c 0.028339,0.0379 5.4222045,-5.4222101 5.4222045,-5.4222101 z"
        id="rect2987"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccc" />
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"

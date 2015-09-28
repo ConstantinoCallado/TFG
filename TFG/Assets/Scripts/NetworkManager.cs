@@ -37,8 +37,7 @@ public class NetworkManager : MonoBehaviour
 	private bool serverLaunched = false;
 
 	public short humanLifes = 5;
-
-
+	
 	public short piezasRecogidas;
 	public short piezasRestantes;
 	public float tiempoPartida;
@@ -215,7 +214,6 @@ public class NetworkManager : MonoBehaviour
 	{
 		panelSpinner.SetActive(true);
 
-
 		#if !jumpNetworkConnectionCheck
 		if(checkInternet())
 		{
@@ -272,17 +270,25 @@ public class NetworkManager : MonoBehaviour
 		else if (msEvent == MasterServerEvent.HostListReceived)
 		{
 			hostList = MasterServer.PollHostList();
-			
+
 			if(hostList.Length > 0)
 			{
-				JoinServer(hostList[0]);
+				for(int i=0; i< hostList.Length; i++)
+				{
+					if(hostList[i].connectedPlayers < hostList[i].playerLimit)
+					{
+						JoinServer(hostList[i]);
+					
+						return;
+					}
+				}
 			}
-			else
-			{
-				Debug.Log("No se han encontrado partidas");
-				panelNoPartidasEncontradas.SetActive(true);
-				panelSpinner.SetActive(false);
-			}
+
+			Debug.Log("No se han encontrado partidas");
+			panelNoPartidasEncontradas.SetActive(true);
+			panelSpinner.SetActive(false);
+
+			MasterServer.ClearHostList();
 		}
 	}
 	

@@ -15,8 +15,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="boton_disabled.svg"
-   inkscape:export-filename="D:\Repos\Unity\TFG\TFG\Assets\Sprites\boton_disabled.png"
+   sodipodi:docname="rectangulo.svg"
+   inkscape:export-filename="D:\Repos\Unity\TFG\TFG\Assets\Sprites\rectangulo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -126,8 +126,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4251553"
-     inkscape:cx="31.252905"
-     inkscape:cy="130.78407"
+     inkscape:cx="49.525953"
+     inkscape:cy="148.76224"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -169,7 +169,7 @@
      inkscape:label="Base"
      style="display:inline">
     <path
-       style="fill:#00758c;fill-opacity:0.88235295000000002;stroke:#00a0a0;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.67553192;stroke-dasharray:none;stroke-dashoffset:0;display:inline;filter:url(#filter3776)"
+       style="fill:#ffffff;fill-opacity:0.11764706;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.67553191999999995;stroke-dasharray:none;stroke-dashoffset:0;display:inline;filter:url(#filter3776)"
        d="m 10.288465,4.8662149 235.423065,0 5.4222,5.4222101 0,235.423095 -5.4222,5.4222 -235.423065,0 -5.4222045,-5.4222 0,-235.423095 c 0.028339,0.0379 5.4222045,-5.4222101 5.4222045,-5.4222101 z"
        id="rect2987"
        inkscape:connector-curvature="0"

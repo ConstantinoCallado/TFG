@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 	// Mueve el jugador a la posicion de spawn, resucitandolo si murio
 	public virtual void Respawn()
 	{
-		if(Network.isServer)
+		if(!Network.isClient)
 		{
 			transform.position = spawnPoint;
 

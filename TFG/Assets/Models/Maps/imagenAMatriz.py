@@ -8,7 +8,7 @@ pixelAzul = (0, 0, 255, 255);
 pixelRojo = (255, 0, 0, 255);
 
 
-im = Image.open("map-tutorial2.png")
+im = Image.open("map-tutorial0.png")
 
 pix = im.load()
 

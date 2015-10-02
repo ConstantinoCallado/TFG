@@ -11,11 +11,11 @@ public class Scenario : MonoBehaviour
 	//public GameObject prefabMuro;
 	public GameObject prefabWeapon;
 	public GameObject prefabPiece;
-	public const int tamanyoMapaX = 42;
-	public const int tamanyoMapaY = 24;
+	public static int tamanyoMapaX = 42;
+	public static int tamanyoMapaY = 24;
 	public GameManager gameManager;
 
-	public byte[,] arrayNivel = new byte[tamanyoMapaY, tamanyoMapaX] 
+	public byte[,] arrayNivel = new byte[24, 42] 
 	{
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
 		{0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 3, 0, 0, 0}, 
@@ -50,9 +50,9 @@ public class Scenario : MonoBehaviour
 	short contadorRobots = -1;
 
 	[HideInInspector]
-	public short partitionOfLeft;
+	public int partitionOfLeft;
 	[HideInInspector]
-	public short partitionOfRight;
+	public int partitionOfRight;
 
 	public virtual void Awake()
 	{

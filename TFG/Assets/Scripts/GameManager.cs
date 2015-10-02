@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
 		for(int i=0; i<listaDeTuercas.Length; i++)
 		{
-			if(!listaDeTuercas[i].recogida)
+			if(listaDeTuercas[i]!=null && !listaDeTuercas[i].recogida)
 			{
 				resultado++;
 			}
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 			// Comprobamos el ultimo bit del paquete para comprobar si la tuerca esta cogida o no...
 			if((paquete & 1) == 1)
 			{
-				if(listaDeTuercas[i].recogida)
+				if(listaDeTuercas[i]!=null && listaDeTuercas[i].recogida)
 				{
 					listaDeTuercas[i].SetCogida(false);
 				}
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 			else
 			{
 				--piezasRestantes;
-				if(!listaDeTuercas[i].recogida)
+				if(listaDeTuercas[i] && !listaDeTuercas[i].recogida)
 				{
 					listaDeTuercas[i].SetCogida(true);
 				}
@@ -89,6 +89,11 @@ public class GameManager : MonoBehaviour
 	{
 		for(int i=0; i < NetworkManager.networkManagerRef.listaJugadores.Length; i++)
 		{
+			if(NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje == EnumPersonaje.Ninguno)
+			{
+				break;
+			}
+
 			// Instanciamos el personaje y lo asignamos al jugador
 			NetworkManager.networkManagerRef.listaJugadores[i].player = playerFactory.InstanciarPlayerEnServidor(NetworkManager.networkManagerRef.listaJugadores[i].viewID,
 			                                                                   (int)NetworkManager.networkManagerRef.listaJugadores[i].enumPersonaje);
@@ -194,17 +199,20 @@ public class GameManager : MonoBehaviour
 
 		--piezasRestantes;
 
-		// Cada 10 segundos actualizamos los recogibles en todoos los dispositivos
-		if(Time.time > ultimaVezRecogidoAlgo + 10)
+		if(Network.isServer)
 		{
-			ultimaVezRecogidoAlgo = Time.time;
+			// Cada 10 segundos actualizamos los recogibles en todoos los dispositivos
+			if(Time.time > ultimaVezRecogidoAlgo + 10)
+			{
+				ultimaVezRecogidoAlgo = Time.time;
 
-			NetworkManager.networkManagerRef.SpamearRecogibles();
-		}
+				NetworkManager.networkManagerRef.SpamearRecogibles();
+			}
 
-		if(piezasRestantes == 0)
-		{
-			NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, listaDeTuercas.Length - piezasRestantes);
+			if(piezasRestantes == 0)
+			{
+				NetworkManager.networkManagerRef.TerminarPartida(true, Time.time - tiempoInicial, piezasRestantes, listaDeTuercas.Length - piezasRestantes);
+			}
 		}
 	}
 

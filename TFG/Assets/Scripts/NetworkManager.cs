@@ -642,6 +642,8 @@ public class NetworkManager : MonoBehaviour
 		listaJugadores[0].isReady = false;
 		listaJugadores[0].index = 0;
 		listaJugadores[0].playerName = nombreJugador;
+
+		NetworkManager.networkManagerRef.listaJugadores[0].ownByClient = true;
 	}
 
 	public void PlayerReadyTutorial()

@@ -23,7 +23,7 @@ public class HumanAI : AIBaseController
 		base.AIEnabled = false;
 		base.Start ();
 		
-		StartCoroutine(startIADelayed());
+		//StartCoroutine(startIADelayed());
 	}
 	
 	IEnumerator startIADelayed()

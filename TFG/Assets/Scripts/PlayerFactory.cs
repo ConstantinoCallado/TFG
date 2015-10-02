@@ -16,7 +16,7 @@ public class PlayerFactory : MonoBehaviour
 
 	public Player InstanciarPlayerComun(NetworkViewID viewID, int enumPersonajeInt)
 	{
-		GameObject gameObjectInstanciado = (GameObject)GameObject.Instantiate(playerPrefab, new Vector3(20.5f, 12, 0), Quaternion.identity); 
+		GameObject gameObjectInstanciado = (GameObject)GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.Euler(new Vector3(0,0,90))); 
 		
 		switch((EnumPersonaje)enumPersonajeInt)
 		{
@@ -78,7 +78,7 @@ public class PlayerFactory : MonoBehaviour
 			sightableInstanciado.transform.position = gameObjectInstanciado.transform.position;
 		}
 
-		jugadorInstanciado.SetSpawnPoint(new Vector2(20.5f, 12));
+		jugadorInstanciado.SetSpawnPoint(Vector3.zero);
 		
 		return jugadorInstanciado;
 	}

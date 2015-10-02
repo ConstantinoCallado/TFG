@@ -41,6 +41,11 @@ public class LobbyManager : MonoBehaviour
 		NetworkManager.networkManagerRef.setPlayerReady(Network.player);
 	}
 
+	public void SetPlayerReadyTutorial()
+	{
+		NetworkManager.networkManagerRef.PlayerReadyTutorial();
+	}
+
 	public void Atras()
 	{
 		Network.Disconnect();
@@ -72,5 +77,20 @@ public class LobbyManager : MonoBehaviour
 		}while(segundos > 0);
 	}
 
+	public void StartCountDownTutorial(int nsegundos)
+	{
+		StartCoroutine(startCuentaAtrasTutorial(nsegundos));
+	}
 
+	
+	public IEnumerator startCuentaAtrasTutorial(int segundos)
+	{
+		textoMensaje.text = "El tutorial empieza en " + segundos.ToString();
+		do
+		{
+			yield return new WaitForSeconds(1);
+			--segundos;
+			textoMensaje.text = "El tutorial empieza en " + segundos.ToString();
+		}while(segundos >= 0);
+	}
 }

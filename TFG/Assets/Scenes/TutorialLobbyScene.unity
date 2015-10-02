@@ -377,7 +377,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 774094926}
-        m_MethodName: SetPlayerReady
+        m_MethodName: SetPlayerReadyTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -646,10 +646,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listaInfoJugadores:
   - {fileID: 1777542520}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   textoMensaje: {fileID: 761296368}
 --- !u!4 &774094928
 Transform:

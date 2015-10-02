@@ -49,10 +49,12 @@ public class Scenario : MonoBehaviour
 	
 	short contadorRobots = -1;
 
+	[HideInInspector]
 	public short partitionOfLeft;
+	[HideInInspector]
 	public short partitionOfRight;
 
-	public void Awake()
+	public virtual void Awake()
 	{
 		partitionOfLeft = tamanyoMapaX/4;
 		partitionOfRight = (tamanyoMapaX/4) * 3;

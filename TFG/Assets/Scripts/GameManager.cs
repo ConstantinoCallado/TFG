@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 		Tuerca.cantidadInstanciada = 0;
 		piezasRestantes = (short)listaDeTuercas.Length;
 
-		if(Network.isServer)
+		if(!Network.isClient)
 		{
 			tiempoInicial = Time.time;
 			SpawnearPersonajesEnServer();

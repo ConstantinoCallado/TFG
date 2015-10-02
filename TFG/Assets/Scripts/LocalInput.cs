@@ -33,7 +33,7 @@ public class LocalInput : MonoBehaviour
 		localInputRef = this;
 		playerRef = gameObject.GetComponent<Player>();
 
-		if(Network.isServer)
+		if(!Network.isClient)
 		{
 			movementRef = gameObject.GetComponent<BasicMovementServer>();
 		}
@@ -81,13 +81,13 @@ public class LocalInput : MonoBehaviour
 		}
 		else
 		{
-			SkillButton.skillButtonRef.gameObject.SetActive(false);
+			if(SkillButton.skillButtonRef) SkillButton.skillButtonRef.gameObject.SetActive(false);
 			BotonIndicador.activados = false;
 		}
 
 		if(iconIndex != 0)
 		{
-			SkillButton.skillButtonRef.icon.sprite = playerRef.playerGraphics.listaIconos[iconIndex];
+			if(SkillButton.skillButtonRef) SkillButton.skillButtonRef.icon.sprite = playerRef.playerGraphics.listaIconos[iconIndex];
 		}
 	}
 

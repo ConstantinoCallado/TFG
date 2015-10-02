@@ -420,7 +420,7 @@ public class NetworkManager : MonoBehaviour
 			if(i != indiceHumano)
 			{
 				int randomCharacterIndex = UnityEngine.Random.Range(0, listaPersonajes.Count);
-				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotAzul;
+//				listaJugadores[i].enumPersonaje = EnumPersonaje.RobotAzul;
 				listaJugadores[i].enumPersonaje = listaPersonajes[randomCharacterIndex];
 				listaJugadores[i].viewID = Network.AllocateViewID();
 				networkView.RPC("bcstChar", RPCMode.OthersBuffered, i, (int)listaJugadores[i].enumPersonaje, listaJugadores[i].viewID);
@@ -465,7 +465,7 @@ public class NetworkManager : MonoBehaviour
 	// Funcion que se invocara cada cliente al cargarse la escena de juego
 	public void NotificarPartidaCargada()
 	{
-		if(!Network.isServer)
+		if(Network.isClient)
 		{
 			networkView.RPC("LdedGame", RPCMode.Server, Network.player);
 		}
@@ -632,5 +632,33 @@ public class NetworkManager : MonoBehaviour
 		{
 			listaJugadores[indiceJugador].player.ponerIndicadorEn(new Vector2(posicionX, posicionY), (EnumTipoInidcador)indicadorAPoner);
 		}
+	}
+
+	public void LaunchTutorial()
+	{
+		Application.LoadLevel("TutorialLobbyScene");
+		listaJugadores[0].activePlayer = true;
+		listaJugadores[0].networkPlayer = Network.player;
+		listaJugadores[0].isReady = false;
+		listaJugadores[0].index = 0;
+		listaJugadores[0].playerName = nombreJugador;
+	}
+
+	public void PlayerReadyTutorial()
+	{
+		listaJugadores[0].isReady = true;
+		listaJugadores[0].enumPersonaje = EnumPersonaje.Humano;
+		StartCoroutine(CargarTutorialDelayed(5));
+		//listaJugadores[0].viewID = Network.AllocateViewID();
+		//networkView.RPC("bcstChar", RPCMode.OthersBuffered, indiceHumano, (int)listaJugadores[indiceHumano].enumPersonaje, listaJugadores[indiceHumano].viewID);
+	}
+
+	public IEnumerator CargarTutorialDelayed(int waitTime)
+	{
+		LobbyManager.lobbyManager.StartCountDownTutorial(waitTime);
+		partidaEmpezada = true;
+		yield return new WaitForSeconds(waitTime+1);
+
+		Application.LoadLevel("TutorialGameScene0");
 	}
 }

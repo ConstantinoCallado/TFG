@@ -13,3 +13,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
   - enabled: 1
     path: Assets/Scenes/ScoreScene.unity
+  - enabled: 1
+    path: Assets/Scenes/TutorialLobbyScene.unity
+  - enabled: 1
+    path: Assets/Scenes/TutorialGameScene0.unity
